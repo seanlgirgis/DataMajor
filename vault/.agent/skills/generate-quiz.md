@@ -37,3 +37,30 @@ Creates an active recall quiz based on an existing concept note to test understa
 
 ## Output
 - Modified concept note with appended quiz section.
+
+## Implementation (for the agent)
+- Preconditions: `note_path` exists and contains `Quick Facts` or `Deep Dive` sections.
+- Extraction heuristics:
+    - Prefer `Quick Facts` bullets as direct fact->question sources.
+    - For each bullet, generate a short question; for compound bullets, split into multiple questions.
+    - Use `Deep Dive` for 1-2 higher-difficulty short-answer questions.
+- Question types:
+    - Multiple Choice (3 options) for factual bullets.
+    - Short Answer for deeper concepts.
+- Idempotency: If `## Practice Quiz` already exists, append with a timestamped subheading instead of duplicating.
+- Output formatting: Use Obsidian callouts for questions and collapsible answers (keep answers visible only on user request).
+
+## Example output snippet
+> [!QUESTION] What is the time complexity of list append in Python?
+>
+> A) O(1)
+>
+> B) O(n)
+>
+> C) O(log n)
+>
+> > [!SUCCESS] - Answer
+> > A) O(1)
+
+## Safety
+- Do not infer facts that are not present in the source note. When uncertain, ask the user for clarification.

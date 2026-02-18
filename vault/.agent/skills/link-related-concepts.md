@@ -29,3 +29,19 @@ Scans a note for keywords that match other existing notes in the vault and conve
 
 ## Output
 - Modified note with more internal `[[links]]`.
+
+## Implementation (for the agent)
+- Preconditions: Vault indexes available (scan `01-concepts/` and `02-technologies/`).
+- Indexing:
+    1. Build a list of candidate titles and their canonical paths from `01-concepts/**` and `02-technologies/**`.
+    2. Normalize match keys by lowercasing and trimming punctuation.
+- Scanning & linking algorithm:
+    1. Read `target_file` content and split into block segments to detect code fences (```), YAML frontmatter, and inline links.
+    2. For each candidate title, search only in non-code, non-link sections and ensure the exact phrase is not already linked.
+    3. Replace first or relevant occurrences with `[[Canonical Note Title]]`.
+    4. Keep replacements conservative: prefer whole-word matches and require length >= 3 characters.
+- Backup: Before writing, save a `.bak` copy alongside the target file.
+- Reporting: Return the number of new links added and the list of files referenced.
+
+## Safety
+- Never modify text inside code blocks, YAML frontmatter, or URLs. Make a backup before writing changes.

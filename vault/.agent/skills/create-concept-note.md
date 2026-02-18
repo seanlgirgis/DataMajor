@@ -65,3 +65,23 @@ Creates a new structured concept note in the appropriate domain folder, ensuring
 
 ## Output
 A new `.md` file in `01-concepts/{domain}/`.
+
+## Implementation (for the agent)
+- Preconditions: User provides `title` and `domain` (or confirms defaults).
+- Normalization:
+    - `title_slug` = title trimmed, replace spaces with hyphens, preserve casing in display name but use filesystem-safe slug for filenames.
+    - `domain_folder` = `01-concepts/{domain}` (lowercase).
+- Idempotency: If the target file exists, do NOT overwrite. Instead, open the file and return its path.
+- File creation steps:
+    1. Ensure `01-concepts/{domain}/` exists.
+    2. Ensure an index `01-concepts/{domain}/_index.md` exists; if created, add a link to `01-concepts/_MASTER_INDEX.md` or `_INDEX.md` as appropriate.
+    3. Build YAML frontmatter strictly with keys: `type`, `tags`, `difficulty`, `language/domain`, `created` (YYYY-MM-DD).
+    4. Write the 30-Second Rule body using the template in this file. Use the user's examples where provided.
+    5. Append a single-line link from `01-concepts/{domain}/_index.md` to the new note (idempotent).
+
+## Example invocation
+- `/create-note "List Comprehension" python --difficulty Intermediate --tags "lists,python"`
+
+## Safety
+- Never overwrite existing notes without explicit confirmation from the user.
+- Avoid creating orphan notes: always link the new note into the domain index.

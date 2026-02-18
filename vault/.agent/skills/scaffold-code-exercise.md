@@ -44,3 +44,33 @@ Creates a runnable code file for practice and links it to a corresponding concep
 ## Output
 - A `.py` (or other ext) file in `03-code/`.
 - An updated or new `.md` file in `01-concepts/`.
+
+## Implementation (for the agent)
+- Preconditions: `concept` exists or user allows creation of the concept note first.
+- File naming:
+    - Target code folder: `03-code/{language}/` (create if missing).
+    - Use `filename_slug` sanitized for filesystem.
+- Idempotency: If the code file exists, do not overwrite; suggest a new name or open the existing file.
+- Code template (Python example):
+    ```python
+    # Practice: {concept}
+    # Linked Note: [[01-concepts/{language}/{concept}|{concept}]]
+
+    def practice_{filename_var}():
+            """Small exercise harness for {concept}."""
+            # TODO: implement small example and assert-based tests
+            pass
+
+
+    if __name__ == "__main__":
+            practice_{filename_var}()
+    ```
+- Linking back to the concept note:
+    - If the concept note exists, append a single bullet under `## Practice` or create that header.
+    - The bullet should be: `- Practice File: [[03-code/{language}/{filename}]]`.
+
+## Example invocation
+- `/code "list_comp_practice.py" python "List Comprehension"`
+
+## Safety
+- Do not execute or run user code. Only write scaffold files and tests.

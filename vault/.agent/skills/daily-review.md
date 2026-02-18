@@ -53,3 +53,16 @@ Generates a daily journal entry to track learning progress, focus, and achieveme
 
 ## Output
 - A new daily note in `08-journal/`.
+
+## Implementation (for the agent)
+- Preconditions: None — defaults to today's date when `date` not supplied.
+- Path format: `08-journal/{YYYY}/{MM}/{YYYY-MM-DD}.md`.
+- Roadmap focus: Check for `07-roadmaps/CURRENT_FOCUS.md` or `07-roadmaps/CURRENT_FOCUS.md` (case-insensitive); include its first 2-3 bullets under `## 🎯 Today's Focus`.
+- Optional activity scan: If environment allows, list files modified today under `## 📝 Notes Created` and `## 💻 Code Written` (best-effort; avoid heavy repo scans).
+- Idempotency: If a note already exists for the date, open it and return path rather than overwriting.
+
+## Example invocation
+- `/review` or `/review 2026-02-18`
+
+## Safety
+- Do not infer or fabricate activities. If no activity data is available, leave sections empty for the user to fill.
