@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File Add-PowerShellContextMenu.ps1)",
+      "Bash(powershell.exe -Command \":*)",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File Set-Win11ClassicContextMenu.ps1)"
+    ]
+  }
+}

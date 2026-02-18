@@ -1,5 +1,5 @@
 # Initialize-DataMajor.ps1
-# Run from: C:\DataaMajor
+# Run from: C:\DataMajor
 # Usage: .\Initialize-DataMajor.ps1
 
 param(
