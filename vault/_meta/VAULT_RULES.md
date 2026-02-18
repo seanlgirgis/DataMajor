@@ -1,4 +1,4 @@
-﻿---
+---
 type: meta
 tags: [vault, rules]
 created: 2026-02-18
