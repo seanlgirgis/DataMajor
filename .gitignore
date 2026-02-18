@@ -1,0 +1,80 @@
+# Obsidian
+# Keeps the vault functional but excludes device-specific state
+vault/.obsidian/workspace.json
+vault/.obsidian/workspace-mobile.json
+vault/.obsidian/cache/
+vault/.obsidian/indexed-ram
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Jupyter
+**/.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.flakes/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# R
+.Rhistory
+.RData
+.Ruserdata
+.Rapp.history
+.Rproj.user/
+*.o
+*.so
+*.dll
+
+# Java & Scala
+*.class
+*.log
+target/
+project/project/
+project/target/
+.cache
+.cache-main
+.lib/
+.idea/
+*.iml
+*.iws
+.project
+.classpath
+.settings/
+
+# SQL
+*.bak
+*.dmp
+*.tmp
+sql_log.txt
+
+# Secrets
+.env
+*.env
+secrets/
+
+# Large diagram exports
+vault/05-diagrams/exports/*.png
+vault/05-diagrams/exports/*.svg
