@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DataMajor — Syntax Cards</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            background: #fff;
+            color: #111;
+            padding: 10mm;
+        }
+
+        h1 {
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 8mm;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #333;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6mm;
+        }
+
+        .card {
+            border: 1px solid #333;
+            padding: 4mm 5mm;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            min-height: 55mm;
+            overflow: visible;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid #333;
+            padding-bottom: 2mm;
+            margin-bottom: 3mm;
+        }
+
+        .card-title {
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .card-badge {
+            font-size: 9px;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-body pre {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10px;
+            line-height: 1.6;
+            white-space: pre;
+        }
+
+        @media print {
+            body {
+                padding: 8mm;
+            }
+
+            .grid {
+                gap: 5mm;
+            }
+
+            @page {
+                margin: 8mm;
+                size: Letter;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>DataMajor · Syntax Cards · 2026-02-21</h1>
+    <div class="grid">
+
+        <!-- CARDS START -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">LINKED LIST</span>
+                <span class="card-badge">Python DS</span>
+            </div>
+            <div class="card-body">
+                <pre>
+# Node Definition
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+# Traversal
+while current:     # loops until None
+    current = current.next
+
+# Fast/Slow Pointers (Middle/Cycle)
+slow = fast = head
+while fast and fast.next:
+    slow = slow.next
+    fast = fast.next.next
+
+# Reverse List
+next_node = curr.next
+curr.next = prev
+prev = curr
+curr = next_node
+        </pre>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">DICTIONARY (HASH MAP)</span>
+                <span class="card-badge">Python DS</span>
+            </div>
+            <div class="card-body">
+                <pre>
+# add/update
+d[k] = v           # updates if k exists
+d.get(k, default)  # safe generic lookup
+d.pop(k)           # removes k, returns v
+
+# existence
+if k in d:         # O(1) existence check
+
+# generation
+from collections import defaultdict
+d = defaultdict(int) # auto-inits to 0
+
+# frequency counting pattern
+for n in nums:
+    d[n] = d.get(n, 0) + 1
+        </pre>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">STACK</span>
+                <span class="card-badge">Python DS</span>
+            </div>
+            <div class="card-body">
+                <pre>
+# operations
+s.append(x)        # push - O(1)
+val = s.pop()      # pop - raises if empty
+if s: v = s.pop()  # safe pop
+if s: v = s[-1]    # safe peek top
+
+# monotonic shell
+s = []
+for i, v in enumerate(nums):
+    while s and nums[s[-1]] < v:
+        idx = s.pop()
+    s.append(i)    # store index
+        </pre>
+            </div>
+        </div>
+        <!-- CARDS END -->
+
+    </div>
+</body>
+
+</html>
