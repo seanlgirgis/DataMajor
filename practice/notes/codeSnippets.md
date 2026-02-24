@@ -251,6 +251,41 @@ def is_same_tree(p, q):
 ```
 
 ---
+
+
+# Two Sum (All Pairs)
+
+## Finding all unique pairs in a sorted list that sum to a target with duplicate handling
+
+```python
+def two_sum_all_pairs(numbers, target):
+    results = []
+    left, right = 0, len(numbers) - 1
+    
+    while left < right:
+        current_sum = numbers[left] + numbers[right]
+        
+        if current_sum == target:
+            results.append([numbers[left], numbers[right]])
+            left += 1
+            right -= 1
+            # Skip duplicates to ensure unique pairs in result
+            while left < right and numbers[left] == numbers[left - 1]:
+                left += 1
+            while left < right and numbers[right] == numbers[right + 1]:
+                right -= 1
+        elif current_sum < target:
+            left += 1
+        else:
+            right -= 1
+            
+    return results
+
+```
+
+
+
+---
 # Two Sum (Sorted)
 
 ## Using two pointers starting at both ends to find a target sum in O(n) time and O(1) space
