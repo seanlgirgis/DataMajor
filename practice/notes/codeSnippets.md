@@ -1,3 +1,25 @@
+# Techniques
+# Sliding Window
+
+## Using two pointers to process a contiguous subsegment of a list or string
+
+```python
+def sliding_window(data):
+    left = 0
+    n = len(data)
+    current_sum = 0
+    
+    for right in range(n):
+        # Expand the window
+        current_sum += data[right]
+        
+        # Shrink the window based on a condition
+        while left <= right and current_sum > target:
+            current_sum -= data[left]
+            left += 1
+
+```
+
 # Data Structs
 
 
