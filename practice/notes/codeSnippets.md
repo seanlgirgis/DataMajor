@@ -20,6 +20,28 @@ def sliding_window(data):
 
 ```
 
+
+## Sliding window using a single while loop with manual pointer increments and exit condition
+
+```python
+left = 0
+right = 0
+n = len(data)
+
+while right < n:
+    # Process current element at right
+    current_sum += data[right]
+    
+    # Shrink window from the left
+    while left <= right and current_sum > target:
+        current_sum -= data[left]
+        left += 1
+        
+    # Expand window to the right
+    right += 1
+
+```
+
 # Data Structs
 
 
