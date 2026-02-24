@@ -175,3 +175,77 @@ def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
     return prev
 
 ```
+
+
+
+
+# Doubly linked lists
+
+## DFS Traverse
+
+# Binary Tree DFS (In-order)
+
+## Depth-First Search explores as far as possible along each branch before backtracking; ideal for sorted traversal and low memory usage
+
+```python
+def inorder(root):
+    # Advantages: Simple recursive implementation; uses O(h) space (height of tree).
+    # In-order on a BST yields elements in non-decreasing order.
+    if not root:
+        return
+    
+    inorder(root.left)
+    print(root.val)
+    inorder(root.right)
+
+```
+
+## BFS Traverse
+
+# Binary Tree BFS (Level-order)
+
+## Breadth-First Search visits nodes level-by-level using a queue; ideal for finding the shortest path or level boundaries
+
+```python
+from collections import deque
+
+def level_order(root):
+    # Advantages: Guarantees finding the shortest path to a node; visits nodes level by level.
+    # Uses O(w) space where w is the maximum width of the tree.
+    if not root:
+        return
+    
+    queue = deque([root])
+    while queue:
+        node = queue.popleft()
+        print(node.val)
+        
+        if node.left: queue.append(node.left)
+        if node.right: queue.append(node.right)
+
+```
+
+
+## Binary Tree comparison using DFS
+Yes, the value comparison `p.val != q.val` handles the roots of the current subtrees in each call.
+
+# Tree Comparison
+
+## Recursive DFS implicitly compares the current root nodes before proceeding to children
+
+```python
+def is_same_tree(p, q):
+    # Base cases: both null (True) or one null (False)
+    if not p and not q:
+        return True
+    if not p or not q:
+        return False
+    
+    # Root value comparison (Head of the current subtree)
+    if p.val != q.val:
+        return False
+    
+    # Recursive calls for branches
+    return is_same_tree(p.left, q.left) and is_same_tree(p.right, q.right)
+
+```
