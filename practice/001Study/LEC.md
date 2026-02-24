@@ -1,6 +1,7 @@
 | # | Problem Title | Concepts | Difficulty | 
 | :--- | :--- | :--- | :--- | 
 | **1** | [Two Sum](#1-two-sum) | `Array`, `Hash Table` | 2/10 |
+| **70** | [Climbing Stairs](#70-climbing-stairs) | `Dynamic Programming`, `Memoization`, `Math` | 2/10 |
 | **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | 
 | **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |  
 
@@ -174,6 +175,46 @@ sol = Solution()
 print("Test1: [2,7,11,15] target=9 -> [0,1]: success" if sol.twoSum([2,7,11,15], 9) == [0,1] else "Test1: Fail")
 print("Test2: [3,2,4] target=6 -> [1,2]: success" if sol.twoSum([3,2,4], 6) == [1,2] else "Test2: Fail")
 print("Test3: [3,3] target=6 -> [0,1]: success" if sol.twoSum([3,3], 6) == [0,1] else "Test3: Fail")
+
+```
+
+---
+
+## 70: Climbing Stairs
+
+### Problem Description
+> You are climbing a staircase. It takes `n` steps to reach the top. Each time you can either climb `1` or `2` steps. In how many distinct ways can you climb to the top?
+
+- number: 70
+- title: "Climbing Stairs"
+- difficulty: 2/10
+- concepts: ["Dynamic Programming", "Memoization", "Math"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def climbStairs(self, n: int) -> int:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Bottom-Up Dynamic Programming (Fibonacci Sequence).
+* **Logic:**
+    1. If `n <= 2`, return `n` directly (1 way for 1 step, 2 ways for 2 steps).
+    2. Initialize `two_steps_before = 1` and `one_step_before = 2`.
+    3. Loop from step 3 up to `n`.
+    4. Calculate the distinct ways to reach the current step as `one_step_before + two_steps_before`.
+    5. Update variables for the next iteration: `two_steps_before = one_step_before`, and `one_step_before = current_ways`.
+    6. Return `one_step_before`.
+
+**Complexity:**
+* **Time:** $O(n)$
+* **Space:** $O(1)$
+
+---
+
+### Solution Code
+```python
+
+<<I fill the code here>>
 
 ```
 
