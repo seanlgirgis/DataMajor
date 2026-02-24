@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BINARY SEARCH — Syntax Card</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #111;
+    background: #fff;
+    padding: 18px 22px;
+  }
+
+  h1 {
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-bottom: 2px solid #111;
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #555;
+    margin: 10px 0 3px 0;
+    border-bottom: 1px solid #ccc;
+  }
+
+  pre {
+    background: #f4f4f4;
+    padding: 5px 8px;
+    border-left: 3px solid #333;
+    white-space: pre;
+    font-size: 10.5px;
+    line-height: 1.6;
+  }
+
+  .comment { color: #555; }
+
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 16px;
+  }
+
+  @media print {
+    body { padding: 10px 14px; }
+    @page { margin: 0.4in; size: letter; }
+  }
+</style>
+</head>
+<body>
+
+<h1>BINARY SEARCH — Python Syntax Card</h1>
+
+<div class="cols">
+<div>
+
+<h2>Template A — Exact Search (inclusive)</h2>
+<pre>left, right = 0, len(nums) - 1
+while left <= right:
+    mid = (left + right) // 2
+    if nums[mid] == target:
+        return mid              <span class="comment"># found</span>
+    elif target > nums[mid]:
+        left = mid + 1          <span class="comment"># search right half</span>
+    else:
+        right = mid - 1         <span class="comment"># search left half</span>
+return -1                       <span class="comment"># not found</span></pre>
+
+<h2>Template B — Find Boundary (exclusive right)</h2>
+<pre>left, right = 0, len(nums)     <span class="comment"># right = len, not len-1</span>
+while left < right:
+    mid = (left + right) // 2
+    if nums[mid] < target:
+        left = mid + 1          <span class="comment"># boundary right of mid</span>
+    else:
+        right = mid             <span class="comment"># boundary at mid or left</span>
+return left                     <span class="comment"># insertion point</span></pre>
+
+<h2>Find First Position of Target</h2>
+<pre>left, right = 0, len(nums)
+while left < right:
+    mid = (left + right) // 2
+    if nums[mid] < target:
+        left = mid + 1
+    else:
+        right = mid
+<span class="comment"># verify it's actually target</span>
+return left if left < len(nums) and nums[left] == target else -1</pre>
+
+</div>
+<div>
+
+<h2>Find Last Position of Target</h2>
+<pre>left, right = 0, len(nums)
+while left < right:
+    mid = (left + right) // 2
+    if nums[mid] <= target:
+        left = mid + 1
+    else:
+        right = mid
+pos = left - 1
+return pos if pos >= 0 and nums[pos] == target else -1</pre>
+
+<h2>Search in Rotated Sorted Array (LC 33)</h2>
+<pre>left, right = 0, len(nums) - 1
+while left <= right:
+    mid = (left + right) // 2
+    if nums[mid] == target: return mid
+    if nums[left] <= nums[mid]:    <span class="comment"># left half sorted</span>
+        if nums[left] <= target < nums[mid]:
+            right = mid - 1
+        else:
+            left = mid + 1
+    else:                          <span class="comment"># right half sorted</span>
+        if nums[mid] < target <= nums[right]:
+            left = mid + 1
+        else:
+            right = mid - 1
+return -1</pre>
+
+<h2>bisect — stdlib shortcut</h2>
+<pre>import bisect
+bisect.bisect_left(nums, x)    <span class="comment"># first idx >= x</span>
+bisect.bisect_right(nums, x)   <span class="comment"># first idx >  x</span>
+bisect.insort(nums, val)        <span class="comment"># insert in sorted order</span></pre>
+
+</div>
+</div>
+
+</body>
+</html>

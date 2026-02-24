@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TWO POINTERS — Syntax Card</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Courier New", Courier, monospace; font-size: 11px; line-height: 1.5; color: #111; background: #fff; padding: 18px 22px; }
+  h1 { font-size: 15px; font-weight: bold; letter-spacing: 2px; border-bottom: 2px solid #111; padding-bottom: 4px; margin-bottom: 10px; text-transform: uppercase; }
+  h2 { font-size: 10px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; color: #555; margin: 10px 0 3px 0; border-bottom: 1px solid #ccc; }
+  pre { background: #f4f4f4; padding: 5px 8px; border-left: 3px solid #333; white-space: pre; font-size: 10.5px; line-height: 1.6; }
+  .comment { color: #555; } .warn { color: #c00; } .good { color: #060; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+  @media print { body { padding: 10px 14px; } @page { margin: 0.4in; size: letter; } }
+</style>
+</head>
+<body>
+<h1>TWO POINTERS — Python Syntax Card</h1>
+<div class="cols">
+<div>
+
+<h2>Squeeze from Both Ends — Template</h2>
+<pre>l, r = 0, len(arr) - 1
+while l &lt; r:
+    <span class="comment"># compute with arr[l] and arr[r]</span>
+    if condition_to_move_left:  l += 1
+    else:                       r -= 1</pre>
+
+<h2>Two Sum II — sorted array</h2>
+<pre>while l &lt; r:
+    s = nums[l] + nums[r]
+    if s == target:  return [l+1, r+1]
+    elif s &lt; target: l += 1  <span class="comment"># need bigger</span>
+    else:            r -= 1  <span class="comment"># need smaller</span></pre>
+
+<h2>Container With Most Water</h2>
+<pre>while l &lt; r:
+    area = max(area,
+        min(height[l], height[r]) * (r - l))
+    if height[l] &gt;= height[r]: r -= 1  <span class="comment"># move shorter</span>
+    else:                       l += 1</pre>
+
+<h2>Reverse In Place</h2>
+<pre>while l &lt; r:
+    arr[l], arr[r] = arr[r], arr[l]
+    l += 1; r -= 1</pre>
+
+</div>
+<div>
+
+<h2>Fast / Slow — Cycle Detection</h2>
+<pre>slow = fast = head
+while fast and fast.next:
+    slow = slow.next
+    fast = fast.next.next
+    if slow == fast: return True  <span class="comment"># cycle</span>
+return False</pre>
+
+<h2>Remove Duplicates — sorted, in-place</h2>
+<pre>k = 1
+for i in range(1, len(nums)):
+    if nums[i] != nums[i-1]:
+        nums[k] = nums[i]
+        k += 1
+return k  <span class="comment"># k = new length</span></pre>
+
+<h2>Window Size Formula</h2>
+<pre>window_size = r - l + 1  <span class="comment"># inclusive</span>
+<span class="comment"># while l &lt; r  → pointers never cross</span>
+<span class="comment"># while l &lt;= r → pointers can land same</span></pre>
+
+<h2>When to Use</h2>
+<pre><span class="good"># Sorted array + pair/triplet problem</span>
+<span class="good"># Fast/slow for linked list cycle/midpoint</span>
+<span class="good"># In-place write (slow=write, fast=read)</span>
+<span class="comment"># O(n) replaces O(n^2) brute force</span></pre>
+
+</div>
+</div>
+</body>
+</html>

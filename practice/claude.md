@@ -20,10 +20,14 @@ We completed 6 problems so far. All files are in C:\DataMajor\practice\
 000006.LEC0206.py  — Reverse Linked List  (Three-Pointer Iterative)
 
 ## File naming convention — follow this exactly
-NNNNNN.LCXXXX.py
+NNNNNN.LCXXXX.descriptive-name.py
 - NNNNNN = zero-padded sequence number (000007, 000008, ...)
 - LC = LeetCode, followed by the 4-digit problem number
-- Example: 000007.LC0003.py
+- descriptive-name = short kebab-case title of the problem
+- For redo files append .redo before .py
+- Examples:
+    000021.LC0021.merge-two-sorted-lists.py
+    000014.LC0001.two-sum.redo.py
 
 ## New folder for reference cards
 C:\DataMajor\vault\06-reference\syntax-cards\

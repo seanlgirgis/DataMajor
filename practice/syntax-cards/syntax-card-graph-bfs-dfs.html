@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GRAPH BFS / DFS — Syntax Card</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; line-height: 1.5; color: #111;
+    background: #fff; padding: 18px 22px;
+  }
+  h1 { font-size: 15px; font-weight: bold; letter-spacing: 2px;
+       border-bottom: 2px solid #111; padding-bottom: 4px;
+       margin-bottom: 10px; text-transform: uppercase; }
+  h2 { font-size: 10px; font-weight: bold; letter-spacing: 1px;
+       text-transform: uppercase; color: #555;
+       margin: 10px 0 3px 0; border-bottom: 1px solid #ccc; }
+  pre { background: #f4f4f4; padding: 5px 8px; border-left: 3px solid #333;
+        white-space: pre; font-size: 10.5px; line-height: 1.6; }
+  .comment { color: #555; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+  @media print { body { padding: 10px 14px; } @page { margin: 0.4in; size: letter; } }
+</style>
+</head>
+<body>
+<h1>GRAPH BFS / DFS — Python Syntax Card</h1>
+<div class="cols">
+<div>
+
+<h2>Build Adjacency List</h2>
+<pre>from collections import defaultdict
+graph = defaultdict(list)
+
+<span class="comment"># undirected</span>
+for u, v in edges:
+    graph[u].append(v)
+    graph[v].append(u)
+
+<span class="comment"># directed</span>
+for u, v in edges:
+    graph[u].append(v)</pre>
+
+<h2>BFS — Shortest Path</h2>
+<pre>from collections import deque
+visited = {start}
+queue   = deque([(start, 0)])   <span class="comment"># (node, dist)</span>
+while queue:
+    node, dist = queue.popleft()
+    for nb in graph[node]:
+        if nb not in visited:
+            visited.add(nb)
+            queue.append((nb, dist + 1))</pre>
+
+<h2>DFS — Recursive</h2>
+<pre>def dfs(node, visited):
+    visited.add(node)
+    for nb in graph[node]:
+        if nb not in visited:
+            dfs(nb, visited)
+
+visited = set()
+dfs(start, visited)</pre>
+
+<h2>DFS — Iterative (Stack)</h2>
+<pre>visited = set()
+stack   = [start]
+while stack:
+    node = stack.pop()
+    if node in visited: continue
+    visited.add(node)
+    for nb in graph[node]:
+        if nb not in visited:
+            stack.append(nb)</pre>
+
+</div>
+<div>
+
+<h2>Count Connected Components</h2>
+<pre>visited = set()
+count   = 0
+for node in graph:
+    if node not in visited:
+        dfs(node, visited)     <span class="comment"># marks whole component</span>
+        count += 1
+return count</pre>
+
+<h2>Detect Cycle — Directed Graph</h2>
+<pre>def has_cycle(node, visited, rec_stack):
+    visited.add(node)
+    rec_stack.add(node)
+    for nb in graph[node]:
+        if nb not in visited:
+            if has_cycle(nb, visited, rec_stack):
+                return True
+        elif nb in rec_stack:
+            return True        <span class="comment"># back edge = cycle</span>
+    rec_stack.remove(node)
+    return False</pre>
+
+<h2>Topological Sort — Kahn's BFS</h2>
+<pre>from collections import deque, defaultdict
+in_deg = defaultdict(int)
+for u in graph:
+    for v in graph[u]: in_deg[v] += 1
+queue = deque([n for n in graph if in_deg[n] == 0])
+order = []
+while queue:
+    node = queue.popleft()
+    order.append(node)
+    for nb in graph[node]:
+        in_deg[nb] -= 1
+        if in_deg[nb] == 0: queue.append(nb)
+<span class="comment"># len(order) != len(graph) means cycle exists</span>
+return order</pre>
+
+<h2>Grid BFS (4-directional)</h2>
+<pre>dirs    = [(0,1),(0,-1),(1,0),(-1,0)]
+visited = set()
+queue   = deque([(r, c)])
+visited.add((r, c))
+while queue:
+    row, col = queue.popleft()
+    for dr, dc in dirs:
+        nr, nc = row+dr, col+dc
+        if 0<=nr<rows and 0<=nc<cols and (nr,nc) not in visited:
+            visited.add((nr, nc))
+            queue.append((nr, nc))</pre>
+
+</div>
+</div>
+</body>
+</html>

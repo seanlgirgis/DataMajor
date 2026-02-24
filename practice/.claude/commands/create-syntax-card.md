@@ -24,4 +24,16 @@ snippet                     # what it does
 snippet                     # pattern name
 ```
 
-After writing the file, confirm: "Card created: syntax-card-{topic}.md"
+Always generate TWO files:
+1. syntax-card-{topic}.md  — Markdown version
+2. syntax-card-{topic}.html — Print-ready HTML with monospace font, tight spacing, colored comments, print CSS (@page letter, 0.4in margins)
+
+The HTML must be self-contained: all CSS inline in <style> tag, no external dependencies.
+Use <span class="comment"> with color #555 for # comments inside <pre> blocks.
+
+LAYOUT RULE — ALWAYS use a two-column grid layout in the HTML:
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px;
+  Distribute sections evenly between left and right columns to fill the page.
+  Only fall back to single column if the topic genuinely has fewer than 4 sections.
+
+After writing both files, confirm: "Card created: syntax-card-{topic}.md + .html — open HTML in browser and Ctrl+P to print."

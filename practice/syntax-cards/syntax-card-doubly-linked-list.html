@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DOUBLY LINKED LIST — Syntax Card</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; line-height: 1.5; color: #111;
+    background: #fff; padding: 18px 22px;
+  }
+  h1 { font-size: 15px; font-weight: bold; letter-spacing: 2px;
+       border-bottom: 2px solid #111; padding-bottom: 4px;
+       margin-bottom: 10px; text-transform: uppercase; }
+  h2 { font-size: 10px; font-weight: bold; letter-spacing: 1px;
+       text-transform: uppercase; color: #555;
+       margin: 10px 0 3px 0; border-bottom: 1px solid #ccc; }
+  pre { background: #f4f4f4; padding: 5px 8px; border-left: 3px solid #333;
+        white-space: pre; font-size: 10.5px; line-height: 1.6; }
+  .comment { color: #555; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+  @media print { body { padding: 10px 14px; } @page { margin: 0.4in; size: letter; } }
+</style>
+</head>
+<body>
+<h1>DOUBLY LINKED LIST — Python Syntax Card</h1>
+<div class="cols">
+<div>
+
+<h2>Node Definition</h2>
+<pre>class DLNode:
+    def __init__(self, val=0):
+        self.val  = val
+        self.prev = None
+        self.next = None</pre>
+
+<h2>Sentinel Pattern (Dummy Head + Tail)</h2>
+<pre>head = DLNode(0)              <span class="comment"># dummy head</span>
+tail = DLNode(0)              <span class="comment"># dummy tail</span>
+head.next = tail
+tail.prev = head              <span class="comment"># eliminates edge cases</span></pre>
+
+<h2>Insert After a Node</h2>
+<pre>def insert_after(node, new_node):
+    new_node.prev = node
+    new_node.next = node.next
+    node.next.prev = new_node  <span class="comment"># fix successor</span>
+    node.next      = new_node  <span class="comment"># fix current</span></pre>
+
+<h2>Delete a Node</h2>
+<pre>def delete(node):
+    node.prev.next = node.next  <span class="comment"># bypass forward</span>
+    node.next.prev = node.prev  <span class="comment"># bypass backward</span></pre>
+
+<h2>Traverse</h2>
+<pre>cur = head.next               <span class="comment"># forward</span>
+while cur != tail:
+    print(cur.val); cur = cur.next
+
+cur = tail.prev               <span class="comment"># backward</span>
+while cur != head:
+    print(cur.val); cur = cur.prev</pre>
+
+</div>
+<div>
+
+<h2>deque — Built-in Doubly Linked List</h2>
+<pre>from collections import deque
+d = deque()
+d.append(x)                   <span class="comment"># add right  O(1)</span>
+d.appendleft(x)               <span class="comment"># add left   O(1)</span>
+d.pop()                       <span class="comment"># remove right O(1)</span>
+d.popleft()                   <span class="comment"># remove left  O(1)</span>
+d[0]                          <span class="comment"># peek left</span>
+d[-1]                         <span class="comment"># peek right</span>
+len(d)                        <span class="comment"># size</span></pre>
+
+<h2>LRU Cache — OrderedDict Pattern</h2>
+<pre>from collections import OrderedDict
+cache = OrderedDict()
+cache[key] = val              <span class="comment"># insert</span>
+cache.move_to_end(key)        <span class="comment"># mark recently used</span>
+cache.move_to_end(key, last=False) <span class="comment"># move to front</span>
+cache.popitem(last=False)     <span class="comment"># evict LRU (front)</span>
+cache.popitem(last=True)      <span class="comment"># evict MRU (back)</span></pre>
+
+<h2>LRU Cache — Manual DLL + Dict</h2>
+<pre><span class="comment"># O(1) get and put</span>
+# dict maps key -> DLNode
+# DLL order: head=LRU ... tail=MRU
+def get(key):
+    if key in cache:
+        move_to_tail(cache[key])   <span class="comment"># mark used</span>
+        return cache[key].val
+    return -1
+
+def put(key, val):
+    if key in cache: delete(cache[key])
+    node = DLNode(key, val)
+    insert_before_tail(node)
+    cache[key] = node
+    if len(cache) > capacity:
+        lru = head.next
+        delete(lru); del cache[lru.key]</pre>
+
+</div>
+</div>
+</body>
+</html>

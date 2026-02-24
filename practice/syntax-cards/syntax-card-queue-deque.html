@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>QUEUE & DEQUE — Syntax Card</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px; line-height: 1.5; color: #111;
+    background: #fff; padding: 18px 22px;
+  }
+  h1 { font-size: 15px; font-weight: bold; letter-spacing: 2px;
+       border-bottom: 2px solid #111; padding-bottom: 4px;
+       margin-bottom: 10px; text-transform: uppercase; }
+  h2 { font-size: 10px; font-weight: bold; letter-spacing: 1px;
+       text-transform: uppercase; color: #555;
+       margin: 10px 0 3px 0; border-bottom: 1px solid #ccc; }
+  pre { background: #f4f4f4; padding: 5px 8px; border-left: 3px solid #333;
+        white-space: pre; font-size: 10.5px; line-height: 1.6; }
+  .comment { color: #555; }
+  .warn    { color: #c00; font-weight: bold; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+  @media print { body { padding: 10px 14px; } @page { margin: 0.4in; size: letter; } }
+</style>
+</head>
+<body>
+<h1>QUEUE &amp; DEQUE — Python Syntax Card</h1>
+<div class="cols">
+<div>
+
+<h2>Queue — deque (recommended)</h2>
+<pre>from collections import deque
+q = deque()
+q.append(x)                   <span class="comment"># enqueue — add right</span>
+q.popleft()                   <span class="comment"># dequeue — remove left O(1)</span>
+q[0]                          <span class="comment"># peek front</span>
+if not q:                     <span class="comment"># check empty</span></pre>
+
+<h2>DO NOT use list as queue</h2>
+<pre>q.append(x)                   <span class="comment"># enqueue — O(1) ok</span>
+q.pop(0)                      <span class="warn"># dequeue — O(n) !! SLOW</span></pre>
+
+<h2>Deque — Double-Ended</h2>
+<pre>d = deque()
+d.append(x)                   <span class="comment"># add right</span>
+d.appendleft(x)               <span class="comment"># add left</span>
+d.pop()                       <span class="comment"># remove right  O(1)</span>
+d.popleft()                   <span class="comment"># remove left   O(1)</span>
+d[0]                          <span class="comment"># peek left</span>
+d[-1]                         <span class="comment"># peek right</span>
+d.rotate(k)                   <span class="comment"># rotate right k steps</span>
+d.rotate(-k)                  <span class="comment"># rotate left  k steps</span>
+deque(iterable, maxlen=k)     <span class="comment"># fixed-size window</span></pre>
+
+<h2>Sliding Window — maxlen</h2>
+<pre>window = deque(maxlen=k)      <span class="comment"># auto-evicts oldest</span>
+for x in nums:
+    window.append(x)          <span class="comment"># old element dropped if full</span>
+    if len(window) == k:
+        process(window)       <span class="comment"># always last k elements</span></pre>
+
+</div>
+<div>
+
+<h2>Monotonic Deque (Sliding Window Max)</h2>
+<pre>from collections import deque
+d = deque()                   <span class="comment"># stores indices, vals decreasing</span>
+result = []
+for i, n in enumerate(nums):
+    while d and nums[d[-1]] < n:
+        d.pop()               <span class="comment"># evict smaller from back</span>
+    d.append(i)
+    if d[0] < i - k + 1:
+        d.popleft()           <span class="comment"># evict out-of-window from front</span>
+    if i >= k - 1:
+        result.append(nums[d[0]])  <span class="comment"># front = window max</span></pre>
+
+<h2>Priority Queue — Min-Heap</h2>
+<pre>import heapq
+h = []
+heapq.heappush(h, val)        <span class="comment"># push</span>
+heapq.heappop(h)              <span class="comment"># pop min</span>
+h[0]                          <span class="comment"># peek min (no pop)</span>
+heapq.heapify(lst)            <span class="comment"># list → heap in-place O(n)</span>
+heapq.nlargest(k, lst)        <span class="comment"># k largest</span>
+heapq.nsmallest(k, lst)       <span class="comment"># k smallest</span></pre>
+
+<h2>Max-Heap (negate trick)</h2>
+<pre>heapq.heappush(h, -val)       <span class="comment"># push negated</span>
+-heapq.heappop(h)             <span class="comment"># pop + negate back</span></pre>
+
+<h2>Heap with Priority Tuple</h2>
+<pre>heapq.heappush(h, (priority, val))
+priority, val = heapq.heappop(h)  <span class="comment"># sorted by priority</span>
+
+<span class="comment"># tie-break with counter to avoid comparing val</span>
+import itertools
+counter = itertools.count()
+heapq.heappush(h, (priority, next(counter), val))</pre>
+
+</div>
+</div>
+</body>
+</html>

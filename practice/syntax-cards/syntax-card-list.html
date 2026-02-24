@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LIST — Syntax Card</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Courier New", Courier, monospace; font-size: 11px; line-height: 1.5; color: #111; background: #fff; padding: 18px 22px; }
+  h1 { font-size: 15px; font-weight: bold; letter-spacing: 2px; border-bottom: 2px solid #111; padding-bottom: 4px; margin-bottom: 10px; text-transform: uppercase; }
+  h2 { font-size: 10px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; color: #555; margin: 10px 0 3px 0; border-bottom: 1px solid #ccc; }
+  pre { background: #f4f4f4; padding: 5px 8px; border-left: 3px solid #333; white-space: pre; font-size: 10.5px; line-height: 1.6; }
+  .comment { color: #555; } .warn { color: #c00; } .good { color: #060; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+  @media print { body { padding: 10px 14px; } @page { margin: 0.4in; size: letter; } }
+</style>
+</head>
+<body>
+<h1>LIST — Python Syntax Card</h1>
+<div class="cols">
+<div>
+
+<h2>Create & Initialize</h2>
+<pre>a = []                       <span class="comment"># empty</span>
+a = [0] * n                  <span class="comment"># n zeros</span>
+a = list(range(n))           <span class="comment"># [0,1,...,n-1]</span>
+a = [x*2 for x in range(5)] <span class="comment"># comprehension</span></pre>
+
+<h2>Access & Slice</h2>
+<pre>a[0]      <span class="comment"># first</span>
+a[-1]     <span class="comment"># last</span>
+a[1:4]    <span class="comment"># index 1,2,3 (end exclusive)</span>
+a[::-1]   <span class="comment"># reversed copy</span>
+a[::2]    <span class="comment"># every other element</span></pre>
+
+<h2>Add / Remove</h2>
+<pre>a.append(x)       <span class="comment"># end        O(1)</span>
+a.insert(i, x)    <span class="comment"># at index   O(n)</span>
+a.pop()           <span class="comment"># last       O(1)</span>
+a.pop(i)          <span class="comment"># at index   O(n)</span>
+a.remove(x)       <span class="comment"># first x    O(n)</span>
+a.extend([1,2])   <span class="comment"># add many   O(k)</span></pre>
+
+<h2>Sort & Order</h2>
+<pre>a.sort()                      <span class="comment"># in-place</span>
+a.sort(reverse=True)
+a.sort(key=lambda x: x[1])   <span class="comment"># by field</span>
+sorted(a)                     <span class="comment"># new list</span>
+a.reverse()                   <span class="comment"># in-place</span></pre>
+
+<h2>Stack Pattern</h2>
+<pre>stack = []
+stack.append(x)   <span class="comment"># push O(1)</span>
+stack.pop()       <span class="comment"># pop  O(1)</span>
+stack[-1]         <span class="comment"># peek O(1)</span></pre>
+
+</div>
+<div>
+
+<h2>Search & Info</h2>
+<pre>x in a            <span class="comment"># membership  O(n)</span>
+a.index(x)        <span class="comment"># first index O(n)</span>
+a.count(x)        <span class="comment"># occurrences O(n)</span>
+len(a)            <span class="comment"># length      O(1)</span>
+min(a), max(a)    <span class="comment"># O(n)</span>
+sum(a)            <span class="comment"># O(n)</span></pre>
+
+<h2>Copy</h2>
+<pre>b = a[:]          <span class="comment"># shallow copy</span>
+b = a.copy()      <span class="comment"># shallow copy</span>
+import copy
+b = copy.deepcopy(a)  <span class="comment"># deep (nested)</span></pre>
+
+<h2>2D List</h2>
+<pre><span class="good">grid = [[0]*c for _ in range(r)]  # correct</span>
+<span class="warn">grid = [[0]*c] * r                # WRONG — shared rows</span>
+grid[r][c]        <span class="comment"># access cell</span>
+len(grid)         <span class="comment"># row count</span>
+len(grid[0])      <span class="comment"># col count</span></pre>
+
+<h2>Loop Patterns</h2>
+<pre><span class="comment"># forward — value</span>
+for x in a: ...
+
+<span class="comment"># forward — index</span>
+for i in range(len(a)): ...
+
+<span class="comment"># backward</span>
+for i in range(len(a)-1, -1, -1): ...
+
+<span class="comment"># every other (step)</span>
+for i in range(0, len(a), 2):  <span class="comment"># even indices</span>
+for i in range(1, len(a), 2):  <span class="comment"># odd indices</span>
+
+<span class="comment"># index + value together</span>
+for i, v in enumerate(a): ...
+
+<span class="comment"># two pointers — squeeze inward</span>
+l, r = 0, len(a) - 1
+while l < r:
+    ...
+    l += 1; r -= 1
+
+<span class="comment"># adjacent pairs (i, i+1)</span>
+for i in range(len(a) - 1): ...
+
+<span class="comment"># zip two lists</span>
+for x, y in zip(a, b): ...
+
+<span class="comment"># all pairs (i &lt; j) — O(n²)</span>
+for i in range(len(a)):
+    for j in range(i+1, len(a)): ...</pre>
+
+<h2>Other Patterns</h2>
+<pre><span class="comment"># flatten 2D</span>
+flat = [x for row in grid for x in row]
+
+<span class="comment"># unpack</span>
+first, *rest = a
+*init, last  = a</pre>
+
+</div>
+</div>
+</body>
+</html>

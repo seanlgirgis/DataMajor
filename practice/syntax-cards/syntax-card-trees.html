@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BINARY TREES — Syntax Card</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #111;
+    background: #fff;
+    padding: 18px 22px;
+  }
+
+  h1 {
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-bottom: 2px solid #111;
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #555;
+    margin: 10px 0 3px 0;
+    border-bottom: 1px solid #ccc;
+  }
+
+  pre {
+    background: #f4f4f4;
+    padding: 5px 8px;
+    border-left: 3px solid #333;
+    white-space: pre;
+    font-size: 10.5px;
+    line-height: 1.6;
+  }
+
+  .comment { color: #555; }
+
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 16px;
+  }
+
+  @media print {
+    body { padding: 10px 14px; }
+    @page { margin: 0.4in; size: letter; }
+  }
+</style>
+</head>
+<body>
+
+<h1>BINARY TREES — Python Syntax Card</h1>
+
+<div class="cols">
+<div>
+
+<h2>Node Definition</h2>
+<pre>class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val   = val
+        self.left  = left
+        self.right = right</pre>
+
+<h2>DFS Recursive — Post-Order (most common)</h2>
+<pre>def dfs(node):
+    if not node: return 0          <span class="comment"># base case</span>
+    left  = dfs(node.left)
+    right = dfs(node.right)
+    return combine(left, right)    <span class="comment"># combine results</span></pre>
+
+<h2>DFS Recursive — Pre-Order</h2>
+<pre>def dfs(node):
+    if not node: return
+    process(node.val)              <span class="comment"># root first</span>
+    dfs(node.left)
+    dfs(node.right)</pre>
+
+<h2>DFS Recursive — In-Order (BST = sorted)</h2>
+<pre>def dfs(node):
+    if not node: return
+    dfs(node.left)
+    process(node.val)              <span class="comment"># root in middle</span>
+    dfs(node.right)</pre>
+
+<h2>DFS Iterative (Stack)</h2>
+<pre>stack = [root]
+while stack:
+    node = stack.pop()
+    if not node: continue
+    process(node.val)
+    stack.append(node.right)       <span class="comment"># right first → left out first</span>
+    stack.append(node.left)</pre>
+
+<h2>Build from Level-Order List</h2>
+<pre>from collections import deque
+def build(vals):
+    if not vals or vals[0] is None: return None
+    root  = TreeNode(vals[0])
+    queue = deque([root])
+    i = 1
+    while queue and i < len(vals):
+        node = queue.popleft()
+        if i < len(vals) and vals[i] is not None:
+            node.left = TreeNode(vals[i])
+            queue.append(node.left)
+        i += 1
+        if i < len(vals) and vals[i] is not None:
+            node.right = TreeNode(vals[i])
+            queue.append(node.right)
+        i += 1
+    return root</pre>
+
+</div>
+<div>
+
+<h2>BFS — Level Order (Queue)</h2>
+<pre>from collections import deque
+queue = deque([root])
+while queue:
+    node = queue.popleft()
+    if not node: continue
+    process(node.val)
+    queue.append(node.left)
+    queue.append(node.right)</pre>
+
+<h2>BFS — Level by Level</h2>
+<pre>queue = deque([root])
+result = []
+while queue:
+    level = []
+    for _ in range(len(queue)):    <span class="comment"># snapshot level size</span>
+        node = queue.popleft()
+        level.append(node.val)
+        if node.left:  queue.append(node.left)
+        if node.right: queue.append(node.right)
+    result.append(level)
+return result</pre>
+
+<h2>Common Patterns</h2>
+<pre><span class="comment"># max depth (post-order)</span>
+return 1 + max(dfs(root.left), dfs(root.right))
+
+<span class="comment"># diameter — update global at each node</span>
+self.res = max(self.res, left + right)
+return 1 + max(left, right)
+
+<span class="comment"># lowest common ancestor</span>
+if not node or node == p or node == q: return node
+left  = lca(node.left,  p, q)
+right = lca(node.right, p, q)
+return node if left and right else left or right</pre>
+
+<h2>BST Valid Range Check</h2>
+<pre>def valid(node, lo=float('-inf'), hi=float('inf')):
+    if not node: return True
+    if not (lo < node.val < hi): return False
+    return (valid(node.left,  lo, node.val) and
+            valid(node.right, node.val, hi))</pre>
+
+<h2>Symmetric / Mirror Check</h2>
+<pre>def mirror(l, r):
+    if not l and not r: return True
+    if not l or  not r: return False
+    return (l.val == r.val and
+            mirror(l.left,  r.right) and
+            mirror(l.right, r.left))</pre>
+
+</div>
+</div>
+
+</body>
+</html>
