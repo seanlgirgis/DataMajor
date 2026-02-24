@@ -1,7 +1,7 @@
 | # | Problem Title | Concepts | Difficulty | Links |
 | :--- | :--- | :--- | :--- | :--- |
-| **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | [Jupyter](./217.ipynb) / [Script](./217.py) |
-| **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 | [Jupyter](./704.ipynb) / [Script](./704.py) |
+| **217** | [Contains Duplicate](#section-1-problem-description) | `Array`, `Hash Set` | 1/10 | [Jupyter](./217.ipynb) / [Script](./217.py) |
+| **704** | [Binary Search](#section-1-problem-description-1) | `Binary Search`, `Array` | 3/10 | [Jupyter](./704.ipynb) / [Script](./704.py) |
 
 
 
@@ -19,18 +19,18 @@ number: 217
 title: "Contains Duplicate"
 difficulty: 1/10
 concepts: ["Array", "Hash Set", "Lookup"]
-jupyter_path: "./study/leetcode_217.ipynb"
-script_path: "./scripts/217_contains_duplicate.py"
+jupyter_path: ".C:\DataMajor\practice\001Study\playground\group1\217.ipynb"
+script_path: "C:\DataMajor\practice\001Study\playground\group1\217.py"
 ---
 
 ## 217: Contains Duplicate
 
-### Problem Description
+### Section 1: Problem Description
 > Given an integer array `nums`, return `true` if any value appears at least twice in the array, and return `false` if every element is distinct.
 
 ---
 
-### Solution Idea (Pseudo-solution)
+### Section 2: Solution Idea (Pseudo-solution)
 * **Approach:** Hash Set for $O(1)$ average time complexity lookups.
 * **Logic:**
     1. Initialize an empty set called `seen`.
@@ -45,7 +45,7 @@ script_path: "./scripts/217_contains_duplicate.py"
 
 ---
 
-### Solution Code
+### Section 3: solution code
 ```python
 def containsDuplicate(nums):
     seen = set()
@@ -70,12 +70,12 @@ script_path: "[PATH_TO_SCRIPT]"
 
 ## [ID_NUMBER]: [PROBLEM_TITLE]
 
-### Problem Description
+### Section 1: Problem Description
 > [Paste the description from LeetCode here.]
 
 ---
 
-### Solution Idea (Pseudo-solution)
+### Section 2: Solution Idea (Pseudo-solution)
 * **Approach:** [e.g., Two Pointers, Sliding Window, Greedy]
 * **Logic:**
     1. [Step 1]
@@ -88,7 +88,7 @@ script_path: "[PATH_TO_SCRIPT]"
 
 ---
 
-### Solution Code
+### Section 3: solution code
 ```python
 # [Insert Python Code Here]
 def solution():
