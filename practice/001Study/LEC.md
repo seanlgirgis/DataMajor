@@ -15,22 +15,19 @@
 # LEC Cases
 
 ---
-number: 217
-title: "Contains Duplicate"
-difficulty: 1/10
-concepts: ["Array", "Hash Set", "Lookup"]
-jupyter_path: ".C:\DataMajor\practice\001Study\playground\group1\217.ipynb"
-script_path: "C:\DataMajor\practice\001Study\playground\group1\217.py"
----
+
 
 ## 217: Contains Duplicate
 
 ### Problem Description
 > Given an integer array `nums`, return `true` if any value appears at least twice in the array, and return `false` if every element is distinct.
 
-section 1  
-section 2  
-section 3  
+##### number: 217
+##### title: "Contains Duplicate"
+##### difficulty: 1/10
+##### concepts: ["Array", "Hash Set", "Lookup"]
+##### jupyter_path: ".C:\DataMajor\practice\001Study\playground\group1\217.ipynb"
+##### script_path: "C:\DataMajor\practice\001Study\playground\group1\217.py"
 
 ---
 
