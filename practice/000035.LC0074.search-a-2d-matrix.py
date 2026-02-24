@@ -3,6 +3,9 @@
 # Pattern   : Binary Search
 # Difficulty : Medium
 # ============================================================
+# Time Complexity:  O(log(m * n)) --- standard binary search over m*n elements
+# Space Complexity: O(1) --- only tracking pointers, no extra array created
+# ============================================================
 # Problem:
 #   You are given an m x n integer matrix matrix with the following two properties:
 #     - Each row is sorted in non-decreasing order.
@@ -19,6 +22,17 @@
 #   n == matrix[i].length
 #   1 <= m, n <= 100
 #   -10^4 <= matrix[i][j], target <= 10^4
+# ============================================================
+# Key Insight:
+#   Because the rows are sorted AND the first element of each row
+#   is strictly greater than the last element of the previous row,
+#   we can treat the entire 2D matrix as one giant sorted 1D array
+#   of length `m * n`.
+#   
+#   To do standard Binary Search without physically transforming it:
+#   Map the 1D `mid` index back to 2D coordinates using:
+#     row = mid // COLS
+#     col = mid % COLS
 # ============================================================
 
 from typing import List
@@ -48,16 +62,6 @@ class Solution:
         return False
 
 
-
-"""r
-import sys
-
-print(Solution().searchMatrix(
-    [[1,3,5,7],[10,11,16,20],[23,30,34,60]], 13
-    )
-)
-sys.exit(0)
-"""
 
 # ── Tests ────────────────────────────────────────────────────
 if __name__ == "__main__":

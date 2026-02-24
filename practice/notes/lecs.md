@@ -113,6 +113,38 @@ class Solution:
         return one_step_before
 ```
 
+
+# LC0074 Search a 2D Matrix
+## matrix is sorted
+
+```python
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        #problem screams binary search
+        #Find a way to convert matrix to List
+        #Since creating new space is processing and space.. do it on the fly
+        #
+        rows,cols = len(matrix), len(matrix[0])
+        left, right = 0, rows * cols -1
+        
+        while left <= right:
+            mid = (left + right) //2
+            midv = matrix[mid//cols][mid%cols]
+            if midv == target:
+                return True
+            elif midv < target:
+                left = mid + 1
+            else:
+                right = mid -1
+        
+        
+        #assume the worst. If we found it we would have returned
+        #Solution is always at mid in binary search
+        return False
+
+```
+
+
 # LC0424 .. Longest Repeating Character Replacement
 ##  You can replace up to a k characters . get the max possible window with replacements of the same char
 ### sliding Window Technique
