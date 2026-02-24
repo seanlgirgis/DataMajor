@@ -133,7 +133,7 @@ print("Test2: search fro trget 4 in [1, 2, 3, 4, 5, 6] : success" if search([1, 
 - title: "Two Sum"
 - difficulty: 2/10
 - concepts: ["Array", "Hash Table"]
-- jupyter_path: <<absolute Path... I fill it>>
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\1.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def twoSum(self, nums: List[int], target: int) -> List[int]:
 
