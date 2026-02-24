@@ -157,7 +157,23 @@ print("Test2: search fro trget 4 in [1, 2, 3, 4, 5, 6] : success" if search([1, 
 ### Solution Code
 ```python
 
-<<I fill the code here>>
+from typing import List
+class Solution(object):
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        #Define a seen dict
+        seen: dict = {}
+        for i, num in enumerate(nums):
+            if (target - num) in seen:
+                return [seen[(target - num)  ], i]
+            else:
+                seen[num] = i
+        return []
+
+
+sol = Solution()
+print("Test1: [2,7,11,15] target=9 -> [0,1]: success" if sol.twoSum([2,7,11,15], 9) == [0,1] else "Test1: Fail")
+print("Test2: [3,2,4] target=6 -> [1,2]: success" if sol.twoSum([3,2,4], 6) == [1,2] else "Test2: Fail")
+print("Test3: [3,3] target=6 -> [0,1]: success" if sol.twoSum([3,3], 6) == [0,1] else "Test3: Fail")
 
 ```
 
