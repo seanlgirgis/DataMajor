@@ -1,7 +1,7 @@
 | # | Problem Title | Concepts | Difficulty | Links |
 | :--- | :--- | :--- | :--- | :--- |
 | **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | [Jupyter](./217.ipynb) / [Script](./217.py) |
-| **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 | [Jupyter](./704.ipynb) / [Script](./704.py) |
+| **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 1/10 | [Jupyter](./704.ipynb) / [Script](./704.py) |
 
 
 
@@ -61,6 +61,46 @@ def contains_duplicate(nums:List[int]) -> bool:
 print ("Single Test Success" if contains_duplicate([1, 2, 3, 4]) == False else "Single Test Fail")
 
     
+```
+
+---
+
+## 704: Binary Search
+
+### Problem Description
+> Given an array of integers `nums` which is sorted in ascending order, and an integer `target`, write a function to search `target` in `nums`. If `target` exists, then return its index. Otherwise, return `-1`.
+
+- number: 704
+- title: "Binary Search"
+- difficulty: 3/10
+- concepts: ["Binary Search", "Array"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Binary Search + Two Pointers. The sequence is already sorted so we find the target by halving the search space repeatedly.
+* **Logic:**
+    1. Initialize `left` pointer to `0`, and `right` pointer to `len(nums) - 1`
+    2. While `left` is less than or equal to `right`:
+    3. Calculate the midpoint `mid` index using `(left + right) // 2`
+    4. If the element at `mid` is the target, return `mid`
+    5. Else if the element at `mid` is less than target, target must be in the right half, so move `left` to `mid + 1`
+    6. Else if the element at `mid` is greater than target, target must be in the left half, so move `right` to `mid - 1`
+    7. If loop finishes with no match, return `-1`
+
+**Complexity:**
+* **Time:** $O(\log n)$
+* **Space:** $O(1)$
+
+---
+
+### Solution Code
+```python
+
+<<I fill the code here>>
+
 ```
 
 ---
