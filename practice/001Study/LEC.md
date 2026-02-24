@@ -1,7 +1,7 @@
 | # | Problem Title | Concepts | Difficulty | Links |
 | :--- | :--- | :--- | :--- | :--- |
-| **217** | [Contains Duplicate](#217) | `Array`, `Hash Set` | 1/10 | [Jupyter](./217.ipynb) / [Script](./217.py) |
-| **704** | [Binary Search](#704) | `Binary Search`, `Array` | 3/10 | [Jupyter](./704.ipynb) / [Script](./704.py) |
+| **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | [Jupyter](./217.ipynb) / [Script](./217.py) |
+| **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 | [Jupyter](./704.ipynb) / [Script](./704.py) |
 
 
 
@@ -13,15 +13,6 @@
 
 ---
 # LEC Cases
-
-
----
-
-
-
-
-
----
 
 ---
 number: 217
@@ -63,12 +54,7 @@ def containsDuplicate(nums):
             return True
         seen.add(n)
     return False
-
-
-
-
-
-
+```
 
 ---
 # Template
@@ -107,3 +93,4 @@ script_path: "[PATH_TO_SCRIPT]"
 # [Insert Python Code Here]
 def solution():
     pass
+```
