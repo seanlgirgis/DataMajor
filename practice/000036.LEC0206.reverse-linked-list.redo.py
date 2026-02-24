@@ -3,6 +3,9 @@
 # Pattern   : Three-Pointer
 # Difficulty : Easy
 # ============================================================
+# Time Complexity:  O(n) --- single pass through the list
+# Space Complexity: O(1) --- only three pointers used
+# ============================================================
 # Problem:
 #   Given the head of a singly linked list, reverse the list,
 #   and return the reversed list.
@@ -11,6 +14,16 @@
 #   head = [1,2,3,4,5]  ->  [5,4,3,2,1]
 #   head = [1,2]        ->  [2,1]
 #   head = []           ->  []
+#   head = []           ->  []
+# ============================================================
+# Key Insight:
+#   To reverse a linked list in place, you need three pointers:
+#   1. `prev`: initialized to None (what the new tail will point to).
+#   2. `cur` : the current node we are processing.
+#   3. `next_node`: temp variable to hold the rest of the list
+#      before we break `cur`'s connection.
+#   Operation at each step: save next_node, point cur backwards
+#   to prev, shift prev to cur, shift cur to next_node.
 # ============================================================
 
 from typing import Optional
@@ -22,7 +35,14 @@ class ListNode:
 
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        pass
+        cur = head 
+        prev = None
+        while cur:
+            next_node = cur.next
+            cur.next = prev
+            prev = cur
+            cur = next_node
+        return prev
 
 
 # ── Helpers ──────────────────────────────────────────────────

@@ -143,8 +143,30 @@ class Solution:
         return False
 
 ```
+#LEC0206 Reverse Linked List
+##  
+```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        cur = head 
+        prev = None
+        while cur:
+            next_node = cur.next
+            cur.next = prev
+            prev = cur
+            cur = next_node
+        return prev
+
+```
 
 
+
+---
 # LC0424 .. Longest Repeating Character Replacement
 ##  You can replace up to a k characters . get the max possible window with replacements of the same char
 ### sliding Window Technique

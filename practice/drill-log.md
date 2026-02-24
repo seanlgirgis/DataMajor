@@ -26,7 +26,7 @@
 | 3 | 000003.LC0121.best-time-buy-sell.py | Best Time Buy/Sell | Greedy | 4 | OK (cleared by 000029) |
 | 4 | 000004.LEC0242.valid-anagram.py | Valid Anagram | Frequency Map | 4 | OK (cleared by 000026) |
 | 5 | 000005.LEC0020.valid-parentheses.py | Valid Parentheses | Stack | 4 | OK (cleared by 000032) |
-| 6 | 000006.LEC0206.reverse-linked-list.py | Reverse Linked List | Three-Pointer | 4 | REDO |
+| 6 | 000006.LEC0206.reverse-linked-list.py | Reverse Linked List | Three-Pointer | 4 | OK (cleared by 000036) |
 | 7 | 000007.LC0003.longest-substr-no-repeat.py | Longest Substr No Repeat | Sliding Window | 4 | REDO |
 | 8 | 000008.LC0704.binary-search.py | Binary Search | Binary Search | 4 | REDO |
 | 9 | 000009.LC0104.max-depth-binary-tree.py | Max Depth Binary Tree | DFS Recursive | 4 | REDO |
@@ -55,3 +55,4 @@
 | 32 | 000032.LC0020.valid-parentheses.redo.py | Valid Parentheses | Stack | 2 | OK |
 | 33 | 000034.LC0424.longest-repeating-char-replacement.py | Longest Repeating Character Replacement | Sliding Window | 5 | REDO |
 | 35 | 000035.LC0074.search-a-2d-matrix.py | Search a 2D Matrix | Binary Search | 2 | OK |
+| 36 | 000036.LEC0206.reverse-linked-list.redo.py | Reverse Linked List | Three-Pointer | 2 | OK |
