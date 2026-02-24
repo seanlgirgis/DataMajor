@@ -1,7 +1,7 @@
-| # | Problem Title | Concepts | Difficulty | Links |
-| :--- | :--- | :--- | :--- | :--- |
-| **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | [Jupyter](./217.ipynb) / [Script](./217.py) |
-| **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 | [Jupyter](C:\DataMajor\practice\001Study\playground\group1\704.ipynb)  |
+| # | Problem Title | Concepts | Difficulty | 
+| :--- | :--- | :--- | :--- | 
+| **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | 
+| **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |  
 
 
 
