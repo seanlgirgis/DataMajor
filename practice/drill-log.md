@@ -56,3 +56,4 @@
 | 33 | 000034.LC0424.longest-repeating-char-replacement.py | Longest Repeating Character Replacement | Sliding Window | 5 | REDO |
 | 35 | 000035.LC0074.search-a-2d-matrix.py | Search a 2D Matrix | Binary Search | 2 | OK |
 | 36 | 000036.LEC0206.reverse-linked-list.redo.py | Reverse Linked List | Three-Pointer | 2 | OK |
+| 37 | 000037.LC0100.same-tree.py | Same Tree | Trees (DFS) | 3 | REDO |
