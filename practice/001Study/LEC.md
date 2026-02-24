@@ -48,54 +48,62 @@
 
 ### Solution Code
 ```python
-def containsDuplicate(nums):
+
+from typing import List
+def contains_duplicate(nums:List[int]) -> bool:
     seen = set()
-    for n in nums:
-        if n in seen:
+    for num in nums:
+        if num in seen:
             return True
-        seen.add(n)
+        else:
+            seen.add(num)
     return False
+print ("Single Test Success" if contains_duplicate([1, 2, 3, 4]) == False else "Single Test Fail")
+
+    
 ```
 
 ---
 # Template
 
----
-number: [ID_NUMBER]
-title: "[PROBLEM_TITLE]"
-difficulty: [1-10]/10
-concepts: ["Concept 1", "Concept 2", "Concept 3"]
-jupyter_path: "[PATH_TO_JUPYTER_NOTEBOOK]"
-script_path: "[PATH_TO_SCRIPT]"
+
+
 ---
 
-## [ID_NUMBER]: [PROBLEM_TITLE]
+
+## 217: Contains Duplicate
 
 ### Problem Description
-> [Paste the description from LeetCode here.]
+> <<Description of the problem>>
 
-section 1  
-section 2  
-section 3  
+##### number: <<number>>
+##### title: "<<Title>>"
+##### difficulty: <<difficulty>>
+##### concepts: ["<<Concept 1>>", "<<Concept 2>>", "<<Concept 3>>"]
+##### jupyter_path: <<absolute Path... I fill it>>
+##### script_path: <<absolute Path... I fill it>>
 
 ---
 
 ### Solution Idea (Pseudo-solution)
-* **Approach:** [e.g., Two Pointers, Sliding Window, Greedy]
+* **Approach:** <<approach goes here>>
 * **Logic:**
-    1. [Step 1]
-    2. [Step 2]
-    3. [Step 3]
+    1. <<Logic goes here>>
+    2. <<Logic goes here>>
+    3. <<Logic goes here>>
+    4. <<Logic goes here>>
+    5. <<Logic goes here>>
 
 **Complexity:**
-* **Time:** $O(\dots)$
-* **Space:** $O(\dots)$
+* **Time:** <<Time Complexity>>
+* **Space:** <<Space Complexity>>
 
 ---
 
 ### Solution Code
 ```python
-# [Insert Python Code Here]
-def solution():
-    pass
+
+<<I fill the code here >>
+
+    
 ```
