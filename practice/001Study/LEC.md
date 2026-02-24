@@ -22,12 +22,12 @@
 ### Problem Description
 > Given an integer array `nums`, return `true` if any value appears at least twice in the array, and return `false` if every element is distinct.
 
-##### number: 217
-##### title: "Contains Duplicate"
-##### difficulty: 1/10
-##### concepts: ["Array", "Hash Set", "Lookup"]
-##### jupyter_path: ".C:\DataMajor\practice\001Study\playground\group1\217.ipynb"
-##### script_path: "C:\DataMajor\practice\001Study\playground\group1\217.py"
+- number: 217
+- title: "Contains Duplicate"
+- difficulty: 1/10
+- concepts: ["Array", "Hash Set", "Lookup"]
+- jupyter_path: ".C:\DataMajor\practice\001Study\playground\group1\217.ipynb"
+- script_path: "C:\DataMajor\practice\001Study\playground\group1\217.py"
 
 ---
 
@@ -76,12 +76,12 @@ print ("Single Test Success" if contains_duplicate([1, 2, 3, 4]) == False else "
 ### Problem Description
 > <<Description of the problem>>
 
-##### number: <<number>>
-##### title: "<<Title>>"
-##### difficulty: <<difficulty>>
-##### concepts: ["<<Concept 1>>", "<<Concept 2>>", "<<Concept 3>>"]
-##### jupyter_path: <<absolute Path... I fill it>>
-##### script_path: <<absolute Path... I fill it>>
+- number: <<number>>
+- title: "<<Title>>"
+- difficulty: <<difficulty>>
+- concepts: ["<<Concept 1>>", "<<Concept 2>>", "<<Concept 3>>"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
 
 ---
 
