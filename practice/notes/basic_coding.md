@@ -5,6 +5,25 @@ from math import inf
 var = inf         #now yo uhave a veriable that is stet to inf
 ```
 
+# String Operations
+
+## Common string functions and accessing characters by index
+
+```python
+text = "Hello"
+
+# Letter at index
+char = text[0] if len(text) > 0 else None
+
+# String functions
+upper_text = text.upper()
+lower_text = text.lower()
+is_digit = text.isdigit()
+stripped = text.strip()
+replaced = text.replace("H", "J")
+
+```
+
 
 # Stack Operations
 
@@ -44,3 +63,25 @@ def solve(n):
     return solve(n - 1) + solve(n - 2)
 
 ```
+
+
+# Dataclass Instantiation
+
+## Creating and initializing a Python dataclass object with positional and keyword arguments
+
+```python
+from dataclasses import dataclass
+
+@dataclass
+class DataObject:
+    id: int
+    name: str
+    value: float = 0.0
+
+# Instantiation
+obj1 = DataObject(1, "Alpha")
+obj2 = DataObject(id=2, name="Beta", value=10.5)
+
+```
+
+

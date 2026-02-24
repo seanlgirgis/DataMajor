@@ -20,21 +20,49 @@
 
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
+        left, right, n = 0,0, len(s)
+        
+        
+        
+        # looks like 2 pointers
         pass
 
+
+
+s, k = "AAABBBCCC", 3
+print(Solution().characterReplacement(s,k))
+import sys
+sys.exit()
 
 # ── Tests ────────────────────────────────────────────────────
 if __name__ == "__main__":
     sol = Solution()
 
     test_cases = [
-        ("ABAB", 2, 4),
-        ("AABABBA", 1, 4),
-        ("A", 0, 1),
-        ("ABAA", 0, 1),
-        ("ABCCC", 1, 4),   # change B to C -> "ACCCC"
-        ("KRSK", 2, 4),    # change two chars to K
-        ("", 1, 0)
+# Edge cases
+("AAAA", 0, 4),        # all same, no changes needed
+("AAAA", 2, 4),        # all same, k irrelevant
+("ABCD", 0, 1),        # all different, no changes allowed
+("ABCD", 1, 2),        # all different, 1 change
+("ABCD", 3, 4),        # all different, k covers whole string
+("AABB", 1, 3),        # tie between A and B dominance
+
+# k >= len(s)
+("ABCD", 4, 4),        # k equals length, whole string
+("ABCD", 10, 4),       # k exceeds length
+
+# Longer strings
+("ABABABABAB", 2, 6),  # alternating, 2 replacements
+("AABBBBAAA", 2, 9),   # nearly uniform
+("AAABBBCCC", 3, 6),   # three equal groups
+
+# All same character
+("BBBBBB", 0, 6),      # no replacements needed
+("BBBBBB", 3, 6),      # k irrelevant
+
+# Single char repeated with noise
+("BAAAB", 2, 5),       # surround A island with B replacements
+("AABAA", 1, 5),       # one replacement makes whole string A
     ]
 
     passed = 0
