@@ -1,7 +1,7 @@
 | # | Problem Title | Concepts | Difficulty | Links |
 | :--- | :--- | :--- | :--- | :--- |
 | **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | [Jupyter](./217.ipynb) / [Script](./217.py) |
-| **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 1/10 | [Jupyter](./704.ipynb) / [Script](./704.py) |
+| **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 1/10 | [Jupyter]("C:\DataMajor\practice\001Study\playground\group1\704.ipynb")  |
 
 
 
@@ -74,8 +74,8 @@ print ("Single Test Success" if contains_duplicate([1, 2, 3, 4]) == False else "
 - title: "Binary Search"
 - difficulty: 3/10
 - concepts: ["Binary Search", "Array"]
-- jupyter_path: <<absolute Path... I fill it>>
-- script_path: <<absolute Path... I fill it>>
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\704.ipynb"
+- script_path: 
 
 ---
 
@@ -99,7 +99,25 @@ print ("Single Test Success" if contains_duplicate([1, 2, 3, 4]) == False else "
 ### Solution Code
 ```python
 
-<<I fill the code here>>
+from typing import List
+def search(nums: List[int], target: int) -> int:
+    # as it is sorted; Binary search is easy
+    #2 Pointers .. one from left and one from right 
+    # mid is right+left // 2
+    left, right = 0, len(nums) -1
+    while right >= left:        # drr the >= this covers the case when both pointers alight over the target
+        mid = (left+right) //2
+        if  target == nums[mid] :
+            return mid
+        # Now if the target is bigger than number in middle
+        elif target > nums[mid]:
+            #Move left to mid + 1
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+print("Test1: Odd number of elements:Target exact middle: success" if search([1, 2, 3, 4, 5], 3) == 2 else "Test1: Fail")
+print("Test2: search fro trget 4 in [1, 2, 3, 4, 5, 6] : success" if search([1, 2, 3, 4, 5, 6], 4) == 3 else "Test2: Fail")
 
 ```
 
