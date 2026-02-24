@@ -249,3 +249,26 @@ def is_same_tree(p, q):
     return is_same_tree(p.left, q.left) and is_same_tree(p.right, q.right)
 
 ```
+
+---
+# Two Sum (Sorted)
+
+## Using two pointers starting at both ends to find a target sum in O(n) time and O(1) space
+
+```python
+def two_sum_sorted(numbers, target):
+    left, right = 0, len(numbers) - 1
+    
+    while left < right:
+        current_sum = numbers[left] + numbers[right]
+        if current_sum == target:
+            return [left + 1, right + 1] # 1-indexed example
+        elif current_sum < target:
+            left += 1
+        else:
+            right -= 1
+            
+    return []
+
+```
+
