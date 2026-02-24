@@ -57,3 +57,4 @@
 | 35 | 000035.LC0074.search-a-2d-matrix.py | Search a 2D Matrix | Binary Search | 2 | OK |
 | 36 | 000036.LEC0206.reverse-linked-list.redo.py | Reverse Linked List | Three-Pointer | 2 | OK |
 | 37 | 000037.LC0100.same-tree.py | Same Tree | Trees (DFS) | 3 | REDO |
+| 38 | 000038.LC0015.3sum.py | 3Sum | Two Pointers / Sorting | 5 | REDO |
