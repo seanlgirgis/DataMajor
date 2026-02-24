@@ -1,5 +1,6 @@
 | # | Problem Title | Concepts | Difficulty | 
 | :--- | :--- | :--- | :--- | 
+| **1** | [Two Sum](#1-two-sum) | `Array`, `Hash Table` | 2/10 |
 | **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | 
 | **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |  
 
@@ -118,6 +119,44 @@ def search(nums: List[int], target: int) -> int:
     return -1
 print("Test1: Odd number of elements:Target exact middle: success" if search([1, 2, 3, 4, 5], 3) == 2 else "Test1: Fail")
 print("Test2: search fro trget 4 in [1, 2, 3, 4, 5, 6] : success" if search([1, 2, 3, 4, 5, 6], 4) == 3 else "Test2: Fail")
+
+```
+
+---
+
+## 1: Two Sum
+
+### Problem Description
+> Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`.
+
+- number: 1
+- title: "Two Sum"
+- difficulty: 2/10
+- concepts: ["Array", "Hash Table"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Hash Map for One-Pass Lookups
+* **Logic:**
+    1. Initialize an empty dictionary `seen` to store numbers and their indices.
+    2. Iterate through each number `num` and its `index` in `nums`.
+    3. Calculate the `complement` as `target - num`.
+    4. If `complement` exists in `seen`, return `[seen[complement], index]`.
+    5. Otherwise, store `seen[num] = index`.
+
+**Complexity:**
+* **Time:** $O(n)$
+* **Space:** $O(n)$
+
+---
+
+### Solution Code
+```python
+
+<<I fill the code here>>
 
 ```
 
