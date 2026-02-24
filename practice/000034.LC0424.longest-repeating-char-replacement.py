@@ -20,19 +20,31 @@
 
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
-        left, right, n = 0,0, len(s)
+        l = 0                       # Left pointer of our sliding window
+        res = 0                     # Stores the maximum length found so far
+        count = {}                  # Frequency dictionary for characters in current window
         
+        # r is the right pointer expanding the window
+        for r in range(len(s)):
+            # 1. Add the new character to our window's frequency count
+            count[s[r]] = count.get(s[r], 0) + 1
+            
+            # 2. Check if the current window is VALID.
+            # A window is valid if: (Length of window) - (Count of most frequent char) <= k
+            # This means the number of characters we need to replace is within our allowance 'k'.
+            # Note: `max(count.values())` takes O(26) time. To optimize to O(1), you can just track a `max_f` variable!
+            while (r - l + 1) - max(count.values()) > k:
+                # If invalid, shrink the window by moving the left pointer
+                count[s[l]] -= 1
+                l += 1
+                
+            # 3. The window is now valid, so we update our maximum result length
+            res = max(res, r - l + 1)
+            
+        return res
+            
         
-        
-        # looks like 2 pointers
-        pass
 
-
-
-s, k = "AAABBBCCC", 3
-print(Solution().characterReplacement(s,k))
-import sys
-sys.exit()
 
 # ── Tests ────────────────────────────────────────────────────
 if __name__ == "__main__":
@@ -52,8 +64,8 @@ if __name__ == "__main__":
 ("ABCD", 10, 4),       # k exceeds length
 
 # Longer strings
-("ABABABABAB", 2, 6),  # alternating, 2 replacements
-("AABBBBAAA", 2, 9),   # nearly uniform
+("ABABABABAB", 2, 5),  # alternating, 2 replacements (my broken test fixed: 5 is correct)
+("AABBBBAAA", 2, 6),   # nearly uniform (my broken test fixed: 6 is correct)
 ("AAABBBCCC", 3, 6),   # three equal groups
 
 # All same character

@@ -53,3 +53,4 @@
 | 30 | 000030.LC0141.linked-list-cycle.py | Linked List Cycle | Fast/Slow Pointers | 4 | REDO |
 | 31 | 000031.LC0070.climbing-stairs.py | Climbing Stairs | Dynamic Programming (basic) | 3 | REDO |
 | 32 | 000032.LC0020.valid-parentheses.redo.py | Valid Parentheses | Stack | 2 | OK |
+| 33 | 000034.LC0424.longest-repeating-char-replacement.py | Longest Repeating Character Replacement | Sliding Window | 5 | REDO |

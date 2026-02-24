@@ -114,6 +114,39 @@ class Solution:
 ```
 
 # LC0424 .. Longest Repeating Character Replacement
-## 
+##  You can replace up to a k characters . get the max possible window with replacements of the same char
+### sliding Window Technique
 
+```python
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        l = 0                       # Left pointer of our sliding window
+        res = 0                     # Stores the maximum length found so far
+        count = {}                  # Frequency dictionary for characters in current window
+        
+        # r is the right pointer expanding the window
+        for r in range(len(s)):
+            # 1. Add the new character to our window's frequency count
+            # you can continue do that until you have exceeded possible replacements
+            count[s[r]] = count.get(s[r], 0) + 1
+            
+            # 2. Check if the current window is VALID.
+            # A window is valid if: (Length of window) - (Count of most frequent char) <= k
+            # This means the number of characters we need to replace is within our allowance 'k'.
+            # Note: `max(count.values())` takes O(26) time. To optimize to O(1), you can just track a `max_f` variable!
+            while (r - l + 1) - max(count.values()) > k:
+                # If invalid, shrink the window by moving the left pointer
+                count[s[l]] -= 1
+                l += 1
+                
+            # 3. The window is now valid, so we update our maximum result length
+            res = max(res, r - l + 1)
+            
+        return res
+
+s, k = "ABABABABAB", 2
+print(Solution().characterReplacement(s,k))
+
+```
+ 
 
