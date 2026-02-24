@@ -135,6 +135,7 @@ print("Test2: search fro trget 4 in [1, 2, 3, 4, 5, 6] : success" if search([1, 
 - concepts: ["Array", "Hash Table"]
 - jupyter_path: <<absolute Path... I fill it>>
 - script_path: <<absolute Path... I fill it>>
+- function_signature: def twoSum(self, nums: List[int], target: int) -> List[int]:
 
 ---
 
@@ -179,6 +180,7 @@ print("Test2: search fro trget 4 in [1, 2, 3, 4, 5, 6] : success" if search([1, 
 - concepts: ["<<Concept 1>>", "<<Concept 2>>", "<<Concept 3>>"]
 - jupyter_path: <<absolute Path... I fill it>>
 - script_path: <<absolute Path... I fill it>>
+- function_signature: <<suggested by agent always>>:
 
 ---
 
