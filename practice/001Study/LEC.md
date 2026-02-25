@@ -492,15 +492,36 @@ print("Test3: [2,4,1] (edge case) -> 2: success" if sol.maxProfit([2,4,1]) == 2 
 ### Solution Code
 ```python
 from typing import Optional
+from typing import Optional
 
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 
+"""r
+Reversing   a linked list requires creating an imaginary node (dummy) and use it to traverse
+the list while swapping the pointers converting head to tail and vice versa
+Obviously hard copying of nodes would require doubling the memory
+We want the exotic solution
+Consider we are looking at two nodes 
+cur and prev  .. in the very beginning prev is just a dummy
+Got to cash next_node first thing so you would not lose it
+At the bottom of the loop move curr to the saved next_node
+in between
+
+"""
 class Solution(object):
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        pass
+        prev: ListNode = None
+        curr = head                                #normal traverse architecture
+        while curr:                                #normal traverse architecture
+            next_node = curr.next                  # have to save the next node
+            curr.next = prev                       # reverse the curr node direction . make it look backward
+            prev = curr                            # move prev forward
+            curr = next_node                        #normal traverse architecture  -- Move forward
+        return prev
+            
 
 
 def to_list(head: Optional[ListNode]) -> list:
