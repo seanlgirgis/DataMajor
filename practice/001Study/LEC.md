@@ -12,6 +12,7 @@
 | **70** | [Climbing Stairs](#70-climbing-stairs) | `Dynamic Programming`, `Memoization`, `Math` | 2/10 |
 | **83** | [Remove Duplicates from Sorted List](#83-remove-duplicates-from-sorted-list) | `Linked List` | 1/10 |
 | **100** | [Same Tree](#100-same-tree) | `Tree`, `Depth-First Search`, `Binary Tree` | 2/10 |
+| **102** | [Binary Tree Level Order Traversal](#102-binary-tree-level-order-traversal) | `Tree`, `Breadth-First Search`, `Binary Tree` | 2/10 |
 | **104** | [Maximum Depth of Binary Tree](#104-maximum-depth-of-binary-tree) | `Tree`, `Depth-First Search`, `Breadth-First Search` | 2/10 |
 | **121** | [Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock) | `Array`, `Dynamic Programming` | 1/10 |
 | **141** | [Linked List Cycle](#141-linked-list-cycle) | `Hash Table`, `Linked List`, `Two Pointers` | 1/10 |
@@ -1598,6 +1599,110 @@ sol = Solution()
 print("Test1: nums=[-2,1,-3,4,-1,2,1,-5,4] -> 6: success" if sol.maxSubArray([-2,1,-3,4,-1,2,1,-5,4]) == 6 else "Test1: Fail")
 print("Test2: nums=[1] -> 1: success" if sol.maxSubArray([1]) == 1 else "Test2: Fail")
 print("Test3: nums=[5,4,-1,7,8] -> 23: success" if sol.maxSubArray([5,4,-1,7,8]) == 23 else "Test3: Fail")
+```
+
+[↑ Back to Top](#lec-cases)
+
+---
+
+## 102: Binary Tree Level Order Traversal
+
+### Problem Description
+> Given the `root` of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+
+- number: 102
+- title: "Binary Tree Level Order Traversal"
+- difficulty: 2/10
+- concepts: ["Tree", "Breadth-First Search", "Binary Tree"]
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group2\102.ipynb"
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Breadth-First Search (BFS) using a Queue
+* **Logic:**
+    1. If the `root` is None, return an empty list `[]`.
+    2. Initialize a queue (e.g. `collections.deque`) and append the `root`.
+    3. Initialize a `result` list to store the levels.
+    4. While the queue is not empty:
+    5.   Get the current length of the queue (`level_size`). This is the number of nodes at the current level.
+    6.   Initialize an empty list `current_level` to store values of this level.
+    7.   Loop `level_size` times:
+    8.     Pop a node from the left of the queue.
+    9.     Append its value to `current_level`.
+    10.    If the node has a left child, append it to the queue.
+    11.    If the node has a right child, append it to the queue.
+    12.  Append `current_level` to the `result` list.
+    13. Return `result`.
+
+**Complexity:**
+* **Time:** $O(n)$ where $n$ is the number of nodes in the tree.
+* **Space:** $O(n)$ to store the nodes in the queue, which can contain at most $n/2$ nodes at the bottom level.
+---
+
+### Solution Code
+```python
+
+from typing import List, Optional
+import collections
+
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution(object):
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root: return []
+        res = []
+        q = collections.deque([root])
+        while q:
+            qLen = len(q)
+            level = []
+            for i in range(qLen):
+                node = q.popleft()
+                level.append(node.val)
+                if node.left: q.append(node.left)
+                if node.right: q.append(node.right)
+            res.append(level)
+        return res
+
+# Helper function to build a tree from list for testing
+def build_tree(values):
+    if not values: return None
+    root = TreeNode(values[0])
+    queue = collections.deque([root])
+    i = 1
+    while queue and i < len(values):
+        current = queue.popleft()
+        if values[i] is None:
+            pass
+        else:
+            current.left = TreeNode(values[i])
+            queue.append(current.left)
+        i += 1
+        if i < len(values):
+            if values[i] is None:
+                pass
+            else:
+                current.right = TreeNode(values[i])
+                queue.append(current.right)
+            i += 1
+    return root
+
+sol = Solution()
+tree1 = build_tree([3,9,20,None,None,15,7])
+print("Test1: root=[3,9,20,null,null,15,7] -> [[3],[9,20],[15,7]]: success" if sol.levelOrder(tree1) == [[3],[9,20],[15,7]] else "Test1: Fail")
+tree2 = build_tree([1])
+print("Test2: root=[1] -> [[1]]: success" if sol.levelOrder(tree2) == [[1]] else "Test2: Fail")
+tree3 = build_tree([])
+print("Test3: root=[] -> []: success" if sol.levelOrder(tree3) == [] else "Test3: Fail")
+
+
 ```
 
 [↑ Back to Top](#lec-cases)
