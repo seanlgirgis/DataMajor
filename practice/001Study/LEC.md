@@ -27,8 +27,6 @@
 | **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |
 | **876** | [Middle of the Linked List](#876-middle-of-the-linked-list) | `Linked List`, `Two Pointers` | 1/10 |
 
-
-
 ## 217: Contains Duplicate
 
 ### Problem Description
@@ -40,8 +38,6 @@
 - concepts: ["Array", "Hash Set", "Lookup"]
 - jupyter_path: ".C:\DataMajor\practice\001Study\playground\group1\217.ipynb"
 - script_path: "C:\DataMajor\practice\001Study\playground\group1\217.py"
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -75,6 +71,9 @@ print ("Single Test Success" if contains_duplicate([1, 2, 3, 4]) == False else "
 
     
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ## 704: Binary Search
@@ -88,8 +87,6 @@ print ("Single Test Success" if contains_duplicate([1, 2, 3, 4]) == False else "
 - concepts: ["Binary Search", "Array"]
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\704.ipynb"
 - script_path:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -133,6 +130,9 @@ print("Test1: Odd number of elements:Target exact middle: success" if search([1,
 print("Test2: search fro trget 4 in [1, 2, 3, 4, 5, 6] : success" if search([1, 2, 3, 4, 5, 6], 4) == 3 else "Test2: Fail")
 
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ## 1: Two Sum
@@ -147,8 +147,6 @@ print("Test2: search fro trget 4 in [1, 2, 3, 4, 5, 6] : success" if search([1, 
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\1.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def twoSum(self, nums: List[int], target: int) -> List[int]:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -181,13 +179,15 @@ class Solution(object):
                 seen[num] = i
         return []
 
-
 sol = Solution()
 print("Test1: [2,7,11,15] target=9 -> [0,1]: success" if sol.twoSum([2,7,11,15], 9) == [0,1] else "Test1: Fail")
 print("Test2: [3,2,4] target=6 -> [1,2]: success" if sol.twoSum([3,2,4], 6) == [1,2] else "Test2: Fail")
 print("Test3: [3,3] target=6 -> [0,1]: success" if sol.twoSum([3,3], 6) == [0,1] else "Test3: Fail")
 
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ## 70: Climbing Stairs
@@ -202,8 +202,6 @@ print("Test3: [3,3] target=6 -> [0,1]: success" if sol.twoSum([3,3], 6) == [0,1]
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\70.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def climbStairs(self, n: int) -> int:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -253,6 +251,9 @@ print("Test1: n=4 -> 5: success" if sol.climbStairs(4) == 5 else "Test1: Fail")
 print("Test2: n=3 -> 3: success" if sol.climbStairs(3) == 3 else "Test2: Fail")
 print("Test3: n=1 (edge case) -> 1: success" if sol.climbStairs(1) == 1 else "Test3: Fail")
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ## 100: Same Tree
@@ -267,8 +268,6 @@ print("Test3: n=1 (edge case) -> 1: success" if sol.climbStairs(1) == 1 else "Te
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\100.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -304,8 +303,6 @@ class Solution(object):
         if p.val != q.val :return False                    # Values are not mathcing. Trees are not the same
         return (self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right))
 
-
-
 sol = Solution()
 p1 = TreeNode(1, TreeNode(2), TreeNode(3))
 q1 = TreeNode(1, TreeNode(2), TreeNode(3))
@@ -320,6 +317,9 @@ q3 = TreeNode(1, TreeNode(1), TreeNode(2))
 print("Test3: [1,2,1], [1,1,2] -> False: success" if sol.isSameTree(p3, q3) == False else "Test3: Fail")
 
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ## 104: Maximum Depth of Binary Tree
@@ -334,8 +334,6 @@ print("Test3: [1,2,1], [1,1,2] -> False: success" if sol.isSameTree(p3, q3) == F
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\104.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def maxDepth(self, root: Optional[TreeNode]) -> int:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -377,7 +375,6 @@ class Solution(object):
             return 0
         return max(self.maxDepth(root.left) , self.maxDepth(root.right)) + 1
 
-
 sol = Solution()
 root1 = TreeNode(3, TreeNode(9), TreeNode(20, TreeNode(15), TreeNode(7)))
 print("Test1: [3,9,20,null,null,15,7] -> 3: success" if sol.maxDepth(root1) == 3 else "Test1: Fail")
@@ -389,6 +386,9 @@ root3 = None
 print("Test3: [] (edge case) -> 0: success" if sol.maxDepth(root3) == 0 else "Test3: Fail")
 
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ## 121: Best Time to Buy and Sell Stock
@@ -403,8 +403,6 @@ print("Test3: [] (edge case) -> 0: success" if sol.maxDepth(root3) == 0 else "Te
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\121.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def maxProfit(self, prices: List[int]) -> int:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -447,12 +445,14 @@ class Solution(object):
             if p < buy: buy = p
         return profit
 
-
 sol = Solution()
 print("Test1: [7,1,5,3,6,4] -> 5: success" if sol.maxProfit([7,1,5,3,6,4]) == 5 else "Test1: Fail")
 print("Test2: [7,6,4,3,1] -> 0: success" if sol.maxProfit([7,6,4,3,1]) == 0 else "Test2: Fail")
 print("Test3: [2,4,1] (edge case) -> 2: success" if sol.maxProfit([2,4,1]) == 2 else "Test3: Fail")
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ## 206: Reverse Linked List
@@ -467,8 +467,6 @@ print("Test3: [2,4,1] (edge case) -> 2: success" if sol.maxProfit([2,4,1]) == 2 
 - jupyter_path: <<absolute Path... I fill it>>
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -521,7 +519,6 @@ class Solution(object):
         return prev
             
 
-
 def to_list(head: Optional[ListNode]) -> list:
     res = []
     while head:
@@ -542,6 +539,9 @@ print("Test1: [1,2,3,4,5] -> [5,4,3,2,1]: success" if to_list(sol.reverseList(to
 print("Test2: [1,2] -> [2,1]: success" if to_list(sol.reverseList(to_linked_list([1,2]))) == [2,1] else "Test2: Fail")
 print("Test3: [] (edge case) -> []: success" if to_list(sol.reverseList(to_linked_list([]))) == [] else "Test3: Fail")
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ## 21: Merge Two Sorted Lists
@@ -556,8 +556,6 @@ print("Test3: [] (edge case) -> []: success" if to_list(sol.reverseList(to_linke
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\21.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -621,7 +619,6 @@ class Solution(object):
         curr.next = list1 or list2  # ← attach remainder
         return dummy.next           # ← skip the dummy        
 
-
 def to_list(head: Optional[ListNode]) -> list:
     res = []
     while head:
@@ -650,6 +647,9 @@ l5 = to_linked_list([])
 l6 = to_linked_list([0])
 print("Test3: [], [0] -> [0]: success" if to_list(sol.mergeTwoLists(l5, l6)) == [0] else "Test3: Fail")
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ## 83: Remove Duplicates from Sorted List
@@ -664,8 +664,6 @@ print("Test3: [], [0] -> [0]: success" if to_list(sol.mergeTwoLists(l5, l6)) == 
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\83.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -710,7 +708,6 @@ class Solution(object):
                 curr = curr.next
         return head
 
-
 def to_list(head: Optional[ListNode]) -> list:
     res = []
     while head:
@@ -726,7 +723,6 @@ def to_linked_list(lst: list) -> Optional[ListNode]:
         curr = curr.next
     return dummy.next
 
-
 sol = Solution()
 print("Test1: [1,1,2] -> [1,2]: success" if to_list(sol.deleteDuplicates(to_linked_list([1,1,2]))) == [1,2] else "Test1: Fail")
 print('-' * 100)
@@ -734,6 +730,9 @@ print("Test2: [1,1,2,3,3] -> [1,2,3]: success" if to_list(sol.deleteDuplicates(t
 print('-' * 100)
 print("Test3: [] (edge case) -> []: success" if to_list(sol.deleteDuplicates(to_linked_list([]))) == [] else "Test3: Fail")
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ## 203: Remove Linked List Elements
@@ -748,8 +747,6 @@ print("Test3: [] (edge case) -> []: success" if to_list(sol.deleteDuplicates(to_
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\203.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -808,13 +805,15 @@ def to_linked_list(lst: list) -> Optional[ListNode]:
         curr = curr.next
     return dummy.next
 
-
 sol = Solution()
 
 print("Test1: [1,2,6,3,4,5,6], val=6 -> [1,2,3,4,5]: success" if to_list(sol.removeElements(to_linked_list([1,2,6,3,4,5,6]), 6)) == [1,2,3,4,5] else "Test1: Fail")
 print("Test2: [7,7,7,7], val=7 -> []: success" if to_list(sol.removeElements(to_linked_list([7,7,7,7]), 7)) == [] else "Test2: Fail")
 print("Test3: [] (edge case), val=1 -> []: success" if to_list(sol.removeElements(to_linked_list([]), 1)) == [] else "Test3: Fail")
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ## 141: Linked List Cycle
@@ -829,8 +828,6 @@ print("Test3: [] (edge case), val=1 -> []: success" if to_list(sol.removeElement
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\141.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def hasCycle(self, head: Optional[ListNode]) -> bool:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -870,7 +867,6 @@ class Solution(object):
         return False
         
 
-
 def build_cycle_list(values: list, pos: int) -> Optional[ListNode]:
     if not values:
         return None
@@ -896,6 +892,9 @@ print("Test1: [3,2,0,-4], pos=1 (cycle exists) -> True: success" if sol.hasCycle
 print("Test2: [1,2], pos=0 (cycle exists) -> True: success" if sol.hasCycle(build_cycle_list([1,2], 0)) == True else "Test2: Fail")
 print("Test3: [1], pos=-1 (no cycle edge case) -> False: success" if sol.hasCycle(build_cycle_list([1], -1)) == False else "Test3: Fail")
 ```
+
+[↑ Back to Top](#lec-cases)
+
 
 # Solution 2 set more human
 ```python
@@ -924,8 +923,6 @@ def hasCycle(self, head: Optional[ListNode]) -> bool:
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\142.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -967,7 +964,6 @@ class Solution(object):
         return None
         
 
-
 def build_cycle_list(values: list, pos: int) -> Optional[ListNode]:
     if not values:
         return None
@@ -996,12 +992,14 @@ def check_node(actual, expected_val):
         return True
     return False
 
-
 sol = Solution()
 print("Test1: [3,2,0,-4], pos=1 -> Node with val 2: success" if check_node(sol.detectCycle(build_cycle_list([3,2,0,-4], 1)), 2) else "Test1: Fail")
 print("Test2: [1,2], pos=0 -> Node with val 1: success" if check_node(sol.detectCycle(build_cycle_list([1,2], 0)), 1) else "Test2: Fail")
 print("Test3: [1], pos=-1 -> null: success" if check_node(sol.detectCycle(build_cycle_list([1], -1)), None) else "Test3: Fail")
 ```
+
+[↑ Back to Top](#lec-cases)
+
 
 # set Solution . More Human
 
@@ -1030,8 +1028,6 @@ def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
 - jupyter_path: <<absolute Path... I fill it>>
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -1063,7 +1059,6 @@ class Solution(object):
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
         pass
 
-
 def to_list(head: Optional[ListNode]) -> list:
     res = []
     while head:
@@ -1084,6 +1079,9 @@ print("Test1: [1,2,3,4,5] (odd length) -> [3,4,5]: success" if to_list(sol.middl
 print("Test2: [1,2,3,4,5,6] (even length) -> [4,5,6]: success" if to_list(sol.middleNode(to_linked_list([1,2,3,4,5,6]))) == [4,5,6] else "Test2: Fail")
 print("Test3: [1] (edge case) -> [1]: success" if to_list(sol.middleNode(to_linked_list([1]))) == [1] else "Test3: Fail")
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 ---
 
@@ -1103,8 +1101,6 @@ print("Test3: [1] (edge case) -> [1]: success" if to_list(sol.middleNode(to_link
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\143.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def reorderList(self, head: Optional[ListNode]) -> None:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -1182,7 +1178,6 @@ class Solution(object):
             curr2 = next2
         
 
-
 def to_list(head: Optional[ListNode]) -> list:
     res = []
     while head:
@@ -1217,6 +1212,9 @@ sol.reorderList(head3)
 print("Test3: [1] (edge case) -> [1]: success" if to_list(head3) == [1] else "Test3: Fail")
 
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ---
@@ -1234,8 +1232,6 @@ print("Test3: [1] (edge case) -> [1]: success" if to_list(head3) == [1] else "Te
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\226.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -1271,7 +1267,6 @@ class Solution(object):
         self.invertTree(root.left) 
         return root
 
-
 def to_level_order(root: Optional[TreeNode]) -> list:
     if not root: return []
     res = []
@@ -1306,6 +1301,9 @@ root3 = None
 inverted3 = sol.invertTree(root3)
 print("Test3: [] (edge case) -> []: success" if to_level_order(inverted3) == [] else "Test3: Fail")
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ## 242: Valid Anagram
@@ -1320,8 +1318,6 @@ print("Test3: [] (edge case) -> []: success" if to_level_order(inverted3) == [] 
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\242.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def isAnagram(self, s: str, t: str) -> bool:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -1352,13 +1348,15 @@ class Solution(object):
         return shash == thash
             
 
-
 sol = Solution()
 print("Test1: s='anagram', t='nagaram' -> True: success" if sol.isAnagram("anagram", "nagaram") == True else "Test1: Fail")
 print("Test2: s='rat', t='car' -> False: success" if sol.isAnagram("rat", "car") == False else "Test2: Fail")
 print("Test3: s='a', t='ab' (edge case length mismatch) -> False: success" if sol.isAnagram("a", "ab") == False else "Test3: Fail")
 
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ## 378: Kth Smallest Element in a Sorted Matrix
@@ -1373,8 +1371,6 @@ print("Test3: s='a', t='ab' (edge case length mismatch) -> False: success" if so
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\378.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -1406,10 +1402,12 @@ print("Test2: matrix=[[-5]], k=1 -> -5: success" if sol.kthSmallest([[-5]], 1) =
 print("Test3: matrix=[[1,2],[1,3]], k=2 -> 1: success" if sol.kthSmallest([[1,2],[1,3]], 2) == 1 else "Test3: Fail")
 ```
 
+[↑ Back to Top](#lec-cases)
+
+
 ### Heap Solution
 ```
 # later not now. heapq
-
 
 ```
 ---
@@ -1431,8 +1429,6 @@ print("Test3: matrix=[[1,2],[1,3]], k=2 -> 1: success" if sol.kthSmallest([[1,2]
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group2\20.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def isValid(self, s: str) -> bool:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -1475,6 +1471,9 @@ print("Test2: s='()[]{}' -> True: success" if sol.isValid("()[]{}") == True else
 print("Test3: s='(]' -> False: success" if sol.isValid("(]") == False else "Test3: Fail")
 print("Test4: s=']' (edge case single close) -> False: success" if sol.isValid("]") == False else "Test4: Fail")
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ## 167: Two Sum II - Input Array Is Sorted
@@ -1495,8 +1494,6 @@ print("Test4: s=']' (edge case single close) -> False: success" if sol.isValid("
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group2\167.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def twoSum(self, numbers: List[int], target: int) -> List[int]:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -1544,6 +1541,9 @@ print("Test1: numbers=[2,7,11,15], target=9 -> [1,2]: success" if sol.twoSum([2,
 print("Test2: numbers=[2,3,4], target=6 -> [1,3]: success" if sol.twoSum([2,3,4], 6) == [1,3] else "Test2: Fail")
 print("Test3: numbers=[-1,0], target=-1 (edge case negatives) -> [1,2]: success" if sol.twoSum([-1,0], -1) == [1,2] else "Test3: Fail")
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ## 53: Maximum Subarray
@@ -1558,8 +1558,6 @@ print("Test3: numbers=[-1,0], target=-1 (edge case negatives) -> [1,2]: success"
 - jupyter_path: <<absolute Path... I fill it>>
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def maxSubArray(self, nums: List[int]) -> int:
-
-[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -1586,12 +1584,14 @@ class Solution(object):
     def maxSubArray(self, nums: List[int]) -> int:
         pass
 
-
 sol = Solution()
 print("Test1: nums=[-2,1,-3,4,-1,2,1,-5,4] -> 6: success" if sol.maxSubArray([-2,1,-3,4,-1,2,1,-5,4]) == 6 else "Test1: Fail")
 print("Test2: nums=[1] -> 1: success" if sol.maxSubArray([1]) == 1 else "Test2: Fail")
 print("Test3: nums=[5,4,-1,7,8] -> 23: success" if sol.maxSubArray([5,4,-1,7,8]) == 23 else "Test3: Fail")
 ```
+
+[↑ Back to Top](#lec-cases)
+
 ---
 # Template
 
@@ -1607,7 +1607,6 @@ print("Test3: nums=[5,4,-1,7,8] -> 23: success" if sol.maxSubArray([5,4,-1,7,8])
      ═══════════════════════════════════════════════════════ -->
 
 ---
-
 
 ## <<NUMBER>>: <<Title>>
 
@@ -1646,9 +1645,6 @@ class Solution(object):
     def <<func_name>>(self, <<params>>) -> <<return_type>>:
         pass
 
-
-
-
 sol = Solution()
 print("Test1: <<input>> -> <<expected>>: success" if sol.<<func_name>>(<<args1>>) == <<expected1>> else "Test1: Fail")
 print("Test2: <<input>> -> <<expected>>: success" if sol.<<func_name>>(<<args2>>) == <<expected2>> else "Test2: Fail")
@@ -1656,3 +1652,5 @@ print("Test3: <<edge case>> -> <<expected>>: success" if sol.<<func_name>>(<<arg
 ```
 
 [↑ Back to Top](#lec-cases)
+
+
