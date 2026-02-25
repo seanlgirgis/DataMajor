@@ -2,7 +2,6 @@
 | :--- | :--- | :--- | :--- | 
 | **1** | [Two Sum](#1-two-sum) | `Array`, `Hash Table` | 2/10 |
 | **21** | [Merge Two Sorted Lists](#21-merge-two-sorted-lists) | `Linked List`, `Two Pointers`, `Recursion` | 1/10 |
-| **23** | [Merge k Sorted Lists](#23-merge-k-sorted-lists) | `Linked List`, `Divide and Conquer`, `Heap (Priority Queue)` | 3/10 |
 | **70** | [Climbing Stairs](#70-climbing-stairs) | `Dynamic Programming`, `Memoization`, `Math` | 2/10 |
 | **83** | [Remove Duplicates from Sorted List](#83-remove-duplicates-from-sorted-list) | `Linked List` | 1/10 |
 | **100** | [Same Tree](#100-same-tree) | `Tree`, `Depth-First Search`, `Binary Tree` | 2/10 |
@@ -1225,82 +1224,6 @@ print("Test3: [1] (edge case) -> [1]: success" if to_list(head3) == [1] else "Te
 
 ---
 
-## 23: Merge k Sorted Lists
-
-### Problem Description
-> You are given an array of `k` linked-lists `lists`, each linked-list is sorted in ascending order. Merge all the linked-lists into one sorted linked-list and return it.
-
-- number: 23
-- title: "Merge k Sorted Lists"
-- difficulty: 3/10
-- concepts: ["Linked List", "Divide and Conquer", "Heap (Priority Queue)"]
-- jupyter_path: <<absolute Path... I fill it>>
-- script_path: <<absolute Path... I fill it>>
-- function_signature: def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-
----
-
-### Solution Idea (Pseudo-solution)
-* **Approach:** Min-Heap (Priority Queue)
-* **Logic:**
-    1. Initialize a min-heap.
-    2. Add the head of each linked list from the `lists` array to the min-heap. (Store tuples of `(node.val, i, node)` to avoid comparing `ListNode` objects if values are equal).
-    3. Create a `dummy` node to build the result list, and a `curr` pointer starting at `dummy`.
-    4. While the min-heap is not empty:
-    5. Pop the node with the minimum value from the heap, attach it to `curr.next`, and advance `curr`.
-    6. If the popped node has a `next` node, push that `next` node into the min-heap.
-    7. Return `dummy.next`.
-
-**Complexity:**
-* **Time:** $O(N \log k)$ where $N$ is total number of nodes, and $k$ is number of linked lists.
-* **Space:** $O(k)$ for the heap.
-
----
-
-### Solution Code
-```python
-from typing import List, Optional
-import heapq
-
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
-
-class Solution(object):
-    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        pass
-
-
-def to_list(head: Optional[ListNode]) -> list:
-    res = []
-    while head:
-        res.append(head.val)
-        head = head.next
-    return res
-
-def to_linked_list(lst: list) -> Optional[ListNode]:
-    dummy = ListNode(0)
-    curr = dummy
-    for val in lst:
-        curr.next = ListNode(val)
-        curr = curr.next
-    return dummy.next
-
-sol = Solution()
-
-# Test 1
-l1 = to_linked_list([1,4,5])
-l2 = to_linked_list([1,3,4])
-l3 = to_linked_list([2,6])
-print("Test1: [[1,4,5],[1,3,4],[2,6]] -> [1,1,2,3,4,4,5,6]: success" if to_list(sol.mergeKLists([l1, l2, l3])) == [1,1,2,3,4,4,5,6] else "Test1: Fail")
-
-# Test 2
-print("Test2: [] -> []: success" if to_list(sol.mergeKLists([])) == [] else "Test2: Fail")
-
-# Test 3
-print("Test3: [[]] (edge case) -> []: success" if to_list(sol.mergeKLists([None])) == [] else "Test3: Fail")
-```
 
 ---
 # Template
