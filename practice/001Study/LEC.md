@@ -18,7 +18,9 @@
 | **141** | [Linked List Cycle](#141-linked-list-cycle) | `Hash Table`, `Linked List`, `Two Pointers` | 1/10 |
 | **142** | [Linked List Cycle II](#142-linked-list-cycle-ii) | `Hash Table`, `Linked List`, `Two Pointers` | 2/10 |
 | **143** | [Reorder List](#143-reorder-list) | `Linked List`, `Two Pointers`, `Stack` | 2/10 |
+| **155** | [Min Stack](#155-min-stack) | `Stack`, `Design` | 2/10 |
 | **167** | [Two Sum II - Input Array Is Sorted](#167-two-sum-ii---input-array-is-sorted) | `Array`, `Two Pointers`, `Binary Search` | 2/10 |
+| **198** | [House Robber](#198-house-robber) | `Array`, `Dynamic Programming` | 2/10 |
 | **203** | [Remove Linked List Elements](#203-remove-linked-list-elements) | `Linked List`, `Recursion` | 1/10 |
 | **206** | [Reverse Linked List](#206-reverse-linked-list) | `Linked List`, `Recursion` | 1/10 |
 | **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | 
@@ -1703,6 +1705,147 @@ tree3 = build_tree([])
 print("Test3: root=[] -> []: success" if sol.levelOrder(tree3) == [] else "Test3: Fail")
 
 
+```
+
+[↑ Back to Top](#lec-cases)
+
+---
+
+## 155: Min Stack
+
+### Problem Description
+> Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+>
+> Implement the `MinStack` class:
+> - `MinStack()` initializes the stack object.
+> - `void push(int val)` pushes the element `val` onto the stack.
+> - `void pop()` removes the element on the top of the stack.
+> - `int top()` gets the top element of the stack.
+> - `int getMin()` retrieves the minimum element in the stack.
+>
+> You must implement a solution with `O(1)` time complexity for each function.
+
+- number: 155
+- title: "Min Stack"
+- difficulty: 2/10
+- concepts: ["Stack", "Design"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+- function_signature: class MinStack:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Two Stacks (or Stack of Tuples)
+* **Logic:**
+    1. A standard stack does not naturally track the historic minimum element efficiently over push/pop operations.
+    2. To achieve $O(1)$ for `getMin()`, we can store pairs of `(value, current_minimum)` in our stack instead of just `value`.
+    3. `__init__`: Initialize an empty list `stack`.
+    4. `push(val)`: If the stack is empty, the `current_minimum` is `val`. If not empty, `current_minimum` is `min(val, stack[-1][1])`. Push `(val, current_minimum)`.
+    5. `pop()`: Standard list pop.
+    6. `top()`: Return `stack[-1][0]`.
+    7. `getMin()`: Return `stack[-1][1]`.
+
+**Complexity:**
+* **Time:** $O(1)$ for all operations natively.
+* **Space:** $O(n)$ where $n$ is the number of elements in the stack.
+
+---
+
+### Solution Code
+```python
+from math import inf
+class MinStack:
+    def __init__(self):
+        self.stack = []
+        self.min_stack = []
+        self.cur_min = inf
+
+    def push(self, val: int) -> None:
+        self.cur_min = min(self.cur_min, val)
+        self.stack.append(val)
+        self.min_stack.append(self.cur_min)
+        
+    def pop(self) -> None:
+        self.stack.pop()
+        self.min_stack.pop()
+
+    def top(self) -> int:
+        return self.stack[-1]
+
+    def getMin(self) -> int:
+        return self.min_stack[-1]
+
+
+minStack = MinStack()
+minStack.push(-2)
+minStack.push(0)
+minStack.push(-3)
+print("Test1: getMin() -> -3: success" if minStack.getMin() == -3 else "Test1: Fail")
+minStack.pop()
+print("Test2: top() -> 0: success" if minStack.top() == 0 else "Test2: Fail")
+print("Test3: getMin() -> -2: success" if minStack.getMin() == -2 else "Test3: Fail")
+
+```
+
+[↑ Back to Top](#lec-cases)
+
+---
+
+## 198: House Robber
+
+### Problem Description
+> You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+>
+> Given an integer array `nums` representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
+
+- number: 198
+- title: "House Robber"
+- difficulty: 2/10
+- concepts: ["Array", "Dynamic Programming"]
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group2\198.ipynb"
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def rob(self, nums: List[int]) -> int:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Dynamic Programming (Bottom-Up)
+* **Logic:**
+    1. If the list of houses is empty, return 0.
+    2. If there's only one house, return its value.
+    3. The maximum money at any given house `i` depends on the maximum between (robbing house `i` + maximum money up to house `i-2`) and (not robbing house `i` + maximum money up to house `i-1`).
+    4. We only need to keep track of the max money from the previous two steps to compute the current step, which optimizes space to $O(1)$.
+    5. Initialize two variables, `rob1 = 0` and `rob2 = 0`.
+    6. Iterate through each `num` in `nums`. Compute the new max: `temp = max(rob1 + num, rob2)`.
+    7. Update `rob1 = rob2` and `rob2 = temp`.
+    8. Return `rob2`.
+
+**Complexity:**
+* **Time:** $O(n)$ where $n$ is the number of houses.
+* **Space:** $O(1)$ since only two variables are used.
+---
+
+### Solution Code
+```python
+#LEC 198
+from typing import List
+
+class Solution(object):
+    def rob(self, nums: List[int]) -> int:
+        if not nums: return 0
+        if len(nums) == 1: return nums[0]
+        #The maximum money at any given house i depends on the maximum between 
+        #(robbing house i + maximum money up to house i-2) and (not robbing house i + maximum money up to house i-1).
+        
+        nums[1] = max(nums[0], nums[1])
+        for i in range(2, len(nums)):
+            nums[i] = max(nums[i-1], nums[i-2] + nums[i])
+        return nums[-1]
+sol = Solution()
+print("Test1: nums=[1,2,3,1] -> 4: success" if sol.rob([1,2,3,1]) == 4 else "Test1: Fail")
+print("Test2: nums=[2,7,9,3,1] -> 12: success" if sol.rob([2,7,9,3,1]) == 12 else "Test2: Fail")
+print("Test3: nums=[0] -> 0: success" if sol.rob([0]) == 0 else "Test3: Fail")
 ```
 
 [↑ Back to Top](#lec-cases)
