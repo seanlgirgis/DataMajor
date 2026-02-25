@@ -2,6 +2,7 @@
 | :--- | :--- | :--- | :--- | 
 | **1** | [Two Sum](#1-two-sum) | `Array`, `Hash Table` | 2/10 |
 | **70** | [Climbing Stairs](#70-climbing-stairs) | `Dynamic Programming`, `Memoization`, `Math` | 2/10 |
+| **100** | [Same Tree](#100-same-tree) | `Tree`, `Depth-First Search`, `Binary Tree` | 2/10 |
 | **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | 
 | **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |  
 
@@ -243,6 +244,67 @@ sol = Solution()
 print("Test1: n=4 -> 5: success" if sol.climbStairs(4) == 5 else "Test1: Fail")
 print("Test2: n=3 -> 3: success" if sol.climbStairs(3) == 3 else "Test2: Fail")
 print("Test3: n=1 (edge case) -> 1: success" if sol.climbStairs(1) == 1 else "Test3: Fail")
+```
+
+---
+
+## 100: Same Tree
+
+### Problem Description
+> Given the roots of two binary trees p and q, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
+
+- number: 100
+- title: "Same Tree"
+- difficulty: 2/10
+- concepts: ["Tree", "Depth-First Search", "Binary Tree"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Depth-First Search (DFS) Recursion — check current nodes, then recursively check left and right subtrees.
+* **Logic:**
+    1. If both `p` and `q` are `None`, return `True` (reached leaves).
+    2. If one is `None` but the other is not, or if their values do not match, return `False`.
+    3. Recursively call `isSameTree` on `p.left` and `q.left`.
+    4. Recursively call `isSameTree` on `p.right` and `q.right`.
+    5. Return `True` only if both recursive calls return `True`.
+
+**Complexity:**
+* **Time:** $O(n)$
+* **Space:** $O(n)$
+
+---
+
+### Solution Code
+```python
+from typing import Optional
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution(object):
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        pass
+
+
+sol = Solution()
+p1 = TreeNode(1, TreeNode(2), TreeNode(3))
+q1 = TreeNode(1, TreeNode(2), TreeNode(3))
+print("Test1: [1,2,3], [1,2,3] -> True: success" if sol.isSameTree(p1, q1) == True else "Test1: Fail")
+
+p2 = TreeNode(1, TreeNode(2))
+q2 = TreeNode(1, None, TreeNode(2))
+print("Test2: [1,2], [1,null,2] (edge case) -> False: success" if sol.isSameTree(p2, q2) == False else "Test2: Fail")
+
+p3 = TreeNode(1, TreeNode(2), TreeNode(1))
+q3 = TreeNode(1, TreeNode(1), TreeNode(2))
+print("Test3: [1,2,1], [1,1,2] -> False: success" if sol.isSameTree(p3, q3) == False else "Test3: Fail")
 ```
 
 ---
