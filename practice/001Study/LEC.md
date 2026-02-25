@@ -984,7 +984,7 @@ print("Test2: [1,2], pos=0 -> Node with val 1: success" if check_node(sol.detect
 print("Test3: [1], pos=-1 -> null: success" if check_node(sol.detectCycle(build_cycle_list([1], -1)), None) else "Test3: Fail")
 ```
 
-#set SOlution . More Human
+# set SOlution . More Human
 
 ```python
 def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
