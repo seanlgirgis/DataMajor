@@ -1,6 +1,7 @@
 | # | Problem Title | Concepts | Difficulty | 
 | :--- | :--- | :--- | :--- | 
 | **1** | [Two Sum](#1-two-sum) | `Array`, `Hash Table` | 2/10 |
+| **21** | [Merge Two Sorted Lists](#21-merge-two-sorted-lists) | `Linked List`, `Two Pointers`, `Recursion` | 1/10 |
 | **70** | [Climbing Stairs](#70-climbing-stairs) | `Dynamic Programming`, `Memoization`, `Math` | 2/10 |
 | **100** | [Same Tree](#100-same-tree) | `Tree`, `Depth-First Search`, `Binary Tree` | 2/10 |
 | **104** | [Maximum Depth of Binary Tree](#104-maximum-depth-of-binary-tree) | `Tree`, `Depth-First Search`, `Breadth-First Search` | 2/10 |
@@ -515,6 +516,82 @@ sol = Solution()
 print("Test1: [1,2,3,4,5] -> [5,4,3,2,1]: success" if to_list(sol.reverseList(to_linked_list([1,2,3,4,5]))) == [5,4,3,2,1] else "Test1: Fail")
 print("Test2: [1,2] -> [2,1]: success" if to_list(sol.reverseList(to_linked_list([1,2]))) == [2,1] else "Test2: Fail")
 print("Test3: [] (edge case) -> []: success" if to_list(sol.reverseList(to_linked_list([]))) == [] else "Test3: Fail")
+```
+
+---
+
+## 21: Merge Two Sorted Lists
+
+### Problem Description
+> You are given the heads of two sorted linked lists list1 and list2. Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists. Return the head of the merged linked list.
+
+- number: 21
+- title: "Merge Two Sorted Lists"
+- difficulty: 1/10
+- concepts: ["Linked List", "Two Pointers", "Recursion"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Two Pointers with Dummy Node — Iterate through both lists, appending the smaller value to the merged list.
+* **Logic:**
+    1. Create a `dummy` node to act as the head of the merged list.
+    2. Initialize a pointer `current` to `dummy`.
+    3. Loop while both `list1` and `list2` are not `None`:
+    4. If `list1.val < list2.val`, set `current.next` to `list1`, and advance `list1`.
+    5. Else, set `current.next` to `list2`, and advance `list2`.
+    6. Advance `current`. After the loop, attach any remaining nodes from `list1` or `list2` and return `dummy.next`.
+
+**Complexity:**
+* **Time:** $O(n + m)$
+* **Space:** $O(1)$
+
+---
+
+### Solution Code
+```python
+from typing import Optional
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution(object):
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        pass
+
+
+def to_list(head: Optional[ListNode]) -> list:
+    res = []
+    while head:
+        res.append(head.val)
+        head = head.next
+    return res
+
+def to_linked_list(lst: list) -> Optional[ListNode]:
+    dummy = ListNode(0)
+    curr = dummy
+    for val in lst:
+        curr.next = ListNode(val)
+        curr = curr.next
+    return dummy.next
+
+sol = Solution()
+l1 = to_linked_list([1,2,4])
+l2 = to_linked_list([1,3,4])
+print("Test1: [1,2,4], [1,3,4] -> [1,1,2,3,4,4]: success" if to_list(sol.mergeTwoLists(l1, l2)) == [1,1,2,3,4,4] else "Test1: Fail")
+
+l3 = to_linked_list([])
+l4 = to_linked_list([])
+print("Test2: [], [] (edge case) -> []: success" if to_list(sol.mergeTwoLists(l3, l4)) == [] else "Test2: Fail")
+
+l5 = to_linked_list([])
+l6 = to_linked_list([0])
+print("Test3: [], [0] -> [0]: success" if to_list(sol.mergeTwoLists(l5, l6)) == [0] else "Test3: Fail")
 ```
 
 ---
