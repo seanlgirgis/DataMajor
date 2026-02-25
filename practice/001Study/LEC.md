@@ -5,6 +5,7 @@
 | **100** | [Same Tree](#100-same-tree) | `Tree`, `Depth-First Search`, `Binary Tree` | 2/10 |
 | **104** | [Maximum Depth of Binary Tree](#104-maximum-depth-of-binary-tree) | `Tree`, `Depth-First Search`, `Breadth-First Search` | 2/10 |
 | **121** | [Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock) | `Array`, `Dynamic Programming` | 1/10 |
+| **206** | [Reverse Linked List](#206-reverse-linked-list) | `Linked List`, `Recursion` | 1/10 |
 | **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | 
 | **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |  
 
@@ -446,6 +447,74 @@ sol = Solution()
 print("Test1: [7,1,5,3,6,4] -> 5: success" if sol.maxProfit([7,1,5,3,6,4]) == 5 else "Test1: Fail")
 print("Test2: [7,6,4,3,1] -> 0: success" if sol.maxProfit([7,6,4,3,1]) == 0 else "Test2: Fail")
 print("Test3: [2,4,1] (edge case) -> 2: success" if sol.maxProfit([2,4,1]) == 2 else "Test3: Fail")
+```
+
+---
+
+## 206: Reverse Linked List
+
+### Problem Description
+> Given the `head` of a singly linked list, reverse the list, and return the reversed list.
+
+- number: 206
+- title: "Reverse Linked List"
+- difficulty: 1/10
+- concepts: ["Linked List", "Recursion"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Iterative Pointers — Keep track of previous node, current node, and next node to reverse the links.
+* **Logic:**
+    1. Initialize `prev` as `None` and `current` as `head`.
+    2. While `current` is not `None`:
+    3. Save `next_node` as `current.next` so we don't lose the rest of the list.
+    4. Reverse the link: point `current.next` to `prev`.
+    5. Move `prev` forward to `current`, and `current` forward to `next_node`.
+    6. Return `prev` as the new head.
+
+**Complexity:**
+* **Time:** $O(n)$
+* **Space:** $O(1)$
+
+---
+
+### Solution Code
+```python
+from typing import Optional
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution(object):
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        pass
+
+
+def to_list(head: Optional[ListNode]) -> list:
+    res = []
+    while head:
+        res.append(head.val)
+        head = head.next
+    return res
+
+def to_linked_list(lst: list) -> Optional[ListNode]:
+    dummy = ListNode(0)
+    curr = dummy
+    for val in lst:
+        curr.next = ListNode(val)
+        curr = curr.next
+    return dummy.next
+
+sol = Solution()
+print("Test1: [1,2,3,4,5] -> [5,4,3,2,1]: success" if to_list(sol.reverseList(to_linked_list([1,2,3,4,5]))) == [5,4,3,2,1] else "Test1: Fail")
+print("Test2: [1,2] -> [2,1]: success" if to_list(sol.reverseList(to_linked_list([1,2]))) == [2,1] else "Test2: Fail")
+print("Test3: [] (edge case) -> []: success" if to_list(sol.reverseList(to_linked_list([]))) == [] else "Test3: Fail")
 ```
 
 ---
