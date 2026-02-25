@@ -395,7 +395,7 @@ print("Test3: [] (edge case) -> 0: success" if sol.maxDepth(root3) == 0 else "Te
 - title: "Best Time to Buy and Sell Stock"
 - difficulty: 1/10
 - concepts: ["Array", "Dynamic Programming"]
-- jupyter_path: <<absolute Path... I fill it>>
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\121.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def maxProfit(self, prices: List[int]) -> int:
 
@@ -419,11 +419,27 @@ print("Test3: [] (edge case) -> 0: success" if sol.maxDepth(root3) == 0 else "Te
 
 ### Solution Code
 ```python
+r"""
+Thinking:
+    - tart by setting buy to infinity so any real price beats it.
+    - creat a virtual price of buy at infinity.. can not every buy more expensively
+    - initially your profit is 0
+    - only buy of you can buy cheaper
+    - only sell if you can make more profit
+    
+
+"""
+from math import inf
 from typing import List
 
 class Solution(object):
     def maxProfit(self, prices: List[int]) -> int:
-        pass
+        buy = inf
+        profit = 0
+        for p in prices:
+            profit = max( profit, p - buy)
+            if p < buy: buy = p
+        return profit
 
 
 sol = Solution()
