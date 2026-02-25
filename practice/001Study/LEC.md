@@ -27,6 +27,7 @@
 | **226** | [Invert Binary Tree](#226-invert-binary-tree) | `Tree`, `Depth-First Search`, `Binary Tree` | 1/10 |
 | **242** | [Valid Anagram](#242-valid-anagram) | `Hash Table`, `String`, `Sorting` | 1/10 |
 | **378** | [Kth Smallest Element in a Sorted Matrix](#378-kth-smallest-element-in-a-sorted-matrix) | `Array`, `Binary Search`, `Matrix`, `Heap (Priority Queue)` | 2/10 |
+| **674** | [Longest Continuous Increasing Subsequence](#674-longest-continuous-increasing-subsequence) | `Array` | 1/10 |
 | **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |
 | **876** | [Middle of the Linked List](#876-middle-of-the-linked-list) | `Linked List`, `Two Pointers` | 1/10 |
 
@@ -1846,6 +1847,65 @@ sol = Solution()
 print("Test1: nums=[1,2,3,1] -> 4: success" if sol.rob([1,2,3,1]) == 4 else "Test1: Fail")
 print("Test2: nums=[2,7,9,3,1] -> 12: success" if sol.rob([2,7,9,3,1]) == 12 else "Test2: Fail")
 print("Test3: nums=[0] -> 0: success" if sol.rob([0]) == 0 else "Test3: Fail")
+```
+
+[↑ Back to Top](#lec-cases)
+
+---
+
+## 674: Longest Continuous Increasing Subsequence
+
+### Problem Description
+> Given an unsorted array of integers `nums`, return the length of the longest continuous increasing subsequence (i.e. subarray). The subsequence must be strictly increasing.
+>
+> A continuous increasing subsequence is defined by two indices `l` and `r` (`l < r`) such that it is `[nums[l], nums[l + 1], ..., nums[r - 1], nums[r]]` and for each `l <= i < r`, `nums[i] < nums[i + 1]`.
+
+- number: 674
+- title: "Longest Continuous Increasing Subsequence"
+- difficulty: 1/10
+- concepts: ["Array"]
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group2\674.ipynb"
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def findLengthOfLCIS(self, nums: List[int]) -> int:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Single Pass (Greedy / Sliding Window)
+* **Logic:**
+    1. If the array is empty, return 0. (Though constraints usually say $\ge 1$).
+    2. Initialize `max_len = 1` and `current_len = 1`.
+    3. Loop through the array from the second element (index `i = 1`) to the end.
+    4. If the current element is greater than the previous element (`nums[i] > nums[i - 1]`), increment `current_len`.
+    5. Update `max_len = max(max_len, current_len)`.
+    6. If the current element is not strictly greater, the continuous increasing sequence is broken. Reset `current_len = 1`.
+    7. Return `max_len`.
+
+**Complexity:**
+* **Time:** $O(n)$ where $n$ is the length of the array, as we only need a single pass.
+* **Space:** $O(1)$ since only variable counters are used.
+---
+
+### Solution Code
+```python
+# LEC 647
+from typing import List
+
+class Solution(object):
+    def findLengthOfLCIS(self, nums: List[int]) -> int:
+        if not nums: return 0
+        max_len, current_len = 1 , 1
+        for i in range (1, len(nums)):
+            if nums[i] > nums[i - 1]:
+                current_len += 1
+                max_len = max(max_len, current_len)
+            else:
+                current_len = 1
+        return max_len
+sol = Solution()
+print("Test1: nums=[1,3,5,4,7] -> 3: success" if sol.findLengthOfLCIS([1,3,5,4,7]) == 3 else "Test1: Fail")
+print("Test2: nums=[2,2,2,2,2] -> 1: success" if sol.findLengthOfLCIS([2,2,2,2,2]) == 1 else "Test2: Fail")
+print("Test3: nums=[1] -> 1: success" if sol.findLengthOfLCIS([1]) == 1 else "Test3: Fail")
 ```
 
 [↑ Back to Top](#lec-cases)
