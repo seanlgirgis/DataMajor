@@ -2,6 +2,7 @@
 | :--- | :--- | :--- | :--- | 
 | **1** | [Two Sum](#1-two-sum) | `Array`, `Hash Table` | 2/10 |
 | **21** | [Merge Two Sorted Lists](#21-merge-two-sorted-lists) | `Linked List`, `Two Pointers`, `Recursion` | 1/10 |
+| **23** | [Merge k Sorted Lists](#23-merge-k-sorted-lists) | `Linked List`, `Divide and Conquer`, `Heap (Priority Queue)` | 3/10 |
 | **70** | [Climbing Stairs](#70-climbing-stairs) | `Dynamic Programming`, `Memoization`, `Math` | 2/10 |
 | **83** | [Remove Duplicates from Sorted List](#83-remove-duplicates-from-sorted-list) | `Linked List` | 1/10 |
 | **100** | [Same Tree](#100-same-tree) | `Tree`, `Depth-First Search`, `Binary Tree` | 2/10 |
@@ -1105,7 +1106,7 @@ print("Test3: [1] (edge case) -> [1]: success" if to_list(sol.middleNode(to_link
 - title: "Reorder List"
 - difficulty: 2/10
 - concepts: ["Linked List", "Two Pointers", "Stack"]
-- jupyter_path: <<absolute Path... I fill it>>
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\143.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def reorderList(self, head: Optional[ListNode]) -> None:
 
@@ -1133,12 +1134,58 @@ class ListNode:
         self.val = val
         self.next = next
 
+r"""
+    A) Half the list
+    B) reverse the second half
+    C) merge the two list
+
+"""
 class Solution(object):
     def reorderList(self, head: Optional[ListNode]) -> None:
+        # 1. Guard Clause: If list is empty, has 1 node, or 2 nodes, no reorder needed or possible
+        if not head or not head.next or not head.next.next:
+            return
         """
         Do not return anything, modify head in-place instead.
         """
-        pass
+        #mid
+        slow = head
+        fast = head
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next        
+        mid = slow
+        # Now think of two lists
+        list1 = head
+        list2 = slow.next
+        # list2 already have an Null at its tail
+        #Now make slow a tail for list1
+        slow.next = None
+        #reversing list2
+        
+        prev: ListNode = None
+        curr = list2                                #normal traverse architecture
+        while curr:                                #normal traverse architecture
+            next_node = curr.next                  # have to save the next node
+            curr.next = prev                       # reverse the curr node direction . make it look backward
+            prev = curr                            # move prev forward
+            curr = next_node                        #normal traverse architecture  -- Move forward
+        list2 = prev     
+        # We'll start with list1 (you can swap if you prefer list2 first)
+        head = list1
+        curr1 = list1
+        curr2 = list2
+        
+        while curr1 and curr2:
+            next1 = curr1.next
+            next2 = curr2.next
+            
+            curr1.next = curr2
+            curr2.next = next1
+            
+            curr1 = next1
+            curr2 = next2
+        
 
 
 def to_list(head: Optional[ListNode]) -> list:
@@ -1173,6 +1220,86 @@ print("Test2: [1,2,3,4,5] -> [1,5,2,4,3]: success" if to_list(head2) == [1,5,2,4
 head3 = to_linked_list([1])
 sol.reorderList(head3)
 print("Test3: [1] (edge case) -> [1]: success" if to_list(head3) == [1] else "Test3: Fail")
+
+```
+
+---
+
+## 23: Merge k Sorted Lists
+
+### Problem Description
+> You are given an array of `k` linked-lists `lists`, each linked-list is sorted in ascending order. Merge all the linked-lists into one sorted linked-list and return it.
+
+- number: 23
+- title: "Merge k Sorted Lists"
+- difficulty: 3/10
+- concepts: ["Linked List", "Divide and Conquer", "Heap (Priority Queue)"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Min-Heap (Priority Queue)
+* **Logic:**
+    1. Initialize a min-heap.
+    2. Add the head of each linked list from the `lists` array to the min-heap. (Store tuples of `(node.val, i, node)` to avoid comparing `ListNode` objects if values are equal).
+    3. Create a `dummy` node to build the result list, and a `curr` pointer starting at `dummy`.
+    4. While the min-heap is not empty:
+    5. Pop the node with the minimum value from the heap, attach it to `curr.next`, and advance `curr`.
+    6. If the popped node has a `next` node, push that `next` node into the min-heap.
+    7. Return `dummy.next`.
+
+**Complexity:**
+* **Time:** $O(N \log k)$ where $N$ is total number of nodes, and $k$ is number of linked lists.
+* **Space:** $O(k)$ for the heap.
+
+---
+
+### Solution Code
+```python
+from typing import List, Optional
+import heapq
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution(object):
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        pass
+
+
+def to_list(head: Optional[ListNode]) -> list:
+    res = []
+    while head:
+        res.append(head.val)
+        head = head.next
+    return res
+
+def to_linked_list(lst: list) -> Optional[ListNode]:
+    dummy = ListNode(0)
+    curr = dummy
+    for val in lst:
+        curr.next = ListNode(val)
+        curr = curr.next
+    return dummy.next
+
+sol = Solution()
+
+# Test 1
+l1 = to_linked_list([1,4,5])
+l2 = to_linked_list([1,3,4])
+l3 = to_linked_list([2,6])
+print("Test1: [[1,4,5],[1,3,4],[2,6]] -> [1,1,2,3,4,4,5,6]: success" if to_list(sol.mergeKLists([l1, l2, l3])) == [1,1,2,3,4,4,5,6] else "Test1: Fail")
+
+# Test 2
+print("Test2: [] -> []: success" if to_list(sol.mergeKLists([])) == [] else "Test2: Fail")
+
+# Test 3
+print("Test3: [[]] (edge case) -> []: success" if to_list(sol.mergeKLists([None])) == [] else "Test3: Fail")
 ```
 
 ---
