@@ -9,10 +9,12 @@
 | **121** | [Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock) | `Array`, `Dynamic Programming` | 1/10 |
 | **141** | [Linked List Cycle](#141-linked-list-cycle) | `Hash Table`, `Linked List`, `Two Pointers` | 1/10 |
 | **142** | [Linked List Cycle II](#142-linked-list-cycle-ii) | `Hash Table`, `Linked List`, `Two Pointers` | 2/10 |
+| **143** | [Reorder List](#143-reorder-list) | `Linked List`, `Two Pointers`, `Stack` | 2/10 |
 | **203** | [Remove Linked List Elements](#203-remove-linked-list-elements) | `Linked List`, `Recursion` | 1/10 |
 | **206** | [Reverse Linked List](#206-reverse-linked-list) | `Linked List`, `Recursion` | 1/10 |
 | **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | 
-| **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |  
+| **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |
+| **876** | [Middle of the Linked List](#876-middle-of-the-linked-list) | `Linked List`, `Two Pointers` | 1/10 |
 
 
 
@@ -984,7 +986,7 @@ print("Test2: [1,2], pos=0 -> Node with val 1: success" if check_node(sol.detect
 print("Test3: [1], pos=-1 -> null: success" if check_node(sol.detectCycle(build_cycle_list([1], -1)), None) else "Test3: Fail")
 ```
 
-# set SOlution . More Human
+# set Solution . More Human
 
 ```python
 def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
@@ -996,6 +998,160 @@ def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
         seen.add(curr)
         curr = curr.next
     return None
+```
+
+---
+
+## 876: Middle of the Linked List
+
+### Problem Description
+> Given the `head` of a singly linked list, return the middle node of the linked list. If there are two middle nodes, return the second middle node.
+
+- number: 876
+- title: "Middle of the Linked List"
+- difficulty: 1/10
+- concepts: ["Linked List", "Two Pointers"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Fast and Slow Pointers (Tortoise and Hare)
+* **Logic:**
+    1. Initialize `slow` pointer to `head`, and `fast` pointer to `head`.
+    2. Loop while `fast` is not `None` and `fast.next` is not `None`:
+    3. Advance `slow` by 1 step (`slow = slow.next`).
+    4. Advance `fast` by 2 steps (`fast = fast.next.next`).
+    5. When `fast` reaches the end of the list, `slow` will be exactly at the middle.
+    6. Return `slow`.
+
+**Complexity:**
+* **Time:** $O(n)$
+* **Space:** $O(1)$
+
+---
+
+### Solution Code
+```python
+from typing import Optional
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution(object):
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        pass
+
+
+def to_list(head: Optional[ListNode]) -> list:
+    res = []
+    while head:
+        res.append(head.val)
+        head = head.next
+    return res
+
+def to_linked_list(lst: list) -> Optional[ListNode]:
+    dummy = ListNode(0)
+    curr = dummy
+    for val in lst:
+        curr.next = ListNode(val)
+        curr = curr.next
+    return dummy.next
+
+sol = Solution()
+print("Test1: [1,2,3,4,5] (odd length) -> [3,4,5]: success" if to_list(sol.middleNode(to_linked_list([1,2,3,4,5]))) == [3,4,5] else "Test1: Fail")
+print("Test2: [1,2,3,4,5,6] (even length) -> [4,5,6]: success" if to_list(sol.middleNode(to_linked_list([1,2,3,4,5,6]))) == [4,5,6] else "Test2: Fail")
+print("Test3: [1] (edge case) -> [1]: success" if to_list(sol.middleNode(to_linked_list([1]))) == [1] else "Test3: Fail")
+```
+
+---
+---
+
+## 143: Reorder List
+
+### Problem Description
+> You are given the head of a singly linked-list. The list can be represented as:
+> `L0 → L1 → … → Ln - 1 → Ln`
+> Reorder the list to be on the following form:
+> `L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …`
+> You may not modify the values in the list's nodes. Only nodes themselves may be changed.
+
+- number: 143
+- title: "Reorder List"
+- difficulty: 2/10
+- concepts: ["Linked List", "Two Pointers", "Stack"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def reorderList(self, head: Optional[ListNode]) -> None:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Middle of list + Reverse second half + Merge two halves
+* **Logic:**
+    1. **Find Middle:** Use fast and slow pointers to find the middle of the linked list. 
+    2. **Reverse 2nd Half:** Reverse the second half of the linked list starting from `slow.next`. Once reversed, cut the first half off by setting `slow.next = None`.
+    3. **Merge:** Set two pointers, `p1` at the beginning of the first half (`head`) and `p2` at the beginning of the reversed second half. Alternatingly connect nodes from `p1` and `p2` to reorder the list in place.
+
+**Complexity:**
+* **Time:** $O(n)$
+* **Space:** $O(1)$
+
+---
+
+### Solution Code
+```python
+from typing import Optional
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution(object):
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+        pass
+
+
+def to_list(head: Optional[ListNode]) -> list:
+    res = []
+    while head:
+        res.append(head.val)
+        head = head.next
+    return res
+
+def to_linked_list(lst: list) -> Optional[ListNode]:
+    if not lst: return None
+    dummy = ListNode(0)
+    curr = dummy
+    for val in lst:
+        curr.next = ListNode(val)
+        curr = curr.next
+    return dummy.next
+
+sol = Solution()
+
+# Test 1
+head1 = to_linked_list([1,2,3,4])
+sol.reorderList(head1)
+print("Test1: [1,2,3,4] -> [1,4,2,3]: success" if to_list(head1) == [1,4,2,3] else "Test1: Fail")
+
+# Test 2
+head2 = to_linked_list([1,2,3,4,5])
+sol.reorderList(head2)
+print("Test2: [1,2,3,4,5] -> [1,5,2,4,3]: success" if to_list(head2) == [1,5,2,4,3] else "Test2: Fail")
+
+# Test 3
+head3 = to_linked_list([1])
+sol.reorderList(head3)
+print("Test3: [1] (edge case) -> [1]: success" if to_list(head3) == [1] else "Test3: Fail")
 ```
 
 ---
