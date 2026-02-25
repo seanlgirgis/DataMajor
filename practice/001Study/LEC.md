@@ -178,6 +178,8 @@ print("Test3: [3,3] target=6 -> [0,1]: success" if sol.twoSum([3,3], 6) == [0,1]
 
 ```
 
+
+
 ---
 
 ## 70: Climbing Stairs
@@ -189,7 +191,7 @@ print("Test3: [3,3] target=6 -> [0,1]: success" if sol.twoSum([3,3], 6) == [0,1]
 - title: "Climbing Stairs"
 - difficulty: 2/10
 - concepts: ["Dynamic Programming", "Memoization", "Math"]
-- jupyter_path: <<absolute Path... I fill it>>
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\70.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def climbStairs(self, n: int) -> int:
 
@@ -213,36 +215,70 @@ print("Test3: [3,3] target=6 -> [0,1]: success" if sol.twoSum([3,3], 6) == [0,1]
 
 ### Solution Code
 ```python
+r"""
+    To understand this problem let us go through the seq
+    number of steps           possible solutions
+    1                         1
+    2                         2
+    3                         3
+    4                         5   < 1111 ; 112 ; 121; 211; 22 >
+    in short each step is the sum of the two previous steps
+    can be done easily in recursion; but Ifeel it is an overkill
+    storing all previous values seems to be an overkill
+    
+"""
 
-<<I fill the code here>>
-
+class Solution(object):
+    def climbStairs(self, n: int) -> int:
+        if n <=2: return n
+        prev = 2
+        prevprev = 1
+        for _ in range (3, n):
+            cur = prev + prevprev
+            prevprev = prev
+            prev = cur
+        return prevprev + prev
+            
+sol = Solution()
+print("Test1: n=4 -> 5: success" if sol.climbStairs(4) == 5 else "Test1: Fail")
+print("Test2: n=3 -> 3: success" if sol.climbStairs(3) == 3 else "Test2: Fail")
+print("Test3: n=1 (edge case) -> 1: success" if sol.climbStairs(1) == 1 else "Test3: Fail")
 ```
 
 ---
 # Template
 
-
+<!-- ═══════════════════════════════════════════════════════
+     AGENT INSTRUCTIONS — how to fill this template
+     ═══════════════════════════════════════════════════════
+     1. Description: fetch from https://leetcode.com/problems/<slug>/
+        Fall back to training knowledge if fetch fails.
+     2. function_signature: always the exact LeetCode Python signature.
+     3. Solution Code: NEVER leave empty.
+        Always write class skeleton + pass + sol = Solution() + print tests.
+     4. jupyter_path / script_path: leave as placeholder — user fills.
+     ═══════════════════════════════════════════════════════ -->
 
 ---
 
 
-## 217: Contains Duplicate
+## <<NUMBER>>: <<Title>>
 
 ### Problem Description
-> <<Description of the problem>>
+> <<Fetched from leetcode.com/problems/<slug>/ or from training knowledge>>
 
 - number: <<number>>
 - title: "<<Title>>"
-- difficulty: <<difficulty>>
+- difficulty: <<difficulty>>/10
 - concepts: ["<<Concept 1>>", "<<Concept 2>>", "<<Concept 3>>"]
 - jupyter_path: <<absolute Path... I fill it>>
 - script_path: <<absolute Path... I fill it>>
-- function_signature: <<suggested by agent always>>:
+- function_signature: def <<func_name>>(self, <<params>>) -> <<return_type>>:
 
 ---
 
 ### Solution Idea (Pseudo-solution)
-* **Approach:** <<approach goes here>>
+* **Approach:** <<pattern name — key insight>>
 * **Logic:**
     1. <<Logic goes here>>
     2. <<Logic goes here>>
@@ -251,15 +287,24 @@ print("Test3: [3,3] target=6 -> [0,1]: success" if sol.twoSum([3,3], 6) == [0,1]
     5. <<Logic goes here>>
 
 **Complexity:**
-* **Time:** <<Time Complexity>>
-* **Space:** <<Space Complexity>>
+* **Time:** $O(...)$
+* **Space:** $O(...)$
 
 ---
 
 ### Solution Code
 ```python
+from typing import List   # include only if needed
 
-<<I fill the code here >>
+class Solution(object):
+    def <<func_name>>(self, <<params>>) -> <<return_type>>:
+        pass
 
-    
+
+
+
+sol = Solution()
+print("Test1: <<input>> -> <<expected>>: success" if sol.<<func_name>>(<<args1>>) == <<expected1>> else "Test1: Fail")
+print("Test2: <<input>> -> <<expected>>: success" if sol.<<func_name>>(<<args2>>) == <<expected2>> else "Test2: Fail")
+print("Test3: <<edge case>> -> <<expected>>: success" if sol.<<func_name>>(<<args3>>) == <<expected3>> else "Test3: Fail")
 ```
