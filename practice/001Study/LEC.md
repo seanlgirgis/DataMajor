@@ -257,7 +257,7 @@ print("Test3: n=1 (edge case) -> 1: success" if sol.climbStairs(1) == 1 else "Te
 - title: "Same Tree"
 - difficulty: 2/10
 - concepts: ["Tree", "Depth-First Search", "Binary Tree"]
-- jupyter_path: <<absolute Path... I fill it>>
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\100.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
 
@@ -280,6 +280,7 @@ print("Test3: n=1 (edge case) -> 1: success" if sol.climbStairs(1) == 1 else "Te
 
 ### Solution Code
 ```python
+
 from typing import Optional
 
 class TreeNode:
@@ -290,7 +291,11 @@ class TreeNode:
 
 class Solution(object):
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        pass
+        if p is None and q is None : return True           # we have reached the end of the trees
+        if p is None or q is None : return False           # One is exhausted and the other not yet Not matching
+        if p.val != q.val :return False                    # Values are not mathcing. Trees are not the same
+        return (self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right))
+
 
 
 sol = Solution()
@@ -305,6 +310,7 @@ print("Test2: [1,2], [1,null,2] (edge case) -> False: success" if sol.isSameTree
 p3 = TreeNode(1, TreeNode(2), TreeNode(1))
 q3 = TreeNode(1, TreeNode(1), TreeNode(2))
 print("Test3: [1,2,1], [1,1,2] -> False: success" if sol.isSameTree(p3, q3) == False else "Test3: Fail")
+
 ```
 
 ---
