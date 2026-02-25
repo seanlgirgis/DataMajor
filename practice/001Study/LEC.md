@@ -8,6 +8,7 @@
 | **104** | [Maximum Depth of Binary Tree](#104-maximum-depth-of-binary-tree) | `Tree`, `Depth-First Search`, `Breadth-First Search` | 2/10 |
 | **121** | [Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock) | `Array`, `Dynamic Programming` | 1/10 |
 | **141** | [Linked List Cycle](#141-linked-list-cycle) | `Hash Table`, `Linked List`, `Two Pointers` | 1/10 |
+| **142** | [Linked List Cycle II](#142-linked-list-cycle-ii) | `Hash Table`, `Linked List`, `Two Pointers` | 2/10 |
 | **203** | [Remove Linked List Elements](#203-remove-linked-list-elements) | `Linked List`, `Recursion` | 1/10 |
 | **206** | [Reverse Linked List](#206-reverse-linked-list) | `Linked List`, `Recursion` | 1/10 |
 | **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | 
@@ -873,6 +874,98 @@ sol = Solution()
 print("Test1: [3,2,0,-4], pos=1 (cycle exists) -> True: success" if sol.hasCycle(build_cycle_list([3,2,0,-4], 1)) == True else "Test1: Fail")
 print("Test2: [1,2], pos=0 (cycle exists) -> True: success" if sol.hasCycle(build_cycle_list([1,2], 0)) == True else "Test2: Fail")
 print("Test3: [1], pos=-1 (no cycle edge case) -> False: success" if sol.hasCycle(build_cycle_list([1], -1)) == False else "Test3: Fail")
+```
+
+---
+
+## 142: Linked List Cycle II
+
+### Problem Description
+> Given the `head` of a linked list, return the node where the cycle begins. If there is no cycle, return `null`. There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the `next` pointer. Do NOT modify the linked list.
+
+- number: 142
+- title: "Linked List Cycle II"
+- difficulty: 2/10
+- concepts: ["Hash Table", "Linked List", "Two Pointers"]
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\142.ipynb"
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Floyd's Cycle-Finding Algorithm Phase 1 & 2 (Fast & Slow Pointers)
+* **Logic:**
+    1. **Phase 1 (Detect Cycle):** Use `slow` (1 step) and `fast` (2 steps) pointers starting from `head` to check if they meet. If they don't meet and reach `None`, return `None` (no cycle).
+    2. **Phase 2 (Find Start):** Once they meet, initialize a new pointer `slow2` at `head`.
+    3. Move both `slow` and `slow2` by 1 step at a time.
+    4. The node where `slow` and `slow2` meet is the exact starting node of the cycle. Return it.
+
+**Complexity:**
+* **Time:** $O(n)$
+* **Space:** $O(1)$
+
+---
+
+### Solution Code
+```python
+from typing import Optional
+
+class ListNode:
+    def __init__(self, x=0, next=None):
+        self.val = x
+        self.next = next
+
+class Solution(object):
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        slow = head
+        fast = head
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                slow2 = head
+                while slow2 != slow:
+                    slow2 = slow2.next
+                    slow = slow.next
+                return slow  # they met at the cycle entry
+        return None
+        
+
+
+def build_cycle_list(values: list, pos: int) -> Optional[ListNode]:
+    if not values:
+        return None
+    
+    head = ListNode(values[0])
+    curr = head
+    nodes = [head]
+    
+    # build straight list
+    for val in values[1:]:
+        curr.next = ListNode(val)
+        curr = curr.next
+        nodes.append(curr)
+        
+    # attach cycle back-pointer if requested
+    if pos >= 0 and pos < len(nodes):
+        curr.next = nodes[pos]
+        
+    return head
+
+# Test assertion helper for nodes
+def check_node(actual, expected_val):
+    if actual is None and expected_val is None:
+        return True
+    if actual is not None and expected_val is not None and actual.val == expected_val:
+        return True
+    return False
+
+
+sol = Solution()
+print("Test1: [3,2,0,-4], pos=1 -> Node with val 2: success" if check_node(sol.detectCycle(build_cycle_list([3,2,0,-4], 1)), 2) else "Test1: Fail")
+print("Test2: [1,2], pos=0 -> Node with val 1: success" if check_node(sol.detectCycle(build_cycle_list([1,2], 0)), 1) else "Test2: Fail")
+print("Test3: [1], pos=-1 -> null: success" if check_node(sol.detectCycle(build_cycle_list([1], -1)), None) else "Test3: Fail")
 ```
 
 ---
