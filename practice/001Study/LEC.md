@@ -15,6 +15,7 @@
 | **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | 
 | **226** | [Invert Binary Tree](#226-invert-binary-tree) | `Tree`, `Depth-First Search`, `Binary Tree` | 1/10 |
 | **242** | [Valid Anagram](#242-valid-anagram) | `Hash Table`, `String`, `Sorting` | 1/10 |
+| **378** | [Kth Smallest Element in a Sorted Matrix](#378-kth-smallest-element-in-a-sorted-matrix) | `Array`, `Binary Search`, `Matrix`, `Heap (Priority Queue)` | 2/10 |
 | **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |
 | **876** | [Middle of the Linked List](#876-middle-of-the-linked-list) | `Linked List`, `Two Pointers` | 1/10 |
 
@@ -1325,7 +1326,7 @@ print("Test3: [] (edge case) -> []: success" if to_level_order(inverted3) == [] 
 - title: "Valid Anagram"
 - difficulty: 1/10
 - concepts: ["Hash Table", "String", "Sorting"]
-- jupyter_path: <<absolute Path... I fill it>>
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\242.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def isAnagram(self, s: str, t: str) -> bool:
 
@@ -1351,14 +1352,75 @@ print("Test3: [] (edge case) -> []: success" if to_level_order(inverted3) == [] 
 ```python
 class Solution(object):
     def isAnagram(self, s: str, t: str) -> bool:
-        pass
+        if len(s) != len(t): return False
+        thash = {}
+        shash = {}
+        for ch in s: shash[ch] = shash.get(ch,0) + 1
+        for ch in t: thash[ch] = thash.get(ch,0) + 1
+        return shash == thash
+            
 
 
 sol = Solution()
 print("Test1: s='anagram', t='nagaram' -> True: success" if sol.isAnagram("anagram", "nagaram") == True else "Test1: Fail")
 print("Test2: s='rat', t='car' -> False: success" if sol.isAnagram("rat", "car") == False else "Test2: Fail")
 print("Test3: s='a', t='ab' (edge case length mismatch) -> False: success" if sol.isAnagram("a", "ab") == False else "Test3: Fail")
+
 ```
+
+---
+
+## 378: Kth Smallest Element in a Sorted Matrix
+
+### Problem Description
+> Given an `n x n` `matrix` where each of the rows and columns is sorted in ascending order, return the `kth` smallest element in the matrix. Note that it is the `kth` smallest element in the sorted order, not the `kth` distinct element. You must find a solution with a memory complexity better than $O(n^2)$.
+
+- number: 378
+- title: "Kth Smallest Element in a Sorted Matrix"
+- difficulty: 2/10
+- concepts: ["Array", "Binary Search", "Matrix", "Heap (Priority Queue)"]
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\378.ipynb"
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Min-Heap (Priority Queue)
+* **Logic:**
+    1. The matrix rows are sorted, so the smallest element overall must be in the first column.
+    2. Initialize a min-heap and push the first element of each row into it, along with its row `r` and column `c` coordinates: `(matrix[r][0], r, 0)`.
+    3. Loop `k` times:
+    4. Pop the minimum element `(val, r, c)` from the heap. This is the current smallest element.
+    5. If this is the `kth` iteration (the loop finishes), return `val`.
+    6. If the popped element isn't the last column in its row (`c + 1 < len(matrix[0])`), push the next element in that same row into the heap: `(matrix[r][c+1], r, c+1)`.
+    7. After `k` pops, we have our answer.
+
+**Complexity:**
+* **Time:** $O(X + k \log X)$ where $X = \min(n, k)$ for the initial heap build and popping/pushing.
+* **Space:** $O(X)$ for storing up to $X$ elements in the heap.
+
+---
+
+### Solution Code
+```python
+from typing import List
+class Solution(object):
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        return sorted(val for row in matrix for val in row)[k-1]
+sol = Solution()
+print("Test1: matrix=[[1,5,9],[10,11,13],[12,13,15]], k=8 -> 13: success" if sol.kthSmallest([[1,5,9],[10,11,13],[12,13,15]], 8) == 13 else "Test1: Fail")
+print("Test2: matrix=[[-5]], k=1 -> -5: success" if sol.kthSmallest([[-5]], 1) == -5 else "Test2: Fail")
+print("Test3: matrix=[[1,2],[1,3]], k=2 -> 1: success" if sol.kthSmallest([[1,2],[1,3]], 2) == 1 else "Test3: Fail")
+```
+
+### Heap Solution
+```
+# later not now. heapq
+
+
+```
+
 
 ---
 # Template
