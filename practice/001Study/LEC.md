@@ -1,6 +1,7 @@
 | # | Problem Title | Concepts | Difficulty | 
 | :--- | :--- | :--- | :--- | 
 | **1** | [Two Sum](#1-two-sum) | `Array`, `Hash Table` | 2/10 |
+| **20** | [Valid Parentheses](#20-valid-parentheses) | `String`, `Stack` | 1/10 |
 | **21** | [Merge Two Sorted Lists](#21-merge-two-sorted-lists) | `Linked List`, `Two Pointers`, `Recursion` | 1/10 |
 | **70** | [Climbing Stairs](#70-climbing-stairs) | `Dynamic Programming`, `Memoization`, `Math` | 2/10 |
 | **83** | [Remove Duplicates from Sorted List](#83-remove-duplicates-from-sorted-list) | `Linked List` | 1/10 |
@@ -1421,6 +1422,69 @@ print("Test3: matrix=[[1,2],[1,3]], k=2 -> 1: success" if sol.kthSmallest([[1,2]
 
 ```
 
+
+---
+
+## 20: Valid Parentheses
+
+### Problem Description
+> Given a string `s` containing just the characters `'('`, `')'`, `'{'`, `'}'`, `'['` and `']'`, determine if the input string is valid.
+> 
+> An input string is valid if:
+> 1. Open brackets must be closed by the same type of brackets.
+> 2. Open brackets must be closed in the correct order.
+> 3. Every close bracket has a corresponding open bracket of the same type.
+
+- number: 20
+- title: "Valid Parentheses"
+- difficulty: 1/10
+- concepts: ["String", "Stack"]
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group2\20.ipynb"
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def isValid(self, s: str) -> bool:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Stack (LIFO matching)
+* **Logic:**
+    1. Initialize an empty list `stack` to keep track of opening brackets.
+    2. Create a dictionary/hash map mapping closing brackets to their corresponding opening brackets: `)` -> `(`, `}` -> `{`, `]` -> `[`.
+    3. Iterate through each character `char` in the string `s`.
+    4. If `char` is an opening bracket (i.e., not a key in the map), push it onto the `stack`.
+    5. If `char` is a closing bracket (i.e., is a key in the map):
+        - If the `stack` is empty (meaning no opening bracket available to match) or the top of the stack does not match the mapped opening bracket, return `False`.
+        - Otherwise, pop the matching opening bracket from the stack.
+    6. After checking all characters, if the `stack` is empty, return `True` (all matched). Otherwise, return `False`.
+
+**Complexity:**
+* **Time:** $O(n)$ where $n$ is the length of the string `s`.
+* **Space:** $O(n)$ for the stack in the worst case (all opening brackets).
+
+---
+
+### Solution Code
+```python
+class Solution(object):
+    def isValid(self, s: str) -> bool:
+        pairs = {')': '(', '}': '{', ']': '['}   # ← reversed mapping!
+        stack = []
+        
+        for ch in s:
+            if ch in '({[':
+                stack.append(ch)
+            elif ch in ')}]':
+                if not stack or stack.pop() != pairs[ch]:
+                    return False
+            else:
+                return False  
+        return not stack
+sol = Solution()
+print("Test1: s='()' -> True: success" if sol.isValid("()") == True else "Test1: Fail")
+print("Test2: s='()[]{}' -> True: success" if sol.isValid("()[]{}") == True else "Test2: Fail")
+print("Test3: s='(]' -> False: success" if sol.isValid("(]") == False else "Test3: Fail")
+print("Test4: s=']' (edge case single close) -> False: success" if sol.isValid("]") == False else "Test4: Fail")
+```
 
 ---
 # Template
