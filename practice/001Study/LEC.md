@@ -723,7 +723,7 @@ print("Test3: [] (edge case) -> []: success" if to_list(sol.deleteDuplicates(to_
 - title: "Remove Linked List Elements"
 - difficulty: 1/10
 - concepts: ["Linked List", "Recursion"]
-- jupyter_path: <<absolute Path... I fill it>>
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\203.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
 
@@ -755,10 +755,21 @@ class ListNode:
         self.next = next
 
 class Solution(object):
+    r"""
+    If I am deleting any node in the middle. It is standard as moving a pointer.
+    I think it is the first and last item that might break something
+    """
     def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
-        pass
-
-
+        dummy = ListNode()
+        dummy.next = head
+        current = dummy
+        while current.next is not None:
+            if current.next.val == val:
+                current.next = current.next.next
+            else:
+                current = current.next
+        return dummy.next
+            
 def to_list(head: Optional[ListNode]) -> list:
     res = []
     while head:
@@ -776,6 +787,7 @@ def to_linked_list(lst: list) -> Optional[ListNode]:
 
 
 sol = Solution()
+
 print("Test1: [1,2,6,3,4,5,6], val=6 -> [1,2,3,4,5]: success" if to_list(sol.removeElements(to_linked_list([1,2,6,3,4,5,6]), 6)) == [1,2,3,4,5] else "Test1: Fail")
 print("Test2: [7,7,7,7], val=7 -> []: success" if to_list(sol.removeElements(to_linked_list([7,7,7,7]), 7)) == [] else "Test2: Fail")
 print("Test3: [] (edge case), val=1 -> []: success" if to_list(sol.removeElements(to_linked_list([]), 1)) == [] else "Test3: Fail")
