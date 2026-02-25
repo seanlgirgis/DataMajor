@@ -876,6 +876,22 @@ print("Test2: [1,2], pos=0 (cycle exists) -> True: success" if sol.hasCycle(buil
 print("Test3: [1], pos=-1 (no cycle edge case) -> False: success" if sol.hasCycle(build_cycle_list([1], -1)) == False else "Test3: Fail")
 ```
 
+# Solution 2 set more human
+```python
+def hasCycle(self, head: Optional[ListNode]) -> bool:
+    seen = set()
+    curr = head
+    while curr:
+        if curr in seen:
+            return True
+        seen.add(curr)
+        curr = curr.next
+    return False
+
+```
+
+
+
 ---
 
 ## 142: Linked List Cycle II
@@ -966,6 +982,20 @@ sol = Solution()
 print("Test1: [3,2,0,-4], pos=1 -> Node with val 2: success" if check_node(sol.detectCycle(build_cycle_list([3,2,0,-4], 1)), 2) else "Test1: Fail")
 print("Test2: [1,2], pos=0 -> Node with val 1: success" if check_node(sol.detectCycle(build_cycle_list([1,2], 0)), 1) else "Test2: Fail")
 print("Test3: [1], pos=-1 -> null: success" if check_node(sol.detectCycle(build_cycle_list([1], -1)), None) else "Test3: Fail")
+```
+
+#set SOlution . More Human
+
+```python
+def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    seen = set()
+    curr = head
+    while curr:
+        if curr in seen:
+            return curr
+        seen.add(curr)
+        curr = curr.next
+    return None
 ```
 
 ---
