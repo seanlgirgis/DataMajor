@@ -1933,7 +1933,7 @@ print("Test3: nums=[1] -> 1: success" if sol.findLengthOfLCIS([1]) == 1 else "Te
 - title: "Reorder Data in Log Files"
 - difficulty: 2/10
 - concepts: ["Array", "String", "Sorting"]
-- jupyter_path: <<absolute Path... I fill it>>
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group2\937.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def reorderLogFiles(self, logs: List[str]) -> List[str]:
 
