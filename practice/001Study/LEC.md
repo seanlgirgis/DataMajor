@@ -11,6 +11,7 @@
 | **141** | [Linked List Cycle](#141-linked-list-cycle) | `Hash Table`, `Linked List`, `Two Pointers` | 1/10 |
 | **142** | [Linked List Cycle II](#142-linked-list-cycle-ii) | `Hash Table`, `Linked List`, `Two Pointers` | 2/10 |
 | **143** | [Reorder List](#143-reorder-list) | `Linked List`, `Two Pointers`, `Stack` | 2/10 |
+| **167** | [Two Sum II - Input Array Is Sorted](#167-two-sum-ii---input-array-is-sorted) | `Array`, `Two Pointers`, `Binary Search` | 2/10 |
 | **203** | [Remove Linked List Elements](#203-remove-linked-list-elements) | `Linked List`, `Recursion` | 1/10 |
 | **206** | [Reverse Linked List](#206-reverse-linked-list) | `Linked List`, `Recursion` | 1/10 |
 | **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | 
@@ -1484,6 +1485,75 @@ print("Test1: s='()' -> True: success" if sol.isValid("()") == True else "Test1:
 print("Test2: s='()[]{}' -> True: success" if sol.isValid("()[]{}") == True else "Test2: Fail")
 print("Test3: s='(]' -> False: success" if sol.isValid("(]") == False else "Test3: Fail")
 print("Test4: s=']' (edge case single close) -> False: success" if sol.isValid("]") == False else "Test4: Fail")
+```
+
+---
+
+## 167: Two Sum II - Input Array Is Sorted
+
+### Problem Description
+> Given a **1-indexed** array of integers `numbers` that is already **sorted in non-decreasing order**, find two numbers such that they add up to a specific `target` number. Let these two numbers be `numbers[index1]` and `numbers[index2]` where `1 <= index1 < index2 <= numbers.length`.
+> 
+> Return the indices of the two numbers, `index1` and `index2`, **added by one** as an integer array `[index1, index2]` of length 2.
+> 
+> The tests are generated such that there is **exactly one solution**. You **may not** use the same element twice.
+> 
+> Your solution must use only constant extra space.
+
+- number: 167
+- title: "Two Sum II - Input Array Is Sorted"
+- difficulty: 2/10
+- concepts: ["Array", "Two Pointers", "Binary Search"]
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group2\167.ipynb"
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def twoSum(self, numbers: List[int], target: int) -> List[int]:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Two Pointers (Left and Right)
+* **Logic:**
+    1. Initialize a `left` pointer to index `0` and a `right` pointer to the last index `len(numbers) - 1`.
+    2. Loop while `left < right`:
+    3. Calculate the `current_sum = numbers[left] + numbers[right]`.
+    4. If `current_sum == target`: return `[left + 1, right + 1]` (since the array is 1-indexed).
+    5. If `current_sum < target`: the sum is too small, so increment the `left` pointer to increase the sum.
+    6. If `current_sum > target`: the sum is too large, so decrement the `right` pointer to decrease the sum.
+    7. Because a solution is guaranteed to exist, the loop will always return before bounds are an issue.
+
+**Complexity:**
+* **Time:** $O(n)$ where $n$ is the length of the array.
+* **Space:** $O(1)$ since only two pointers are used.
+
+---
+
+### Solution Code
+```python
+from typing import List
+"""r
+Because the numbers are sorted
+we will use two pointers right, left
+if sum  is greater than target move right pointer towards left
+if sum is smaller move left pointer to the right
+when sum found.. return rigth, left
+left is < right in the loop
+
+"""
+class Solution(object):
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        left, right = 0, len(numbers) -1
+        
+        while left < right:
+            if (numbers[left] + numbers[right]) == target:
+                return [left+1, right+1]
+            elif (numbers[left] + numbers[right]) > target:
+                right -= 1
+            else:
+                left += 1
+sol = Solution()
+print("Test1: numbers=[2,7,11,15], target=9 -> [1,2]: success" if sol.twoSum([2,7,11,15], 9) == [1,2] else "Test1: Fail")
+print("Test2: numbers=[2,3,4], target=6 -> [1,3]: success" if sol.twoSum([2,3,4], 6) == [1,3] else "Test2: Fail")
+print("Test3: numbers=[-1,0], target=-1 (edge case negatives) -> [1,2]: success" if sol.twoSum([-1,0], -1) == [1,2] else "Test3: Fail")
 ```
 
 ---
