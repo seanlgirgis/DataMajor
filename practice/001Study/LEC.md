@@ -30,6 +30,7 @@
 | **674** | [Longest Continuous Increasing Subsequence](#674-longest-continuous-increasing-subsequence) | `Array` | 1/10 |
 | **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |
 | **876** | [Middle of the Linked List](#876-middle-of-the-linked-list) | `Linked List`, `Two Pointers` | 1/10 |
+| **937** | [Reorder Data in Log Files](#937-reorder-data-in-log-files) | `Array`, `String`, `Sorting` | 2/10 |
 
 ## 217: Contains Duplicate
 
@@ -1906,6 +1907,106 @@ sol = Solution()
 print("Test1: nums=[1,3,5,4,7] -> 3: success" if sol.findLengthOfLCIS([1,3,5,4,7]) == 3 else "Test1: Fail")
 print("Test2: nums=[2,2,2,2,2] -> 1: success" if sol.findLengthOfLCIS([2,2,2,2,2]) == 1 else "Test2: Fail")
 print("Test3: nums=[1] -> 1: success" if sol.findLengthOfLCIS([1]) == 1 else "Test3: Fail")
+```
+
+[↑ Back to Top](#lec-cases)
+
+---
+
+## 937: Reorder Data in Log Files
+
+### Problem Description
+> You are given an array of `logs`. Each log is a space-delimited string of words, where the first word is the identifier.
+>
+> There are two types of logs:
+> - **Letter-logs**: All words (except the identifier) consist of lowercase English letters.
+> - **Digit-logs**: All words (except the identifier) consist of digits.
+>
+> Reorder these logs so that:
+> 1. The letter-logs come before all digit-logs.
+> 2. The letter-logs are sorted lexicographically by their contents. If their contents are the same, then sort them lexicographically by their identifiers.
+> 3. The digit-logs maintain their relative ordering.
+>
+> Return the final order of the logs.
+
+- number: 937
+- title: "Reorder Data in Log Files"
+- difficulty: 2/10
+- concepts: ["Array", "String", "Sorting"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def reorderLogFiles(self, logs: List[str]) -> List[str]:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Custom Sorting using Tuples
+* **Logic:**
+    1. Separate the logs into two lists: `let_logs` and `dig_logs`.
+    2. Iterate through each `log` in `logs`.
+    3. Split each `log` into two parts maximally: the `identifier` and the `content`.
+    4. Check if the first character of the `content` is a digit or a letter.
+    5. If it's a digit, append the entire `log` to `dig_logs`.
+    6. If it's a letter, append the entire `log` to `let_logs`.
+    7. Sort the `let_logs` list.
+       * Python's `.sort()` allows a custom `key` function.
+       * We want to sort primarily by the `content`, and secondarily by the `identifier`.
+       * The key should return a tuple: `(content, identifier)`.
+    8. Combine the sorted `let_logs` and the original `dig_logs` (which maintains relative order) and return the combined list.
+
+**Complexity:**
+* **Time:** $O(M \log M)$ where $M$ is the number of characters across all logs, because string comparisons take an amount of time proportional to the length of the string.
+* **Space:** $O(M)$ to store the separated lists of logs.
+---
+
+### Solution Code
+```python
+#LEC 937
+from typing import List
+
+class Solution(object):
+    def reorderLogFiles(self, logs: List[str]) -> List[str]:
+        let_logs = []
+        dig_logs = []
+        for log in logs:
+            id, content = log.split(' ',1 )
+            if content[0].isdigit():
+                dig_logs.append(log)
+            else:
+                let_logs.append(log)
+        let_logs.sort(key=lambda log: (
+                log.split(' ', 1)[1],   # primary: content
+                log.split(' ', 1)[0]    # secondary: identifier
+                ))
+        return let_logs+dig_logs
+            
+                
+sol = Solution()
+print("Test1: logs=['dig1 8 1 5 1','let1 art can','dig2 3 6','let2 own kit dig','let3 art zero'] -> ['let1 art can','let3 art zero','let2 own kit dig','dig1 8 1 5 1','dig2 3 6']: success" if sol.reorderLogFiles(["dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"]) == ["let1 art can","let3 art zero","let2 own kit dig","dig1 8 1 5 1","dig2 3 6"] else "Test1: Fail")
+print("Test2: logs=['a1 9 2 3 1','g1 act car','zo4 4 7','ab1 off key dog','a8 act zoo'] -> ['g1 act car','a8 act zoo','ab1 off key dog','a1 9 2 3 1','zo4 4 7']: success" if sol.reorderLogFiles(["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"]) == ["g1 act car","a8 act zoo","ab1 off key dog","a1 9 2 3 1","zo4 4 7"] else "Test2: Fail")
+```
+
+### Solution Code2 More efficient
+```python
+#LEC 937
+from typing import List
+class Solution(object):
+    def reorderLogFiles(self, logs: List[str]) -> List[str]:
+        let_logs = []
+        dig_logs = []
+        for log in logs:
+            log_id, content = log.split(' ', 1)
+            if content[0].isdigit():
+                dig_logs.append(log)
+            else:
+                let_logs.append((log, log_id, content))  # cache the split
+                
+        let_logs.sort(key=lambda x: (x[2], x[1]))  # sort by content then id
+        
+        return [log for log, _, _ in let_logs] + dig_logs
+sol = Solution()
+print("Test1: logs=['dig1 8 1 5 1','let1 art can','dig2 3 6','let2 own kit dig','let3 art zero'] -> ['let1 art can','let3 art zero','let2 own kit dig','dig1 8 1 5 1','dig2 3 6']: success" if sol.reorderLogFiles(["dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"]) == ["let1 art can","let3 art zero","let2 own kit dig","dig1 8 1 5 1","dig2 3 6"] else "Test1: Fail")
+print("Test2: logs=['a1 9 2 3 1','g1 act car','zo4 4 7','ab1 off key dog','a8 act zoo'] -> ['g1 act car','a8 act zoo','ab1 off key dog','a1 9 2 3 1','zo4 4 7']: success" if sol.reorderLogFiles(["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"]) == ["g1 act car","a8 act zoo","ab1 off key dog","a1 9 2 3 1","zo4 4 7"] else "Test2: Fail")
 ```
 
 [↑ Back to Top](#lec-cases)
