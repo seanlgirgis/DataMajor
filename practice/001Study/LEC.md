@@ -4,6 +4,7 @@
 | **70** | [Climbing Stairs](#70-climbing-stairs) | `Dynamic Programming`, `Memoization`, `Math` | 2/10 |
 | **100** | [Same Tree](#100-same-tree) | `Tree`, `Depth-First Search`, `Binary Tree` | 2/10 |
 | **104** | [Maximum Depth of Binary Tree](#104-maximum-depth-of-binary-tree) | `Tree`, `Depth-First Search`, `Breadth-First Search` | 2/10 |
+| **121** | [Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock) | `Array`, `Dynamic Programming` | 1/10 |
 | **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | 
 | **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |  
 
@@ -381,6 +382,54 @@ print("Test2: [1,null,2] -> 2: success" if sol.maxDepth(root2) == 2 else "Test2:
 root3 = None
 print("Test3: [] (edge case) -> 0: success" if sol.maxDepth(root3) == 0 else "Test3: Fail")
 
+```
+
+---
+
+## 121: Best Time to Buy and Sell Stock
+
+### Problem Description
+> You are given an array prices where `prices[i]` is the price of a given stock on the `ith` day. You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock. Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+- number: 121
+- title: "Best Time to Buy and Sell Stock"
+- difficulty: 1/10
+- concepts: ["Array", "Dynamic Programming"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def maxProfit(self, prices: List[int]) -> int:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** One Pass (Greedy / state tracking) — Keep track of the lowest price seen so far and the maximum profit at each step.
+* **Logic:**
+    1. Initialize `min_price` to infinity (or a very large number).
+    2. Initialize `max_profit` to `0`.
+    3. Loop through each `price` in the array `prices`.
+    4. If the current `price` is less than `min_price`, update `min_price` to `price`.
+    5. Else if `price - min_price` is greater than `max_profit`, update `max_profit` to `price - min_price`.
+    6. Return `max_profit`.
+
+**Complexity:**
+* **Time:** $O(n)$
+* **Space:** $O(1)$
+
+---
+
+### Solution Code
+```python
+from typing import List
+
+class Solution(object):
+    def maxProfit(self, prices: List[int]) -> int:
+        pass
+
+
+sol = Solution()
+print("Test1: [7,1,5,3,6,4] -> 5: success" if sol.maxProfit([7,1,5,3,6,4]) == 5 else "Test1: Fail")
+print("Test2: [7,6,4,3,1] -> 0: success" if sol.maxProfit([7,6,4,3,1]) == 0 else "Test2: Fail")
+print("Test3: [2,4,1] (edge case) -> 2: success" if sol.maxProfit([2,4,1]) == 2 else "Test3: Fail")
 ```
 
 ---
