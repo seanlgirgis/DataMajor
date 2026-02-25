@@ -325,7 +325,7 @@ print("Test3: [1,2,1], [1,1,2] -> False: success" if sol.isSameTree(p3, q3) == F
 - title: "Maximum Depth of Binary Tree"
 - difficulty: 2/10
 - concepts: ["Tree", "Depth-First Search", "Breadth-First Search"]
-- jupyter_path: <<absolute Path... I fill it>>
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\104.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def maxDepth(self, root: Optional[TreeNode]) -> int:
 
@@ -349,7 +349,14 @@ print("Test3: [1,2,1], [1,1,2] -> False: success" if sol.isSameTree(p3, q3) == F
 ### Solution Code
 ```python
 from typing import Optional
+r"""
+Thinking: -
+    - Recursive wins
+    - if object is None .. return 0   (end of a tree)
+    - return max (maxDepth (left) and right + 1
+    
 
+"""
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -358,7 +365,10 @@ class TreeNode:
 
 class Solution(object):
     def maxDepth(self, root: Optional[TreeNode]) -> int:
-        pass
+        #No run forever
+        if root is None:
+            return 0
+        return max(self.maxDepth(root.left) , self.maxDepth(root.right)) + 1
 
 
 sol = Solution()
@@ -370,6 +380,7 @@ print("Test2: [1,null,2] -> 2: success" if sol.maxDepth(root2) == 2 else "Test2:
 
 root3 = None
 print("Test3: [] (edge case) -> 0: success" if sol.maxDepth(root3) == 0 else "Test3: Fail")
+
 ```
 
 ---
