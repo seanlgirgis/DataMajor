@@ -31,6 +31,7 @@
 | **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |
 | **876** | [Middle of the Linked List](#876-middle-of-the-linked-list) | `Linked List`, `Two Pointers` | 1/10 |
 | **937** | [Reorder Data in Log Files](#937-reorder-data-in-log-files) | `Array`, `String`, `Sorting` | 2/10 |
+| **2043** | [Simple Bank System](#2043-simple-bank-system) | `Array`, `Design`, `Simulation` | 2/10 |
 
 ## 217: Contains Duplicate
 
@@ -2007,6 +2008,92 @@ class Solution(object):
 sol = Solution()
 print("Test1: logs=['dig1 8 1 5 1','let1 art can','dig2 3 6','let2 own kit dig','let3 art zero'] -> ['let1 art can','let3 art zero','let2 own kit dig','dig1 8 1 5 1','dig2 3 6']: success" if sol.reorderLogFiles(["dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"]) == ["let1 art can","let3 art zero","let2 own kit dig","dig1 8 1 5 1","dig2 3 6"] else "Test1: Fail")
 print("Test2: logs=['a1 9 2 3 1','g1 act car','zo4 4 7','ab1 off key dog','a8 act zoo'] -> ['g1 act car','a8 act zoo','ab1 off key dog','a1 9 2 3 1','zo4 4 7']: success" if sol.reorderLogFiles(["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"]) == ["g1 act car","a8 act zoo","ab1 off key dog","a1 9 2 3 1","zo4 4 7"] else "Test2: Fail")
+```
+
+[↑ Back to Top](#lec-cases)
+
+[↑ Back to Top](#lec-cases)
+
+---
+
+## 2043: Simple Bank System
+
+### Problem Description
+> You have been tasked with writing a program for a popular bank that will automate all its incoming transactions (transfer, deposit, and withdraw). The bank has `n` accounts numbered from `1` to `n`. The initial balance of each account is stored in a 0-indexed integer array `balance`, with the `(i + 1)th` account having an initial balance of `balance[i]`.
+>
+> Execute all the valid transactions. A transaction is valid if:
+> - The given account number(s) are between `1` and `n`, and
+> - The amount of money withdrawn or transferred from is less than or equal to the balance of the account.
+>
+> Implement the `Bank` class:
+> - `Bank(long[] balance)` Initializes the object with the 0-indexed integer array `balance`.
+> - `boolean transfer(int account1, int account2, long money)` Transfers `money` dollars from the account numbered `account1` to the account numbered `account2`. Return `true` if the transaction was successful, `false` otherwise.
+> - `boolean deposit(int account, long money)` Deposit `money` dollars into the account numbered `account`. Return `true` if the transaction was successful, `false` otherwise.
+> - `boolean withdraw(int account, long money)` Withdraw `money` dollars from the account numbered `account`. Return `true` if the transaction was successful, `false` otherwise.
+
+- number: 2043
+- title: "Simple Bank System"
+- difficulty: 2/10
+- concepts: ["Array", "Design", "Simulation"]
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group2\2043.ipynb"
+- script_path: <<absolute Path... I fill it>>
+- function_signature: class Bank:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Array / Object-Oriented Simulation
+* **Logic:**
+    1. `__init__`: Store the 0-indexed `balance` array as a class variable. We can optionally prepend it with a dummy value (like `0`) so it becomes 1-indexed to match account numbers directly, or just subtract `1` from every account argument in the functions.
+    2. Helper `is_valid(account)`: Create a helper function to verify if an account is strictly between `1` and `n` (or length of balance).
+    3. `transfer(acc1, acc2, money)`: Check `is_valid(acc1)` and `is_valid(acc2)`. If valid, check if `balance[acc1] >= money`. If so, `-= money` from `acc1` and `+= money` to `acc2` and return `True`. Otherwise return `False`.
+    4. `deposit(acc, money)`: Check `is_valid(acc)`. If valid, `+= money` to `acc` and return `True`. Otherwise return `False`.
+    5. `withdraw(acc, money)`: Check `is_valid(acc)`. If valid, check if `balance[acc] >= money`. If so, `-= money` from `acc` and return `True`. Otherwise return `False`.
+
+**Complexity:**
+* **Time:** $O(1)$ per operation.
+* **Space:** $O(n)$ to store the copy of the `balance` array within the class instance.
+---
+
+### Solution Code
+```python
+#LEC 2043
+from typing import List
+
+class Bank:
+    def __init__(self, balance: List[int]):
+        self.balance = [0]                #prepend with 0 for dummy account. from now one you can work safely
+        self.balance += balance           # on a 1 base array
+        
+    def _is_valid (self, account: int)-> bool:
+        return 1 <= account <= (len(self.balance) -1)
+        
+    def transfer(self, account1: int, account2: int, money: int) -> bool:
+        if self._is_valid(account1) and self._is_valid(account2):
+            if self.withdraw(account1, money):
+                self.deposit(account2, money)
+                return True
+        return False
+
+    def deposit(self, account: int, money: int) -> bool:
+        if self._is_valid(account):
+            self.balance[account] += money
+            return True
+        return False
+
+    def withdraw(self, account: int, money: int) -> bool:
+        if self._is_valid(account) and self.balance[account] >= money:
+            self.balance[account] -= money
+            return True
+        return False
+
+
+bank = Bank([10, 100, 20, 50, 30])
+print("Test1: withdraw(3, 10) -> True: success" if bank.withdraw(3, 10) == True else "Test1: Fail")
+print("Test2: transfer(5, 1, 20) -> True: success" if bank.transfer(5, 1, 20) == True else "Test2: Fail")
+print("Test3: deposit(5, 20) -> True: success" if bank.deposit(5, 20) == True else "Test3: Fail")
+print("Test4: transfer(3, 4, 15) -> False: success" if bank.transfer(3, 4, 15) == False else "Test4: Fail")
+print("Test5: withdraw(10, 50) -> False: success" if bank.withdraw(10, 50) == False else "Test5: Fail")
 ```
 
 [↑ Back to Top](#lec-cases)
