@@ -3,6 +3,7 @@
 | **1** | [Two Sum](#1-two-sum) | `Array`, `Hash Table` | 2/10 |
 | **20** | [Valid Parentheses](#20-valid-parentheses) | `String`, `Stack` | 1/10 |
 | **21** | [Merge Two Sorted Lists](#21-merge-two-sorted-lists) | `Linked List`, `Two Pointers`, `Recursion` | 1/10 |
+| **53** | [Maximum Subarray](#53-maximum-subarray) | `Array`, `Divide and Conquer`, `Dynamic Programming` | 2/10 |
 | **70** | [Climbing Stairs](#70-climbing-stairs) | `Dynamic Programming`, `Memoization`, `Math` | 2/10 |
 | **83** | [Remove Duplicates from Sorted List](#83-remove-duplicates-from-sorted-list) | `Linked List` | 1/10 |
 | **100** | [Same Tree](#100-same-tree) | `Tree`, `Depth-First Search`, `Binary Tree` | 2/10 |
@@ -20,18 +21,8 @@
 | **378** | [Kth Smallest Element in a Sorted Matrix](#378-kth-smallest-element-in-a-sorted-matrix) | `Array`, `Binary Search`, `Matrix`, `Heap (Priority Queue)` | 2/10 |
 | **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |
 | **876** | [Middle of the Linked List](#876-middle-of-the-linked-list) | `Linked List`, `Two Pointers` | 1/10 |
-
-
-
-
-
-
-
-
-
 ---
 # LEC Cases
-
 ---
 
 
@@ -47,6 +38,8 @@
 - jupyter_path: ".C:\DataMajor\practice\001Study\playground\group1\217.ipynb"
 - script_path: "C:\DataMajor\practice\001Study\playground\group1\217.py"
 
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ### Solution Idea (Pseudo-solution)
@@ -61,7 +54,6 @@
 **Complexity:**
 * **Time:** $O(n)$
 * **Space:** $O(n)$
-
 ---
 
 ### Solution Code
@@ -80,7 +72,6 @@ print ("Single Test Success" if contains_duplicate([1, 2, 3, 4]) == False else "
 
     
 ```
-
 ---
 
 ## 704: Binary Search
@@ -93,7 +84,9 @@ print ("Single Test Success" if contains_duplicate([1, 2, 3, 4]) == False else "
 - difficulty: 3/10
 - concepts: ["Binary Search", "Array"]
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\704.ipynb"
-- script_path: 
+- script_path:
+
+[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -111,7 +104,6 @@ print ("Single Test Success" if contains_duplicate([1, 2, 3, 4]) == False else "
 **Complexity:**
 * **Time:** $O(\log n)$
 * **Space:** $O(1)$
-
 ---
 
 ### Solution Code
@@ -138,7 +130,6 @@ print("Test1: Odd number of elements:Target exact middle: success" if search([1,
 print("Test2: search fro trget 4 in [1, 2, 3, 4, 5, 6] : success" if search([1, 2, 3, 4, 5, 6], 4) == 3 else "Test2: Fail")
 
 ```
-
 ---
 
 ## 1: Two Sum
@@ -154,6 +145,8 @@ print("Test2: search fro trget 4 in [1, 2, 3, 4, 5, 6] : success" if search([1, 
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def twoSum(self, nums: List[int], target: int) -> List[int]:
 
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ### Solution Idea (Pseudo-solution)
@@ -168,7 +161,6 @@ print("Test2: search fro trget 4 in [1, 2, 3, 4, 5, 6] : success" if search([1, 
 **Complexity:**
 * **Time:** $O(n)$
 * **Space:** $O(n)$
-
 ---
 
 ### Solution Code
@@ -193,9 +185,6 @@ print("Test2: [3,2,4] target=6 -> [1,2]: success" if sol.twoSum([3,2,4], 6) == [
 print("Test3: [3,3] target=6 -> [0,1]: success" if sol.twoSum([3,3], 6) == [0,1] else "Test3: Fail")
 
 ```
-
-
-
 ---
 
 ## 70: Climbing Stairs
@@ -210,6 +199,8 @@ print("Test3: [3,3] target=6 -> [0,1]: success" if sol.twoSum([3,3], 6) == [0,1]
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\70.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def climbStairs(self, n: int) -> int:
+
+[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -226,7 +217,6 @@ print("Test3: [3,3] target=6 -> [0,1]: success" if sol.twoSum([3,3], 6) == [0,1]
 **Complexity:**
 * **Time:** $O(n)$
 * **Space:** $O(1)$
-
 ---
 
 ### Solution Code
@@ -260,7 +250,6 @@ print("Test1: n=4 -> 5: success" if sol.climbStairs(4) == 5 else "Test1: Fail")
 print("Test2: n=3 -> 3: success" if sol.climbStairs(3) == 3 else "Test2: Fail")
 print("Test3: n=1 (edge case) -> 1: success" if sol.climbStairs(1) == 1 else "Test3: Fail")
 ```
-
 ---
 
 ## 100: Same Tree
@@ -276,6 +265,8 @@ print("Test3: n=1 (edge case) -> 1: success" if sol.climbStairs(1) == 1 else "Te
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
 
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ### Solution Idea (Pseudo-solution)
@@ -290,7 +281,6 @@ print("Test3: n=1 (edge case) -> 1: success" if sol.climbStairs(1) == 1 else "Te
 **Complexity:**
 * **Time:** $O(n)$
 * **Space:** $O(n)$
-
 ---
 
 ### Solution Code
@@ -327,7 +317,6 @@ q3 = TreeNode(1, TreeNode(1), TreeNode(2))
 print("Test3: [1,2,1], [1,1,2] -> False: success" if sol.isSameTree(p3, q3) == False else "Test3: Fail")
 
 ```
-
 ---
 
 ## 104: Maximum Depth of Binary Tree
@@ -343,6 +332,8 @@ print("Test3: [1,2,1], [1,1,2] -> False: success" if sol.isSameTree(p3, q3) == F
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def maxDepth(self, root: Optional[TreeNode]) -> int:
 
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ### Solution Idea (Pseudo-solution)
@@ -357,7 +348,6 @@ print("Test3: [1,2,1], [1,1,2] -> False: success" if sol.isSameTree(p3, q3) == F
 **Complexity:**
 * **Time:** $O(n)$
 * **Space:** $O(h)$ where h is the height of the tree (for recursion stack). Or $O(n)$ in the worst case (skewed tree).
-
 ---
 
 ### Solution Code
@@ -396,7 +386,6 @@ root3 = None
 print("Test3: [] (edge case) -> 0: success" if sol.maxDepth(root3) == 0 else "Test3: Fail")
 
 ```
-
 ---
 
 ## 121: Best Time to Buy and Sell Stock
@@ -411,6 +400,8 @@ print("Test3: [] (edge case) -> 0: success" if sol.maxDepth(root3) == 0 else "Te
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\121.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def maxProfit(self, prices: List[int]) -> int:
+
+[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -427,7 +418,6 @@ print("Test3: [] (edge case) -> 0: success" if sol.maxDepth(root3) == 0 else "Te
 **Complexity:**
 * **Time:** $O(n)$
 * **Space:** $O(1)$
-
 ---
 
 ### Solution Code
@@ -460,7 +450,6 @@ print("Test1: [7,1,5,3,6,4] -> 5: success" if sol.maxProfit([7,1,5,3,6,4]) == 5 
 print("Test2: [7,6,4,3,1] -> 0: success" if sol.maxProfit([7,6,4,3,1]) == 0 else "Test2: Fail")
 print("Test3: [2,4,1] (edge case) -> 2: success" if sol.maxProfit([2,4,1]) == 2 else "Test3: Fail")
 ```
-
 ---
 
 ## 206: Reverse Linked List
@@ -475,6 +464,8 @@ print("Test3: [2,4,1] (edge case) -> 2: success" if sol.maxProfit([2,4,1]) == 2 
 - jupyter_path: <<absolute Path... I fill it>>
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+
+[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -491,7 +482,6 @@ print("Test3: [2,4,1] (edge case) -> 2: success" if sol.maxProfit([2,4,1]) == 2 
 **Complexity:**
 * **Time:** $O(n)$
 * **Space:** $O(1)$
-
 ---
 
 ### Solution Code
@@ -549,7 +539,6 @@ print("Test1: [1,2,3,4,5] -> [5,4,3,2,1]: success" if to_list(sol.reverseList(to
 print("Test2: [1,2] -> [2,1]: success" if to_list(sol.reverseList(to_linked_list([1,2]))) == [2,1] else "Test2: Fail")
 print("Test3: [] (edge case) -> []: success" if to_list(sol.reverseList(to_linked_list([]))) == [] else "Test3: Fail")
 ```
-
 ---
 
 ## 21: Merge Two Sorted Lists
@@ -564,6 +553,8 @@ print("Test3: [] (edge case) -> []: success" if to_list(sol.reverseList(to_linke
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\21.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+
+[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -580,7 +571,6 @@ print("Test3: [] (edge case) -> []: success" if to_list(sol.reverseList(to_linke
 **Complexity:**
 * **Time:** $O(n + m)$
 * **Space:** $O(1)$
-
 ---
 
 ### Solution Code
@@ -657,7 +647,6 @@ l5 = to_linked_list([])
 l6 = to_linked_list([0])
 print("Test3: [], [0] -> [0]: success" if to_list(sol.mergeTwoLists(l5, l6)) == [0] else "Test3: Fail")
 ```
-
 ---
 
 ## 83: Remove Duplicates from Sorted List
@@ -672,6 +661,8 @@ print("Test3: [], [0] -> [0]: success" if to_list(sol.mergeTwoLists(l5, l6)) == 
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\83.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+
+[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -688,7 +679,6 @@ print("Test3: [], [0] -> [0]: success" if to_list(sol.mergeTwoLists(l5, l6)) == 
 **Complexity:**
 * **Time:** $O(n)$
 * **Space:** $O(1)$
-
 ---
 
 ### Solution Code
@@ -741,7 +731,6 @@ print("Test2: [1,1,2,3,3] -> [1,2,3]: success" if to_list(sol.deleteDuplicates(t
 print('-' * 100)
 print("Test3: [] (edge case) -> []: success" if to_list(sol.deleteDuplicates(to_linked_list([]))) == [] else "Test3: Fail")
 ```
-
 ---
 
 ## 203: Remove Linked List Elements
@@ -756,6 +745,8 @@ print("Test3: [] (edge case) -> []: success" if to_list(sol.deleteDuplicates(to_
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\203.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
+
+[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -772,7 +763,6 @@ print("Test3: [] (edge case) -> []: success" if to_list(sol.deleteDuplicates(to_
 **Complexity:**
 * **Time:** $O(n)$
 * **Space:** $O(1)$
-
 ---
 
 ### Solution Code
@@ -822,7 +812,6 @@ print("Test1: [1,2,6,3,4,5,6], val=6 -> [1,2,3,4,5]: success" if to_list(sol.rem
 print("Test2: [7,7,7,7], val=7 -> []: success" if to_list(sol.removeElements(to_linked_list([7,7,7,7]), 7)) == [] else "Test2: Fail")
 print("Test3: [] (edge case), val=1 -> []: success" if to_list(sol.removeElements(to_linked_list([]), 1)) == [] else "Test3: Fail")
 ```
-
 ---
 
 ## 141: Linked List Cycle
@@ -837,6 +826,8 @@ print("Test3: [] (edge case), val=1 -> []: success" if to_list(sol.removeElement
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\141.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def hasCycle(self, head: Optional[ListNode]) -> bool:
+
+[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -853,7 +844,6 @@ print("Test3: [] (edge case), val=1 -> []: success" if to_list(sol.removeElement
 **Complexity:**
 * **Time:** $O(n)$
 * **Space:** $O(1)$
-
 ---
 
 ### Solution Code
@@ -917,9 +907,6 @@ def hasCycle(self, head: Optional[ListNode]) -> bool:
     return False
 
 ```
-
-
-
 ---
 
 ## 142: Linked List Cycle II
@@ -935,6 +922,8 @@ def hasCycle(self, head: Optional[ListNode]) -> bool:
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
 
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ### Solution Idea (Pseudo-solution)
@@ -948,7 +937,6 @@ def hasCycle(self, head: Optional[ListNode]) -> bool:
 **Complexity:**
 * **Time:** $O(n)$
 * **Space:** $O(1)$
-
 ---
 
 ### Solution Code
@@ -1025,7 +1013,6 @@ def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
         curr = curr.next
     return None
 ```
-
 ---
 
 ## 876: Middle of the Linked List
@@ -1040,6 +1027,8 @@ def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
 - jupyter_path: <<absolute Path... I fill it>>
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+
+[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -1056,7 +1045,6 @@ def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
 **Complexity:**
 * **Time:** $O(n)$
 * **Space:** $O(1)$
-
 ---
 
 ### Solution Code
@@ -1093,7 +1081,6 @@ print("Test1: [1,2,3,4,5] (odd length) -> [3,4,5]: success" if to_list(sol.middl
 print("Test2: [1,2,3,4,5,6] (even length) -> [4,5,6]: success" if to_list(sol.middleNode(to_linked_list([1,2,3,4,5,6]))) == [4,5,6] else "Test2: Fail")
 print("Test3: [1] (edge case) -> [1]: success" if to_list(sol.middleNode(to_linked_list([1]))) == [1] else "Test3: Fail")
 ```
-
 ---
 ---
 
@@ -1114,6 +1101,8 @@ print("Test3: [1] (edge case) -> [1]: success" if to_list(sol.middleNode(to_link
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def reorderList(self, head: Optional[ListNode]) -> None:
 
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ### Solution Idea (Pseudo-solution)
@@ -1126,7 +1115,6 @@ print("Test3: [1] (edge case) -> [1]: success" if to_list(sol.middleNode(to_link
 **Complexity:**
 * **Time:** $O(n)$
 * **Space:** $O(1)$
-
 ---
 
 ### Solution Code
@@ -1226,9 +1214,7 @@ sol.reorderList(head3)
 print("Test3: [1] (edge case) -> [1]: success" if to_list(head3) == [1] else "Test3: Fail")
 
 ```
-
 ---
-
 
 ---
 ---
@@ -1246,6 +1232,8 @@ print("Test3: [1] (edge case) -> [1]: success" if to_list(head3) == [1] else "Te
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
 
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ### Solution Idea (Pseudo-solution)
@@ -1260,7 +1248,6 @@ print("Test3: [1] (edge case) -> [1]: success" if to_list(head3) == [1] else "Te
 **Complexity:**
 * **Time:** $O(n)$
 * **Space:** $O(h)$ where $h$ is the height of the tree (for the recursion stack).
-
 ---
 
 ### Solution Code
@@ -1316,7 +1303,6 @@ root3 = None
 inverted3 = sol.invertTree(root3)
 print("Test3: [] (edge case) -> []: success" if to_level_order(inverted3) == [] else "Test3: Fail")
 ```
-
 ---
 
 ## 242: Valid Anagram
@@ -1331,6 +1317,8 @@ print("Test3: [] (edge case) -> []: success" if to_level_order(inverted3) == [] 
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\242.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def isAnagram(self, s: str, t: str) -> bool:
+
+[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -1347,7 +1335,6 @@ print("Test3: [] (edge case) -> []: success" if to_level_order(inverted3) == [] 
 **Complexity:**
 * **Time:** $O(n)$ where $n$ is the length of the string.
 * **Space:** $O(1)$ because the hash table is bound by a fixed number of possible characters (e.g., 26 lowercase English letters).
-
 ---
 
 ### Solution Code
@@ -1369,7 +1356,6 @@ print("Test2: s='rat', t='car' -> False: success" if sol.isAnagram("rat", "car")
 print("Test3: s='a', t='ab' (edge case length mismatch) -> False: success" if sol.isAnagram("a", "ab") == False else "Test3: Fail")
 
 ```
-
 ---
 
 ## 378: Kth Smallest Element in a Sorted Matrix
@@ -1384,6 +1370,8 @@ print("Test3: s='a', t='ab' (edge case length mismatch) -> False: success" if so
 - jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\378.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+
+[↑ Back to Top](#lec-cases)
 
 ---
 
@@ -1401,7 +1389,6 @@ print("Test3: s='a', t='ab' (edge case length mismatch) -> False: success" if so
 **Complexity:**
 * **Time:** $O(X + k \log X)$ where $X = \min(n, k)$ for the initial heap build and popping/pushing.
 * **Space:** $O(X)$ for storing up to $X$ elements in the heap.
-
 ---
 
 ### Solution Code
@@ -1422,8 +1409,6 @@ print("Test3: matrix=[[1,2],[1,3]], k=2 -> 1: success" if sol.kthSmallest([[1,2]
 
 
 ```
-
-
 ---
 
 ## 20: Valid Parentheses
@@ -1444,6 +1429,8 @@ print("Test3: matrix=[[1,2],[1,3]], k=2 -> 1: success" if sol.kthSmallest([[1,2]
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def isValid(self, s: str) -> bool:
 
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ### Solution Idea (Pseudo-solution)
@@ -1461,7 +1448,6 @@ print("Test3: matrix=[[1,2],[1,3]], k=2 -> 1: success" if sol.kthSmallest([[1,2]
 **Complexity:**
 * **Time:** $O(n)$ where $n$ is the length of the string `s`.
 * **Space:** $O(n)$ for the stack in the worst case (all opening brackets).
-
 ---
 
 ### Solution Code
@@ -1486,7 +1472,6 @@ print("Test2: s='()[]{}' -> True: success" if sol.isValid("()[]{}") == True else
 print("Test3: s='(]' -> False: success" if sol.isValid("(]") == False else "Test3: Fail")
 print("Test4: s=']' (edge case single close) -> False: success" if sol.isValid("]") == False else "Test4: Fail")
 ```
-
 ---
 
 ## 167: Two Sum II - Input Array Is Sorted
@@ -1508,6 +1493,8 @@ print("Test4: s=']' (edge case single close) -> False: success" if sol.isValid("
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def twoSum(self, numbers: List[int], target: int) -> List[int]:
 
+[↑ Back to Top](#lec-cases)
+
 ---
 
 ### Solution Idea (Pseudo-solution)
@@ -1524,7 +1511,6 @@ print("Test4: s=']' (edge case single close) -> False: success" if sol.isValid("
 **Complexity:**
 * **Time:** $O(n)$ where $n$ is the length of the array.
 * **Space:** $O(1)$ since only two pointers are used.
-
 ---
 
 ### Solution Code
@@ -1555,7 +1541,54 @@ print("Test1: numbers=[2,7,11,15], target=9 -> [1,2]: success" if sol.twoSum([2,
 print("Test2: numbers=[2,3,4], target=6 -> [1,3]: success" if sol.twoSum([2,3,4], 6) == [1,3] else "Test2: Fail")
 print("Test3: numbers=[-1,0], target=-1 (edge case negatives) -> [1,2]: success" if sol.twoSum([-1,0], -1) == [1,2] else "Test3: Fail")
 ```
+---
 
+## 53: Maximum Subarray
+
+### Problem Description
+> Given an integer array `nums`, find the subarray with the largest sum, and return its sum.
+
+- number: 53
+- title: "Maximum Subarray"
+- difficulty: 2/10
+- concepts: ["Array", "Divide and Conquer", "Dynamic Programming"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def maxSubArray(self, nums: List[int]) -> int:
+
+[↑ Back to Top](#lec-cases)
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Kadane's Algorithm (Dynamic programming / Greedy)
+* **Logic:**
+    1. Initialize `max_so_far` and `current_max` to the first element in the array `nums[0]`.
+    2. Iterate through the array starting from the second element (index 1).
+    3. For each element, decide whether it's better to add the current element to the existing sequence of numbers (`current_max + num`), or to start a new sequence from the current element itself (`num`).
+    4. Set `current_max = max(num, current_max + num)`.
+    5. Update `max_so_far` if `current_max` is strictly greater than `max_so_far`.
+    6. Return `max_so_far`.
+
+**Complexity:**
+* **Time:** $O(n)$ where $n$ is the length of the array.
+* **Space:** $O(1)$ since only variable tracking is used.
+---
+
+### Solution Code
+```python
+from typing import List
+
+class Solution(object):
+    def maxSubArray(self, nums: List[int]) -> int:
+        pass
+
+
+sol = Solution()
+print("Test1: nums=[-2,1,-3,4,-1,2,1,-5,4] -> 6: success" if sol.maxSubArray([-2,1,-3,4,-1,2,1,-5,4]) == 6 else "Test1: Fail")
+print("Test2: nums=[1] -> 1: success" if sol.maxSubArray([1]) == 1 else "Test2: Fail")
+print("Test3: nums=[5,4,-1,7,8] -> 23: success" if sol.maxSubArray([5,4,-1,7,8]) == 23 else "Test3: Fail")
+```
 ---
 # Template
 
@@ -1600,7 +1633,6 @@ print("Test3: numbers=[-1,0], target=-1 (edge case negatives) -> [1,2]: success"
 **Complexity:**
 * **Time:** $O(...)$
 * **Space:** $O(...)$
-
 ---
 
 ### Solution Code
@@ -1619,3 +1651,5 @@ print("Test1: <<input>> -> <<expected>>: success" if sol.<<func_name>>(<<args1>>
 print("Test2: <<input>> -> <<expected>>: success" if sol.<<func_name>>(<<args2>>) == <<expected2>> else "Test2: Fail")
 print("Test3: <<edge case>> -> <<expected>>: success" if sol.<<func_name>>(<<args3>>) == <<expected3>> else "Test3: Fail")
 ```
+
+[↑ Back to Top](#lec-cases)
