@@ -1,3 +1,8 @@
+
+---
+# LEC Cases
+---
+
 | # | Problem Title | Concepts | Difficulty | 
 | :--- | :--- | :--- | :--- | 
 | **1** | [Two Sum](#1-two-sum) | `Array`, `Hash Table` | 2/10 |
@@ -21,9 +26,7 @@
 | **378** | [Kth Smallest Element in a Sorted Matrix](#378-kth-smallest-element-in-a-sorted-matrix) | `Array`, `Binary Search`, `Matrix`, `Heap (Priority Queue)` | 2/10 |
 | **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |
 | **876** | [Middle of the Linked List](#876-middle-of-the-linked-list) | `Linked List`, `Two Pointers` | 1/10 |
----
-# LEC Cases
----
+
 
 
 ## 217: Contains Duplicate
