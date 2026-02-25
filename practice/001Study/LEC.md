@@ -529,7 +529,7 @@ print("Test3: [] (edge case) -> []: success" if to_list(sol.reverseList(to_linke
 - title: "Merge Two Sorted Lists"
 - difficulty: 1/10
 - concepts: ["Linked List", "Two Pointers", "Recursion"]
-- jupyter_path: <<absolute Path... I fill it>>
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\21.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
 
@@ -559,10 +559,42 @@ class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
+r"""
+Merge Two Sorted Lists
+----------------------
+Strategy: dummy head + two-pointer traversal
 
+Create a dummy node as a fixed anchor for the result list.
+Use curr to build the merged list by advancing through it node by node.
+
+Each iteration, compare the front of list1 vs list2 — attach the smaller
+node to curr.next, advance that list forward, then advance curr.
+
+When one list is exhausted, the other is already sorted — attach it whole.
+
+Return dummy.next to skip the empty placeholder and get the real head.
+
+Pattern: dummy/curr is the standard linked list construction pattern.
+         dummy stays fixed. curr walks. dummy.next is always your answer.
+"""
 class Solution(object):
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        pass
+        if not list1 and not list2 : return None
+        if not list1: return list2
+        if not list2: return list1
+        #Now edge cases are handled. We have two lists to merge
+        dummy = ListNode()
+        curr = dummy
+        while list1 and list2:
+            if list1.val <= list2.val:
+                curr.next = list1
+                list1 = list1.next
+            else:
+                curr.next = list2
+                list2 = list2.next
+            curr = curr.next        # ← advance curr
+        curr.next = list1 or list2  # ← attach remainder
+        return dummy.next           # ← skip the dummy        
 
 
 def to_list(head: Optional[ListNode]) -> list:
