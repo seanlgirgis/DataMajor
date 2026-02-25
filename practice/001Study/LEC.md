@@ -3,9 +3,11 @@
 | **1** | [Two Sum](#1-two-sum) | `Array`, `Hash Table` | 2/10 |
 | **21** | [Merge Two Sorted Lists](#21-merge-two-sorted-lists) | `Linked List`, `Two Pointers`, `Recursion` | 1/10 |
 | **70** | [Climbing Stairs](#70-climbing-stairs) | `Dynamic Programming`, `Memoization`, `Math` | 2/10 |
+| **83** | [Remove Duplicates from Sorted List](#83-remove-duplicates-from-sorted-list) | `Linked List` | 1/10 |
 | **100** | [Same Tree](#100-same-tree) | `Tree`, `Depth-First Search`, `Binary Tree` | 2/10 |
 | **104** | [Maximum Depth of Binary Tree](#104-maximum-depth-of-binary-tree) | `Tree`, `Depth-First Search`, `Breadth-First Search` | 2/10 |
 | **121** | [Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock) | `Array`, `Dynamic Programming` | 1/10 |
+| **203** | [Remove Linked List Elements](#203-remove-linked-list-elements) | `Linked List`, `Recursion` | 1/10 |
 | **206** | [Reverse Linked List](#206-reverse-linked-list) | `Linked List`, `Recursion` | 1/10 |
 | **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | 
 | **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |  
@@ -624,6 +626,159 @@ print("Test2: [], [] (edge case) -> []: success" if to_list(sol.mergeTwoLists(l3
 l5 = to_linked_list([])
 l6 = to_linked_list([0])
 print("Test3: [], [0] -> [0]: success" if to_list(sol.mergeTwoLists(l5, l6)) == [0] else "Test3: Fail")
+```
+
+---
+
+## 83: Remove Duplicates from Sorted List
+
+### Problem Description
+> Given the `head` of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
+
+- number: 83
+- title: "Remove Duplicates from Sorted List"
+- difficulty: 1/10
+- concepts: ["Linked List"]
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\83.ipynb"
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** One Pointer Traversal — Loop through the list and skip over next nodes that share the same value as the current node.
+* **Logic:**
+    1. Initialize `current` pointer to `head`.
+    2. While `current` and `current.next` are not `None`:
+    3. If `current.val == current.next.val`, a duplicate is found.
+    4. Bypass the duplicate by setting `current.next` to `current.next.next`.
+    5. Else, the values are different, so simply advance `current` to `current.next`.
+    6. Return the original `head`.
+
+**Complexity:**
+* **Time:** $O(n)$
+* **Space:** $O(1)$
+
+---
+
+### Solution Code
+```python
+from typing import Optional
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+r"""
+Traverse  the list while curr and curr.next: To avoid erring 
+if curr.val = curr.next.val == duplicat.
+then curr.next = curr.next.next == advance to next
+else .. Just advance once
+
+"""
+class Solution(object):
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+
+        curr = head
+        while curr and curr.next:
+            if (curr.val == curr.next.val): # a duplicat is found
+                curr.next = curr.next.next
+            else:
+                curr = curr.next
+        return head
+
+
+def to_list(head: Optional[ListNode]) -> list:
+    res = []
+    while head:
+        res.append(head.val)
+        head = head.next
+    return res
+
+def to_linked_list(lst: list) -> Optional[ListNode]:
+    dummy = ListNode(0)
+    curr = dummy
+    for val in lst:
+        curr.next = ListNode(val)
+        curr = curr.next
+    return dummy.next
+
+
+sol = Solution()
+print("Test1: [1,1,2] -> [1,2]: success" if to_list(sol.deleteDuplicates(to_linked_list([1,1,2]))) == [1,2] else "Test1: Fail")
+print('-' * 100)
+print("Test2: [1,1,2,3,3] -> [1,2,3]: success" if to_list(sol.deleteDuplicates(to_linked_list([1,1,2,3,3]))) == [1,2,3] else "Test2: Fail")
+print('-' * 100)
+print("Test3: [] (edge case) -> []: success" if to_list(sol.deleteDuplicates(to_linked_list([]))) == [] else "Test3: Fail")
+```
+
+---
+
+## 203: Remove Linked List Elements
+
+### Problem Description
+> Given the `head` of a linked list and an integer `val`, remove all the nodes of the linked list that has `Node.val == val`, and return the new head.
+
+- number: 203
+- title: "Remove Linked List Elements"
+- difficulty: 1/10
+- concepts: ["Linked List", "Recursion"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Dummy Head + Traversal — Use a dummy node pointing to the head to cleanly handle edge cases where the head itself needs to be removed.
+* **Logic:**
+    1. Create a `dummy` node and set its `next` to `head`.
+    2. Initialize a `current` pointer starting at `dummy`.
+    3. Loop while `current.next` is not `None`:
+    4. If `current.next.val == val`, we need to remove it. Update `current.next` to `current.next.next` (bypassing the target node).
+    5. Else, advance `current` to `current.next`.
+    6. Return `dummy.next` as the new head.
+
+**Complexity:**
+* **Time:** $O(n)$
+* **Space:** $O(1)$
+
+---
+
+### Solution Code
+```python
+from typing import Optional
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution(object):
+    def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
+        pass
+
+
+def to_list(head: Optional[ListNode]) -> list:
+    res = []
+    while head:
+        res.append(head.val)
+        head = head.next
+    return res
+
+def to_linked_list(lst: list) -> Optional[ListNode]:
+    dummy = ListNode(0)
+    curr = dummy
+    for val in lst:
+        curr.next = ListNode(val)
+        curr = curr.next
+    return dummy.next
+
+
+sol = Solution()
+print("Test1: [1,2,6,3,4,5,6], val=6 -> [1,2,3,4,5]: success" if to_list(sol.removeElements(to_linked_list([1,2,6,3,4,5,6]), 6)) == [1,2,3,4,5] else "Test1: Fail")
+print("Test2: [7,7,7,7], val=7 -> []: success" if to_list(sol.removeElements(to_linked_list([7,7,7,7]), 7)) == [] else "Test2: Fail")
+print("Test3: [] (edge case), val=1 -> []: success" if to_list(sol.removeElements(to_linked_list([]), 1)) == [] else "Test3: Fail")
 ```
 
 ---

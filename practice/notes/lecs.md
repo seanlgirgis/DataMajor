@@ -113,6 +113,32 @@ class Solution:
         return one_step_before
 ```
 
+# LEC00100 Same Tree
+## Using recursive solution. Need to memorize case almost 
+
+```python
+class Solution:
+    # DFS Recursive comparison
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        # Base Case 1: If both are None, we reached the end of identical branches
+        if not p and not q:
+            return True
+        
+        # Base Case 2: If only one is None, there is a structural imbalance
+        if not p or not q:
+            return False
+        
+        # Base Case 3: If the values at the current nodes are different
+        if p.val != q.val:
+            return False
+            
+        # Recursive Step: Check both left branches and right branches
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+
+
+```
+
+
 
 # LC0074 Search a 2D Matrix
 ## matrix is sorted
