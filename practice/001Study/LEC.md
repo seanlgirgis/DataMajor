@@ -13,6 +13,7 @@
 | **203** | [Remove Linked List Elements](#203-remove-linked-list-elements) | `Linked List`, `Recursion` | 1/10 |
 | **206** | [Reverse Linked List](#206-reverse-linked-list) | `Linked List`, `Recursion` | 1/10 |
 | **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | 
+| **226** | [Invert Binary Tree](#226-invert-binary-tree) | `Tree`, `Depth-First Search`, `Binary Tree` | 1/10 |
 | **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |
 | **876** | [Middle of the Linked List](#876-middle-of-the-linked-list) | `Linked List`, `Two Pointers` | 1/10 |
 
@@ -1224,6 +1225,93 @@ print("Test3: [1] (edge case) -> [1]: success" if to_list(head3) == [1] else "Te
 
 ---
 
+
+---
+---
+
+## 226: Invert Binary Tree
+
+### Problem Description
+> Given the `root` of a binary tree, invert the tree, and return its root.
+
+- number: 226
+- title: "Invert Binary Tree"
+- difficulty: 1/10
+- concepts: ["Tree", "Depth-First Search", "Binary Tree"]
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group1\226.ipynb"
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Depth-First Search (DFS) / Recursion
+* **Logic:**
+    1. If `root` is `None`, return `None` (base case).
+    2. Swap the left and right children of the current `root` node (`root.left`, `root.right` = `root.right`, `root.left`).
+    3. Recursively call `invertTree` on the new `root.left`.
+    4. Recursively call `invertTree` on the new `root.right`.
+    5. Return the original `root` node.
+
+**Complexity:**
+* **Time:** $O(n)$
+* **Space:** $O(h)$ where $h$ is the height of the tree (for the recursion stack).
+
+---
+
+### Solution Code
+```python
+from typing import Optional
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution(object):
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if root is None : return None
+        root.left, root.right = root.right, root.left
+        self.invertTree(root.right)   
+        self.invertTree(root.left) 
+        return root
+
+
+def to_level_order(root: Optional[TreeNode]) -> list:
+    if not root: return []
+    res = []
+    queue = [root]
+    while queue:
+        node = queue.pop(0)
+        if node:
+            res.append(node.val)
+            queue.append(node.left)
+            queue.append(node.right)
+        else:
+            res.append(None)
+    # Remove trailing Nones for cleaner equality checks
+    while res and res[-1] is None:
+        res.pop()
+    return res
+
+sol = Solution()
+
+# Test 1
+root1 = TreeNode(4, TreeNode(2, TreeNode(1), TreeNode(3)), TreeNode(7, TreeNode(6), TreeNode(9)))
+inverted1 = sol.invertTree(root1)
+print("Test1: [4,2,7,1,3,6,9] -> [4,7,2,9,6,3,1]: success" if to_level_order(inverted1) == [4,7,2,9,6,3,1] else "Test1: Fail")
+
+# Test 2
+root2 = TreeNode(2, TreeNode(1), TreeNode(3))
+inverted2 = sol.invertTree(root2)
+print("Test2: [2,1,3] -> [2,3,1]: success" if to_level_order(inverted2) == [2,3,1] else "Test2: Fail")
+
+# Test 3
+root3 = None
+inverted3 = sol.invertTree(root3)
+print("Test3: [] (edge case) -> []: success" if to_level_order(inverted3) == [] else "Test3: Fail")
+```
 
 ---
 # Template
