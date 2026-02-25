@@ -3,6 +3,7 @@
 | **1** | [Two Sum](#1-two-sum) | `Array`, `Hash Table` | 2/10 |
 | **70** | [Climbing Stairs](#70-climbing-stairs) | `Dynamic Programming`, `Memoization`, `Math` | 2/10 |
 | **100** | [Same Tree](#100-same-tree) | `Tree`, `Depth-First Search`, `Binary Tree` | 2/10 |
+| **104** | [Maximum Depth of Binary Tree](#104-maximum-depth-of-binary-tree) | `Tree`, `Depth-First Search`, `Breadth-First Search` | 2/10 |
 | **217** | [Contains Duplicate](#217-contains-duplicate) | `Array`, `Hash Set` | 1/10 | 
 | **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |  
 
@@ -311,6 +312,64 @@ p3 = TreeNode(1, TreeNode(2), TreeNode(1))
 q3 = TreeNode(1, TreeNode(1), TreeNode(2))
 print("Test3: [1,2,1], [1,1,2] -> False: success" if sol.isSameTree(p3, q3) == False else "Test3: Fail")
 
+```
+
+---
+
+## 104: Maximum Depth of Binary Tree
+
+### Problem Description
+> Given the `root` of a binary tree, return its maximum depth. A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+- number: 104
+- title: "Maximum Depth of Binary Tree"
+- difficulty: 2/10
+- concepts: ["Tree", "Depth-First Search", "Breadth-First Search"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def maxDepth(self, root: Optional[TreeNode]) -> int:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Depth-First Search (Recursion) — the max depth of a tree is 1 plus the max depth of its deepest subtree.
+* **Logic:**
+    1. If `root` is `None`, return `0` (depth is 0).
+    2. Recursively call `maxDepth` on `root.left`.
+    3. Recursively call `maxDepth` on `root.right`.
+    4. Calculate the maximum of the two depths.
+    5. Return the maximum depth computed plus `1` (for the current node).
+
+**Complexity:**
+* **Time:** $O(n)$
+* **Space:** $O(h)$ where h is the height of the tree (for recursion stack). Or $O(n)$ in the worst case (skewed tree).
+
+---
+
+### Solution Code
+```python
+from typing import Optional
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution(object):
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        pass
+
+
+sol = Solution()
+root1 = TreeNode(3, TreeNode(9), TreeNode(20, TreeNode(15), TreeNode(7)))
+print("Test1: [3,9,20,null,null,15,7] -> 3: success" if sol.maxDepth(root1) == 3 else "Test1: Fail")
+
+root2 = TreeNode(1, None, TreeNode(2))
+print("Test2: [1,null,2] -> 2: success" if sol.maxDepth(root2) == 2 else "Test2: Fail")
+
+root3 = None
+print("Test3: [] (edge case) -> 0: success" if sol.maxDepth(root3) == 0 else "Test3: Fail")
 ```
 
 ---
