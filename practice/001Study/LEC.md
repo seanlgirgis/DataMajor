@@ -1555,7 +1555,7 @@ print("Test3: numbers=[-1,0], target=-1 (edge case negatives) -> [1,2]: success"
 - title: "Maximum Subarray"
 - difficulty: 2/10
 - concepts: ["Array", "Divide and Conquer", "Dynamic Programming"]
-- jupyter_path: <<absolute Path... I fill it>>
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group2\53.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def maxSubArray(self, nums: List[int]) -> int:
 
@@ -1582,7 +1582,17 @@ from typing import List
 
 class Solution(object):
     def maxSubArray(self, nums: List[int]) -> int:
-        pass
+        max_so_far , current_max = nums[0], nums[0]
+        for i in range(1, len(nums)):
+            if (current_max + nums[i]) > nums[i] :           # keeping the current window condition is about 
+                                                            #if adding the current number to the current max
+                                                          # is actually bigger than the current number itself
+                current_max += nums[i]
+            else:
+                current_max =  nums[i]
+            max_so_far = max(max_so_far, current_max)
+        return max_so_far
+
 
 sol = Solution()
 print("Test1: nums=[-2,1,-3,4,-1,2,1,-5,4] -> 6: success" if sol.maxSubArray([-2,1,-3,4,-1,2,1,-5,4]) == 6 else "Test1: Fail")
