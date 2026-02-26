@@ -18,6 +18,7 @@
 | **102** | [Binary Tree Level Order Traversal](#102-binary-tree-level-order-traversal) | `Tree`, `Breadth-First Search`, `Binary Tree` | 2/10 |
 | **104** | [Maximum Depth of Binary Tree](#104-maximum-depth-of-binary-tree) | `Tree`, `Depth-First Search`, `Breadth-First Search` | 2/10 |
 | **121** | [Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock) | `Array`, `Dynamic Programming` | 1/10 |
+| **128** | [Longest Consecutive Sequence](#128-longest-consecutive-sequence) | `Array`, `Hash Table`, `Union Find` | 2/10 |
 | **141** | [Linked List Cycle](#141-linked-list-cycle) | `Hash Table`, `Linked List`, `Two Pointers` | 1/10 |
 | **142** | [Linked List Cycle II](#142-linked-list-cycle-ii) | `Hash Table`, `Linked List`, `Two Pointers` | 2/10 |
 | **143** | [Reorder List](#143-reorder-list) | `Linked List`, `Two Pointers`, `Stack` | 2/10 |
@@ -2366,6 +2367,62 @@ class Solution(object):
 sol = Solution()
 print("Test1: matrix=[[1,3,5,7],[10,11,16,20],[23,30,34,60]], target=3 -> True: success" if sol.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 3) == True else "Test1: Fail")
 print("Test2: matrix=[[1,3,5,7],[10,11,16,20],[23,30,34,60]], target=13 -> False: success" if sol.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 13) == False else "Test2: Fail")
+```
+
+[↑ Back to Top](#lec-cases)
+
+[↑ Back to Top](#lec-cases)
+
+---
+
+## 128: Longest Consecutive Sequence
+
+### Problem Description
+> Given an unsorted array of integers `nums`, return the length of the longest consecutive elements sequence.
+>
+> You must write an algorithm that runs in `O(n)` time.
+
+- number: 128
+- title: "Longest Consecutive Sequence"
+- difficulty: 2/10
+- concepts: ["Array", "Hash Table", "Union Find"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def longestConsecutive(self, nums: List[int]) -> int:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Hash Set (or Union Find)
+* **Logic:**
+    1. To achieve $O(n)$ time complexity, we cannot sort the array first ($O(n \log n)$). Instead, we can use a Hash Set for $O(1)$ lookups.
+    2. Convert `nums` into a `set` named `num_set`.
+    3. Initialize a variable `longest_streak = 0`.
+    4. Iterate through each `num` in `num_set`.
+    5. **Crucial Optimization:** We only want to start counting a sequence from the *beginning* of that sequence. We know a number is the start of a sequence if `num - 1` is *not* in `num_set`.
+    6. If `num` is a start:
+        * Initialize `current_num = num` and `current_streak = 1`.
+        * While `current_num + 1` is in `num_set`, increment both `current_num` and `current_streak`.
+        * Update `longest_streak = max(longest_streak, current_streak)`.
+    7. Return `longest_streak`.
+
+**Complexity:**
+* **Time:** $O(n)$ because we only iterate through the while loop when we find the *start* of a sequence, meaning each number in the array is visited at most twice (once in the outer loop, once in the inner while loop).
+* **Space:** $O(n)$ to store the set.
+---
+
+### Solution Code
+```python
+from typing import List
+
+class Solution(object):
+    def longestConsecutive(self, nums: List[int]) -> int:
+        pass
+
+
+sol = Solution()
+print("Test1: nums=[100,4,200,1,3,2] -> 4: success" if sol.longestConsecutive([100,4,200,1,3,2]) == 4 else "Test1: Fail")
+print("Test2: nums=[0,3,7,2,5,8,4,6,0,1] -> 9: success" if sol.longestConsecutive([0,3,7,2,5,8,4,6,0,1]) == 9 else "Test2: Fail")
 ```
 
 [↑ Back to Top](#lec-cases)
