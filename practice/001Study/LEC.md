@@ -6,6 +6,7 @@
 | # | Problem Title | Concepts | Difficulty | 
 | :--- | :--- | :--- | :--- | 
 | **1** | [Two Sum](#1-two-sum) | `Array`, `Hash Table` | 2/10 |
+| **3** | [Longest Substring Without Repeating Characters](#3-longest-substring-without-repeating-characters) | `Hash Table`, `String`, `Sliding Window` | 2/10 |
 | **20** | [Valid Parentheses](#20-valid-parentheses) | `String`, `Stack` | 1/10 |
 | **21** | [Merge Two Sorted Lists](#21-merge-two-sorted-lists) | `Linked List`, `Two Pointers`, `Recursion` | 1/10 |
 | **49** | [Group Anagrams](#49-group-anagrams) | `Array`, `Hash Table`, `String`, `Sorting` | 2/10 |
@@ -2330,7 +2331,7 @@ print("Test2: matrix=[[0,1,2,0],[3,4,5,2],[1,3,1,5]] -> [[0,0,0,0],[0,4,5,0],[0,
 - title: "Search a 2D Matrix"
 - difficulty: 2/10
 - concepts: ["Array", "Binary Search", "Matrix"]
-- jupyter_path: <<absolute Path... I fill it>>
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group2\74.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
 
@@ -2359,9 +2360,33 @@ print("Test2: matrix=[[0,1,2,0],[3,4,5,2],[1,3,1,5]] -> [[0,0,0,0],[0,4,5,0],[0,
 ```python
 from typing import List
 
-class Solution(object):
+class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        pass
+        if not matrix or not matrix[0]:
+            return False
+            
+        rows, cols = len(matrix), len(matrix[0])
+        n = rows * cols
+        left, right = 0, n - 1
+        
+        def trans(offset: int) -> tuple[int, int]:
+            return (offset // cols, offset % cols)
+        
+        while left <= right:                  # ← safer condition (includes equality)
+            mid = left + (right - left) // 2  # ← avoids potential overflow (good habit)
+            r, c = trans(mid)
+            mid_val = matrix[r][c]
+            
+            if mid_val == target:
+                return True
+            elif target > mid_val:
+                left = mid + 1
+            else:
+                right = mid - 1
+                
+        return False
+                
+            
 
 
 sol = Solution()
@@ -2386,7 +2411,7 @@ print("Test2: matrix=[[1,3,5,7],[10,11,16,20],[23,30,34,60]], target=13 -> False
 - title: "Longest Consecutive Sequence"
 - difficulty: 2/10
 - concepts: ["Array", "Hash Table", "Union Find"]
-- jupyter_path: <<absolute Path... I fill it>>
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group2\128.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def longestConsecutive(self, nums: List[int]) -> int:
 
@@ -2413,16 +2438,92 @@ print("Test2: matrix=[[1,3,5,7],[10,11,16,20],[23,30,34,60]], target=13 -> False
 
 ### Solution Code
 ```python
+#LEC 128
 from typing import List
 
 class Solution(object):
     def longestConsecutive(self, nums: List[int]) -> int:
-        pass
-
+        num_set = set()
+        for num in nums:num_set.add(num)
+        current_max:int = 0
+        max_cons = 0
+        for num in nums:
+            if (num-1) not in num_set:
+                #start of a sequence
+                current_streak = 1
+                anum = num + 1
+                while anum in num_set:
+                    current_streak += 1
+                    anum += 1
+                max_cons = max(max_cons, current_streak)
+        return max_cons
+                    
 
 sol = Solution()
 print("Test1: nums=[100,4,200,1,3,2] -> 4: success" if sol.longestConsecutive([100,4,200,1,3,2]) == 4 else "Test1: Fail")
 print("Test2: nums=[0,3,7,2,5,8,4,6,0,1] -> 9: success" if sol.longestConsecutive([0,3,7,2,5,8,4,6,0,1]) == 9 else "Test2: Fail")
+```
+
+[↑ Back to Top](#lec-cases)
+
+[↑ Back to Top](#lec-cases)
+
+---
+
+## 3: Longest Substring Without Repeating Characters
+
+### Problem Description
+> Given a string `s`, find the length of the longest substring without repeating characters.
+
+- number: 3
+- title: "Longest Substring Without Repeating Characters"
+- difficulty: 2/10
+- concepts: ["Hash Table", "String", "Sliding Window"]
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group3\LEC3.ipynb"
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def lengthOfLongestSubstring(self, s: str) -> int:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Sliding Window (with Hash Map/Set for character tracking)
+* **Logic:**
+    1. Initialize a `left` pointer to `0`, and a variable `max_length` to `0`.
+    2. Initialize a dictionary `char_index_map` to store the most recent index of each character.
+    3. Iterate through the string `s` with a `right` pointer (from `0` to `len(s)-1`).
+    4. If the character `s[right]` is already in `char_index_map` AND its index is $\ge$ `left`, it means we've found a repeat within our current window.
+    5. We must shrink the window by moving `left` to `char_index_map[s[right]] + 1`.
+    6. Update `char_index_map[s[right]] = right`.
+    7. Update `max_length = max(max_length, right - left + 1)`.
+    8. Return `max_length`.
+
+**Complexity:**
+* **Time:** $O(n)$ where $n$ is the length of the string `s`.
+* **Space:** $O(\min(m, n))$ where $m$ is the size of the character set (e.g., 128 or 256 for ASCII).
+---
+
+### Solution Code
+```python
+#LEC03
+class Solution(object):
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        longestsub: int = 0
+        seen= set()
+        left, right = 0, 0
+        for right,ch in enumerate(s):
+            #if it is a repeating character
+            if ch in seen:
+                while seen and ( ch in seen):
+                    seen.discard(s[left])
+                    left+=1 
+            seen.add(ch)
+            longestsub = max(longestsub, right - left + 1)
+        return longestsub
+sol = Solution()
+print("Test1: s='abcabcbb' -> 3: success" if sol.lengthOfLongestSubstring("abcabcbb") == 3 else "Test1: Fail")
+print("Test2: s='bbbbb' -> 1: success" if sol.lengthOfLongestSubstring("bbbbb") == 1 else "Test2: Fail")
+print("Test3: s='pwwkew' -> 3: success" if sol.lengthOfLongestSubstring("pwwkew") == 3 else "Test3: Fail")
+print("Test4: s='' -> 0: success" if sol.lengthOfLongestSubstring("") == 0 else "Test4: Fail")
 ```
 
 [↑ Back to Top](#lec-cases)
