@@ -12,6 +12,7 @@
 | **53** | [Maximum Subarray](#53-maximum-subarray) | `Array`, `Divide and Conquer`, `Dynamic Programming` | 2/10 |
 | **70** | [Climbing Stairs](#70-climbing-stairs) | `Dynamic Programming`, `Memoization`, `Math` | 2/10 |
 | **73** | [Set Matrix Zeroes](#73-set-matrix-zeroes) | `Array`, `Hash Table`, `Matrix` | 2/10 |
+| **74** | [Search a 2D Matrix](#74-search-a-2d-matrix) | `Array`, `Binary Search`, `Matrix` | 2/10 |
 | **83** | [Remove Duplicates from Sorted List](#83-remove-duplicates-from-sorted-list) | `Linked List` | 1/10 |
 | **100** | [Same Tree](#100-same-tree) | `Tree`, `Depth-First Search`, `Binary Tree` | 2/10 |
 | **102** | [Binary Tree Level Order Traversal](#102-binary-tree-level-order-traversal) | `Tree`, `Breadth-First Search`, `Binary Tree` | 2/10 |
@@ -2246,7 +2247,7 @@ print("Test3: strs=['a'] -> [['a']]: success" if sol.groupAnagrams(["a"]) == [["
 - title: "Set Matrix Zeroes"
 - difficulty: 2/10
 - concepts: ["Array", "Hash Table", "Matrix"]
-- jupyter_path: <<absolute Path... I fill it>>
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group2\73.ipynb"
 - script_path: <<absolute Path... I fill it>>
 - function_signature: def setZeroes(self, matrix: List[List[int]]) -> None:
 
@@ -2270,14 +2271,28 @@ print("Test3: strs=['a'] -> [['a']]: success" if sol.groupAnagrams(["a"]) == [["
 
 ### Solution Code
 ```python
+#LEC 73
 from typing import List
 
 class Solution(object):
     def setZeroes(self, matrix: List[List[int]]) -> None:
-        """
-        Do not return anything, modify matrix in-place instead.
-        """
-        pass
+        rowsMarker: List[int] = [1]* len(matrix)
+        colsMarker: List[int] = [1]* len(matrix[0])
+        for r in range(len(matrix)):
+            for c in range(len(matrix[0])):
+                if matrix[r][c] == 0:
+                    rowsMarker[r] = 0
+                    colsMarker[c] = 0
+        for i, val in enumerate(rowsMarker):
+            if val == 0:
+                for c in range(len(matrix[0])):
+                    matrix[i][c] = 0
+                    
+        for i, val in enumerate(colsMarker):
+            if val == 0:
+                for r in range(len(matrix)):
+                    matrix[r][i] = 0        
+        return
 
 
 sol = Solution()
@@ -2291,6 +2306,66 @@ print("Test1: matrix=[[1,1,1],[1,0,1],[1,1,1]] -> [[1,0,1],[0,0,0],[1,0,1]]: suc
 matrix2 = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
 sol.setZeroes(matrix2)
 print("Test2: matrix=[[0,1,2,0],[3,4,5,2],[1,3,1,5]] -> [[0,0,0,0],[0,4,5,0],[0,3,1,0]]: success" if matrix2 == [[0,0,0,0],[0,4,5,0],[0,3,1,0]] else "Test2: Fail")
+```
+
+[↑ Back to Top](#lec-cases)
+
+[↑ Back to Top](#lec-cases)
+
+---
+
+## 74: Search a 2D Matrix
+
+### Problem Description
+> You are given an `m x n` integer matrix `matrix` with the following two properties:
+> - Each row is sorted in non-decreasing order.
+> - The first integer of each row is greater than the last integer of the previous row.
+>
+> Given an integer `target`, return `true` if `target` is in `matrix` or `false` otherwise.
+>
+> You must write a solution in `O(log(m * n))` time complexity.
+
+- number: 74
+- title: "Search a 2D Matrix"
+- difficulty: 2/10
+- concepts: ["Array", "Binary Search", "Matrix"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Binary Search (treating the 2D matrix as a 1D array)
+* **Logic:**
+    1. Since the matrix is strictly sorted, we can conceptually flatten it into a 1D array of length `m * n`.
+    2. We can perform a standard binary search on this conceptual 1D array.
+    3. Initialize `left = 0` and `right = m * n - 1`.
+    4. While `left <= right`:
+        * Calculate `mid = left + (right - left) // 2`.
+        * Map the 1D index `mid` back to 2D coordinates: `r = mid // n` and `c = mid % n`.
+        * If `matrix[r][c] == target`, return `True`.
+        * If `matrix[r][c] < target`, shrink the search space to the right: `left = mid + 1`.
+        * If `matrix[r][c] > target`, shrink the search space to the left: `right = mid - 1`.
+    5. If the loop completes and we haven't found the target, return `False`.
+
+**Complexity:**
+* **Time:** $O(\log(m \cdot n))$ because we perform standard binary search over `m * n` elements.
+* **Space:** $O(1)$ since we are only using a few pointers and variables.
+---
+
+### Solution Code
+```python
+from typing import List
+
+class Solution(object):
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        pass
+
+
+sol = Solution()
+print("Test1: matrix=[[1,3,5,7],[10,11,16,20],[23,30,34,60]], target=3 -> True: success" if sol.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 3) == True else "Test1: Fail")
+print("Test2: matrix=[[1,3,5,7],[10,11,16,20],[23,30,34,60]], target=13 -> False: success" if sol.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 13) == False else "Test2: Fail")
 ```
 
 [↑ Back to Top](#lec-cases)
