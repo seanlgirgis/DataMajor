@@ -8,8 +8,10 @@
 | **1** | [Two Sum](#1-two-sum) | `Array`, `Hash Table` | 2/10 |
 | **20** | [Valid Parentheses](#20-valid-parentheses) | `String`, `Stack` | 1/10 |
 | **21** | [Merge Two Sorted Lists](#21-merge-two-sorted-lists) | `Linked List`, `Two Pointers`, `Recursion` | 1/10 |
+| **49** | [Group Anagrams](#49-group-anagrams) | `Array`, `Hash Table`, `String`, `Sorting` | 2/10 |
 | **53** | [Maximum Subarray](#53-maximum-subarray) | `Array`, `Divide and Conquer`, `Dynamic Programming` | 2/10 |
 | **70** | [Climbing Stairs](#70-climbing-stairs) | `Dynamic Programming`, `Memoization`, `Math` | 2/10 |
+| **73** | [Set Matrix Zeroes](#73-set-matrix-zeroes) | `Array`, `Hash Table`, `Matrix` | 2/10 |
 | **83** | [Remove Duplicates from Sorted List](#83-remove-duplicates-from-sorted-list) | `Linked List` | 1/10 |
 | **100** | [Same Tree](#100-same-tree) | `Tree`, `Depth-First Search`, `Binary Tree` | 2/10 |
 | **102** | [Binary Tree Level Order Traversal](#102-binary-tree-level-order-traversal) | `Tree`, `Breadth-First Search`, `Binary Tree` | 2/10 |
@@ -2170,6 +2172,125 @@ class Solution:
 sol = Solution()
 print("Test1: nums1=[4,1,2], nums2=[1,3,4,2] -> [-1,3,-1]: success" if sol.nextGreaterElement([4,1,2], [1,3,4,2]) == [-1,3,-1] else "Test1: Fail")
 print("Test2: nums1=[2,4], nums2=[1,2,3,4] -> [3,-1]: success" if sol.nextGreaterElement([2,4], [1,2,3,4]) == [3,-1] else "Test2: Fail")
+```
+
+[↑ Back to Top](#lec-cases)
+
+---
+
+## 49: Group Anagrams
+
+### Problem Description
+> Given an array of strings `strs`, group the anagrams together. You can return the answer in any order.
+>
+> An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+- number: 49
+- title: "Group Anagrams"
+- difficulty: 2/10
+- concepts: ["Array", "Hash Table", "String", "Sorting"]
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group2\49.ipynb"
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Hash Map with Sorted String as Key (or Character Count as Key)
+* **Logic:**
+    1. Two strings are anagrams if and only if their sorted strings are exactly the same (or their character counts are the same).
+    2. We can use a hash map `anagrams` mapping a string representation to a list of original strings.
+    3. Iterate through each string `s` in `strs`.
+    4. Sort the characters of `s` and join them back to form a sorted string (e.g., "eat" -> "aet").
+    5. Check if this sorted string exists as a key in `anagrams`.
+    6. If it does not exist, create it with an empty list.
+    7. Append the original string `s` to the list corresponding to the sorted string key.
+    8. Once all strings are processed, return the values of the hash map as a list of lists.
+    *(Alternatively, use a tuple of 26 character counts as the key for $O(NK)$ instead of $O(NK \log K)$)*
+
+**Complexity:**
+* **Time:** $O(N \cdot K \log K)$ where $N$ is the number of strings and $K$ is the maximum length of a string, due to sorting each string.
+* **Space:** $O(N \cdot K)$ to store the strings in the hash map.
+---
+
+### Solution Code
+```python
+import collections
+from typing import List
+from collections import defaultdict
+class Solution(object):
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+
+        data: defaultdict[str, list[str]] = defaultdict(list)
+        for s in strs:
+            data[''.join(sorted(s))].append(s)
+        return list(data.values())
+sol = Solution()
+print("Test1: strs=['eat','tea','tan','ate','nat','bat'] -> [['bat'],['nat','tan'],['ate','eat','tea']]: success" if sorted([sorted(group) for group in sol.groupAnagrams(["eat","tea","tan","ate","nat","bat"])]) == sorted([sorted(group) for group in [["bat"],["nat","tan"],["ate","eat","tea"]]]) else "Test1: Fail")
+print("Test2: strs=[''] -> [['']]: success" if sol.groupAnagrams([""]) == [[""]] else "Test2: Fail")
+print("Test3: strs=['a'] -> [['a']]: success" if sol.groupAnagrams(["a"]) == [["a"]] else "Test3: Fail")
+```
+
+[↑ Back to Top](#lec-cases)
+
+---
+
+## 73: Set Matrix Zeroes
+
+### Problem Description
+> Given an `m x n` integer matrix `matrix`, if an element is `0`, set its entire row and column to `0`'s.
+>
+> You must do it in place.
+
+- number: 73
+- title: "Set Matrix Zeroes"
+- difficulty: 2/10
+- concepts: ["Array", "Hash Table", "Matrix"]
+- jupyter_path: <<absolute Path... I fill it>>
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def setZeroes(self, matrix: List[List[int]]) -> None:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** In-place State Tracking (using first row and first column)
+* **Logic:**
+    1. The naive approach is $O(M \cdot N)$ space, keeping a full copy of the matrix. We can improve this to $O(M+N)$ by keeping track of which rows/cols need to be zeroed in two separate arrays.
+    2. We can optimize this to $O(1)$ space by using the first row and first column of the matrix itself to store the zero states.
+    3. Iterate through the matrix. If `matrix[r][c] == 0`, mark the start of its row `matrix[r][0] = 0` and the start of its column `matrix[0][c] = 0`.
+    4. *Crucial Detail:* The element `matrix[0][0]` overlaps for both the first row and first column. We need an extra variable `rowZero = False` to track if the *first row* needs to be zeroed, while `matrix[0][0]` will solely track if the *first column* needs to be zeroed.
+    5. Second pass: Iterate from `r = 1` to `M-1` and `c = 1` to `N-1`. If `matrix[r][0] == 0` or `matrix[0][c] == 0`, set `matrix[r][c] = 0`.
+    6. Third pass: If `matrix[0][0] == 0`, set the entire first column to `0`.
+    7. Fourth pass: If `rowZero == True`, set the entire first row to `0`.
+
+**Complexity:**
+* **Time:** $O(m \times n)$ to traverse the matrix a couple of times.
+* **Space:** $O(1)$ strictly in-place, relying only on the matrix structure itself and one boolean variable.
+---
+
+### Solution Code
+```python
+from typing import List
+
+class Solution(object):
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        pass
+
+
+sol = Solution()
+
+# Test 1
+matrix1 = [[1,1,1],[1,0,1],[1,1,1]]
+sol.setZeroes(matrix1)
+print("Test1: matrix=[[1,1,1],[1,0,1],[1,1,1]] -> [[1,0,1],[0,0,0],[1,0,1]]: success" if matrix1 == [[1,0,1],[0,0,0],[1,0,1]] else "Test1: Fail")
+
+# Test 2
+matrix2 = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
+sol.setZeroes(matrix2)
+print("Test2: matrix=[[0,1,2,0],[3,4,5,2],[1,3,1,5]] -> [[0,0,0,0],[0,4,5,0],[0,3,1,0]]: success" if matrix2 == [[0,0,0,0],[0,4,5,0],[0,3,1,0]] else "Test2: Fail")
 ```
 
 [↑ Back to Top](#lec-cases)
