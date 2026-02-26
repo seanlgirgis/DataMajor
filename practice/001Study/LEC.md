@@ -27,6 +27,7 @@
 | **226** | [Invert Binary Tree](#226-invert-binary-tree) | `Tree`, `Depth-First Search`, `Binary Tree` | 1/10 |
 | **242** | [Valid Anagram](#242-valid-anagram) | `Hash Table`, `String`, `Sorting` | 1/10 |
 | **378** | [Kth Smallest Element in a Sorted Matrix](#378-kth-smallest-element-in-a-sorted-matrix) | `Array`, `Binary Search`, `Matrix`, `Heap (Priority Queue)` | 2/10 |
+| **496** | [Next Greater Element I](#496-next-greater-element-i) | `Array`, `Hash Table`, `Monotonic Stack` | 1/10 |
 | **674** | [Longest Continuous Increasing Subsequence](#674-longest-continuous-increasing-subsequence) | `Array` | 1/10 |
 | **704** | [Binary Search](#704-binary-search) | `Binary Search`, `Array` | 3/10 |
 | **876** | [Middle of the Linked List](#876-middle-of-the-linked-list) | `Linked List`, `Two Pointers` | 1/10 |
@@ -2094,6 +2095,81 @@ print("Test2: transfer(5, 1, 20) -> True: success" if bank.transfer(5, 1, 20) ==
 print("Test3: deposit(5, 20) -> True: success" if bank.deposit(5, 20) == True else "Test3: Fail")
 print("Test4: transfer(3, 4, 15) -> False: success" if bank.transfer(3, 4, 15) == False else "Test4: Fail")
 print("Test5: withdraw(10, 50) -> False: success" if bank.withdraw(10, 50) == False else "Test5: Fail")
+```
+
+[↑ Back to Top](#lec-cases)
+
+---
+
+## 496: Next Greater Element I
+
+### Problem Description
+> The next greater element of some element `x` in an array is the first greater element that is to the right of `x` in the same array.
+>
+> You are given two distinct 0-indexed integer arrays `nums1` and `nums2`, where `nums1` is a subset of `nums2`.
+>
+> For each `0 <= i < nums1.length`, find the index `j` such that `nums1[i] == nums2[j]` and determine the next greater element of `nums2[j]` in `nums2`. If there is no next greater element, then the answer for this query is `-1`.
+>
+> Return an array `ans` of length `nums1.length` such that `ans[i]` is the next greater element as described above.
+
+- number: 496
+- title: "Next Greater Element I"
+- difficulty: 1/10
+- concepts: ["Array", "Hash Table", "Monotonic Stack"]
+- jupyter_path: "C:\DataMajor\practice\001Study\playground\group2\496.ipynb"
+- script_path: <<absolute Path... I fill it>>
+- function_signature: def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+
+---
+
+### Solution Idea (Pseudo-solution)
+* **Approach:** Monotonic Stack + Hash Map
+* **Logic:**
+    1. We want to find the next greater element for every element in `nums2` efficiently, and then instantly look up the answers for elements in `nums1`.
+    2. Initialize a hash map `next_greater` to store answers: `{element: next_greater_element}`.
+    3. Initialize an empty `stack` (monotonic decreasing).
+    4. Iterate through each `num` in `nums2`:
+    5.   While the `stack` is not empty and the current `num` is strictly greater than the element at the top of the `stack` (`stack[-1]`):
+    6.     The current `num` is the "next greater element" for the top element.
+    7.     Pop the top element off the `stack` and add it to the hash map: `next_greater[popped_element] = num`.
+    8.   Push the current `num` onto the `stack`.
+    9. After iterating through all of `nums2`, any elements left in the `stack` do not have a next greater element. We can iterate through them and map them to `-1`, or just use `-1` as the default value when looking up the hash map.
+    10. Finally, construct the answer array by iterating through `nums1` and looking up their next greater element in the `next_greater` map (defaulting to `-1`).
+
+**Complexity:**
+* **Time:** $O(n + m)$ where $n$ is length of `nums1` and $m$ is length of `nums2`. Elements in `nums2` are pushed and popped at most once.
+* **Space:** $O(m)$ to store the stack and the map for `nums2`.
+---
+
+### Solution Code
+```python
+#LEC 496
+from typing import List
+
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        stack = []
+        next_greater = {}           # maps number → its next greater in nums2
+        
+        for num in nums2:
+            # Pop all elements smaller than current num
+            while stack and num > stack[-1]:
+                smaller = stack.pop()
+                next_greater[smaller] = num
+            
+            stack.append(num)
+        
+        # All remaining elements in stack have no greater element
+        while stack:
+            next_greater[stack.pop()] = -1
+        
+        # Build result for nums1
+        return [next_greater.get(num, -1) for num in nums1]
+        
+
+sol = Solution()
+print("Test1: nums1=[4,1,2], nums2=[1,3,4,2] -> [-1,3,-1]: success" if sol.nextGreaterElement([4,1,2], [1,3,4,2]) == [-1,3,-1] else "Test1: Fail")
+print("Test2: nums1=[2,4], nums2=[1,2,3,4] -> [3,-1]: success" if sol.nextGreaterElement([2,4], [1,2,3,4]) == [3,-1] else "Test2: Fail")
 ```
 
 [↑ Back to Top](#lec-cases)
